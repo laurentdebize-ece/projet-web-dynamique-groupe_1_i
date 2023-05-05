@@ -3,39 +3,42 @@
 
 <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Mes Compétences</title>
     <link href="style1.css" rel="stylesheet" type="text/css"/>
-    <link rel= "stylesheet"
-          href= "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <script src= "https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.j s"> </script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <title>Mes Compétences</title>
 </head>
 <body>
 
-<header>
-    <h2>ECE</h2>
-</header>
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">OMNES</a>
+            <a class="navbar-brand center" href="#">ACCUEIL</a>
+        </div>
+    </div>
+</nav>
 
-<section>
-    <nav>
-        <div id = "cercle"></div>
-        </br></br></br></br>
-        <ul>
-            <li><a href="#">Matiere</a></li></br>
-            <li><a href="#">Compétences</a></li></br>
-            <li><a href="#">Compétences transverses</a></li></br>
-            <li><a href="#">Toutes les compétences</a></li>
-        </ul>
-    </nav>
+<div class="container-fluid text-center">
+    <div class="row content">
 
-    <article>
-        <h1>Accueil</h1>
-    </article>
-</section>
+        <div class="col-sm-10 text-left">
+            <h1>Bienvenue</h1>
+        </div>
+        <div class="col-sm-2 sidenav">
+            <div id = "cercle"></div>
+            <br><br><br><br>
+            <p><a href="#">Matières</a></p><br>
+            <p><a href="#">Compétences</a></p><br>
+            <p><a href="#">Compétences transverses</a></p><br>
+            <p><a href="#">Toutes mes compétences</a></p>
+        </div>
+</div>
 
-<footer>
-    <p>Footer</p>
+<footer class="container-fluid text-center">
+    <p>Footer Text</p>
 </footer>
 
 </body>

@@ -1,14 +1,15 @@
 <?php
+
 $servername = "localhost";
 $username = "root";
 $password = "root";
 $dbname = "Omnes MySkills";
 
-// Créer la connexion
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-// Vérifier la connexion
-if ($conn->connect_error) {
-    die("Erreur de connexion: " . $conn->connect_error);
+try {
+    $bdd = new PDO("mysql:host=$servername;dbname=$dbname;charset=utf8", $username, $password);
+    $bdd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+} catch (PDOException $e) {
+    echo "Erreur : " . $e->getMessage();
 }
+
 ?>

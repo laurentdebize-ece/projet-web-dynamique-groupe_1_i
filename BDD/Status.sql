@@ -1,0 +1,5 @@
+-- Table: status
+CREATE TABLE Status (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  statut VARCHAR(255) NOT NULL UNIQUE
+);

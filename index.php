@@ -24,8 +24,13 @@
 <div class="container-fluid text-center">
     <div class="row content">
 
-        <div class="col-sm-10 text-left">
-            <h1>Bienvenue</h1>
+        <div class="col-sm-6 text-left">
+            <h1>Omnes Skills</h1>
+            <p>Omnes skills est une plateforme qui vous permetera de suivre vos competences<br>
+            acquises durant vos années d'études</p>
+        </div>
+        <div class="col-sm-4">
+            <img src="images/ECE_Lyon1.jpg" alt="images de differents campus">
         </div>
         <div class="col-sm-2 sidenav">
             <div id = "cercle"></div>

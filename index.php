@@ -30,10 +30,10 @@
         <div class="col-sm-2 sidenav">
             <div id = "cercle"></div>
             <br><br><br><br>
-            <p><a href="#">Matières</a></p><br>
-            <p><a href="#">Compétences</a></p><br>
-            <p><a href="#">Compétences transverses</a></p><br>
-            <p><a href="#">Toutes mes compétences</a></p>
+            <p><a href="matieres.php">Matières</a></p><br>
+            <p><a href="competences.php">Compétences</a></p><br>
+            <p><a href="competences_transverses.php">Compétences transverses</a></p><br>
+            <p><a href="toutes_mes_competences.php">Toutes mes compétences</a></p>
         </div>
 </div>
 

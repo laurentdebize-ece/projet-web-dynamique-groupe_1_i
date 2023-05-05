@@ -17,7 +17,7 @@
 footer {
     background-color: #555;
     color: white;
-    padding: 15px;
+    padding: 10px;
 }
 
 /* On small screens, set height to 'auto' for sidenav and grid */
@@ -40,4 +40,7 @@ footer {
 .center {
     display: block;
     margin: 0 auto;
+}
+
+#footer1 {
 }

@@ -42,7 +42,7 @@
         </div>
 </div>
 
-<footer class="container-fluid text-center">
+<footer class="container-fluid text-center" id="footer1">
     <p>Footer Text</p>
 </footer>
 

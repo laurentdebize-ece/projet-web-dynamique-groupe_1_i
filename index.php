@@ -15,8 +15,8 @@
 <nav class="navbar navbar-inverse">
     <div class="container-fluid">
         <div class="navbar-header">
-            <a class="navbar-brand" href="#">OMNES</a>
-            <a class="navbar-brand center" href="#">ACCUEIL</a>
+            <a class="navbar-brand" href="index.php">OMNES</a>
+            <a class="navbar-brand center" href="index.php">ACCUEIL</a>
         </div>
     </div>
 </nav>

@@ -11,27 +11,27 @@
         <h1>Inscription</h1>
     </header>
     <main>
-        <form action="ajout_utilisateur.php" method="post">
+        <form action="../PHP/ajout_utilisateur.php" method="post">
             <label for="nom">Nom :</label>
             <input type="text" name="nom" id="nom" required>
-            
+        
             <label for="prenom">Prénom :</label>
             <input type="text" name="prenom" id="prenom" required>
-
+        
             <label for="email">Email :</label>
             <input type="email" name="email" id="email" required>
-
+        
             <label for="mot_de_passe">Mot de passe :</label>
             <input type="password" name="mot_de_passe" id="mot_de_passe" required>
-
-            <label for="type">Type :</label>
-            <select name="type" id="type">
-                <option value="etudiant">Étudiant</option>
-                <option value="professeur">Professeur</option>
+        
+            <label for="status_id">Type :</label>
+            <select name="status_id" id="status_id">
+                <option value="1">Étudiant</option>
+                <option value="2">Professeur</option>
             </select>
-
+        
             <input type="submit" value="S'inscrire">
-        </form>
+        </form>        
     </main>
 </body>
 </html>

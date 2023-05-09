@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src = "test.js"></script>
     <title>Omnes MySkill</title>
 </head>
 <body>
@@ -15,36 +16,63 @@
 <nav class="navbar navbar-inverse">
     <div class="container-fluid">
         <div class="navbar-header">
-            <a class="navbar-brand" href="index.php">OMNES</a>
-            <a class="navbar-brand center" href="index.php">ACCUEIL</a>
+            <a class="navbar-brand" href="accueil.php">OMNES</a>
         </div>
     </div>
 </nav>
 
 <div class="container-fluid text-center">
     <div class="row content">
+        <form method="post" action="index.php">
+            <div>
+                <label for="prenom">Login :</label>
+                <input type="text" name="login" id="login">
+            </div>
+            <br>
+            <div>
+                <label for="prenom">mdp :</label>
+                <input type="text" name="mdp" id="mdp">
+            </div>
+            <br>
+            <div>
+                <input type="submit" value="Valider">
+            </div>
+        </form>
+    </div>
 
-        <div class="col-sm-6 text-left">
-            <h1>Omnes Skills</h1>
-            <p>Omnes skills est une plateforme qui vous permetera de suivre vos competences<br>
-            acquises durant vos années d'études</p>
-        </div>
-        <div class="col-sm-4">
-            <img src="images/ECE_Lyon1.jpg" alt="images de differents campus">
-        </div>
-        <div class="col-sm-2 sidenav">
-            <div id = "cercle"></div>
-            <br><br><br><br>
-            <p><a href="matieres.php">Matières</a></p><br>
-            <p><a href="competences.php">Compétences</a></p><br>
-            <p><a href="competences_transverses.php">Compétences transverses</a></p><br>
-            <p><a href="toutes_mes_competences.php">Toutes mes compétences</a></p>
-        </div>
-</div>
-
-<footer class="container-fluid text-center" id="footer1">
-    <p>Footer Text</p>
-</footer>
+    <footer class="container-fluid text-center" id="footer1">
+        <p>Footer Text</p>
+    </footer>
 
 </body>
+
+
+<?php
+$users = array(
+    array('user123', 'motdepasse123'),
+    array('admin', 'password')
+);
+
+if (isset($_POST['login']) && isset($_POST['mdp'])) {
+    $login = $_POST['login'];
+    $pass = $_POST['mdp'];
+
+    $connected = false;
+    foreach ($users as $user) {
+        if ($login === $user[0] && $pass === $user[1]) {
+            $connected = true;
+            break;
+        }
+    }
+
+    if ($connected) {
+        echo "Connection okay";
+
+    } else {
+        echo "Identifiant ou mot de passe incorrect";
+    }
+}
+?>
+
+
 </html>

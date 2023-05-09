@@ -16,7 +16,7 @@
     <div class="container-fluid">
         <div class="navbar-header">
             <a class="navbar-brand" href="accueil.php">OMNES</a>
-            <a class="navbar-brand center" href="competences.php">Competences</a>
+            <a class="navbar-brand center" href="accueil.php">ACCUEIL</a>
         </div>
     </div>
 </nav>
@@ -24,11 +24,14 @@
 <div class="container-fluid text-center">
     <div class="row content">
 
-        <div class="col-sm-10 text-left">
-            <h1>Competences</h1>
-            <p>Hello world</p>
+        <div class="col-sm-6 text-left">
+            <h1>Omnes Skills</h1>
+            <p>Omnes skills est une plateforme qui vous permetera de suivre vos competences<br>
+            acquises durant vos années d'études</p>
         </div>
-
+        <div class="col-sm-4">
+            <img src="images/ECE_Lyon1.jpg" alt="images de differents campus">
+        </div>
         <div class="col-sm-2 sidenav">
             <div id = "cercle"></div>
             <br><br><br><br>
@@ -37,9 +40,11 @@
             <p><a href="competences_transverses.php">Compétences transverses</a></p><br>
             <p><a href="toutes_mes_competences.php">Toutes mes compétences</a></p>
         </div>
-    </div>
 </div>
 
-<footer class="container-fluid text-center">
+<footer class="container-fluid text-center" id="footer1">
     <p>Footer Text</p>
 </footer>
+
+</body>
+</html>

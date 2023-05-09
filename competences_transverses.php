@@ -15,7 +15,7 @@
 <nav class="navbar navbar-inverse">
     <div class="container-fluid">
         <div class="navbar-header">
-            <a class="navbar-brand" href="index.php">OMNES</a>
+            <a class="navbar-brand" href="accueil.php">OMNES</a>
             <a class="navbar-brand center" href="competences_transverses.php">Toutes mes competences</a>
         </div>
     </div>

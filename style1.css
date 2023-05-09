@@ -35,6 +35,7 @@ footer {
     border-radius: 40px;
     background: #007179;
     float: right;
+    cursor: pointer;
 }
 
 .center {
@@ -43,4 +44,23 @@ footer {
 }
 
 #footer1 {
+}
+
+#rond {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: blue;
+}
+
+.circle {
+    width: 50px;
+    height: 50px;
+    background: blue;
+    cursor: pointer;
+    border-radius: 50%;
+}
+
+.circle:hover {
+    background-color: red;
 }

@@ -27,15 +27,25 @@
         <div class="col-sm-10 text-left">
             <h1>Matieres</h1>
             <p>Hello world</p>
-            <table border="1" style = "width: 100%;">
+            <form action="matieres.php" method="post">
+            <table style = "width: 100%;">
                 <tr>
-                    <td><button style="width: 50px; height: 50px; border-radius: 50%; background-color: blue;cursor: pointer;"></button></td>
-                    <td><button class = "circle"></button></td>
-                    <td><button>test</button></td>
-                    <td><button>test</button></td>
+                    <td><button class = "circle" name="matChoisie" value="1"></button></td>
+                    <td><button class = "circle" name="matChoisie" value="2"></button></td>
+                    <td><button class = "circle" name="matChoisie" value="3"></button></td>
+                </tr>
+                <tr>
+                    <td><button class = "circle" name="matChoisie" value="4"></button></td>
+                    <td><button class = "circle" name="matChoisie" value="5"></button></td>
+                    <td><button class = "circle" name="matChoisie" value="6"></button></td>
+                </tr>
+                <tr>
+                    <td><button class = "circle" name="matChoisie" value="6"></button></td>
+                    <td><button class = "circle" name="matChoisie" value="7"></button></td>
+                    <td><button class = "circle" name="matChoisie" value="8"></button></td>
                 </tr>
             </table>
-
+                </form>
         </div>
 
         <div class="col-sm-2 sidenav">
@@ -52,3 +62,17 @@
 <footer class="container-fluid text-center">
     <p>Footer Text</p>
 </footer>
+</body>
+
+<?php
+    $choice = isset($_POST["matChoisie"]) ? $_POST["matChoisie"] : "";
+    switch ($choice) {
+        case "1":
+            echo '<p>'. $_POST["matChoisie"] . '</p>';
+        default:
+            break;
+    }
+
+?>
+
+</html>

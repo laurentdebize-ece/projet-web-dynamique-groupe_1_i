@@ -67,7 +67,7 @@ if (isset($_POST['login']) && isset($_POST['mdp'])) {
 
     if ($connected) {
         echo "Connection okay";
-
+        header("Location: accueil.php");
     } else {
         echo "Identifiant ou mot de passe incorrect";
     }

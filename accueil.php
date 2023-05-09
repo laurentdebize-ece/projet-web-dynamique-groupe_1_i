@@ -21,7 +21,7 @@
     </div>
 </nav>
 
-<div class="container-fluid text-center">
+<div class="container-fluid text-center" <!--style="height: 100%"-->>
     <div class="row content">
 
         <div class="col-sm-6 text-left">
@@ -40,11 +40,11 @@
             <p><a href="competences_transverses.php">Compétences transverses</a></p><br>
             <p><a href="toutes_mes_competences.php">Toutes mes compétences</a></p>
         </div>
+    </div>
 </div>
-
-<footer class="container-fluid text-center" id="footer1">
+<footer class="footer mt-auto py-3">
     <p>Footer Text</p>
 </footer>
-
 </body>
+
 </html>

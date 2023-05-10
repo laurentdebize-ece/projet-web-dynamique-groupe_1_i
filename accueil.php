@@ -21,7 +21,7 @@
     </div>
 </nav>
 
-<div class="container-fluid text-center" <!--style="height: 100%"-->>
+<div class="container-fluid text-center"> <!--style="height: 100%"-->
     <div class="row content">
 
         <div class="col-sm-6 text-left">

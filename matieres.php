@@ -69,10 +69,33 @@
     switch ($choice) {
         case "1":
             echo '<p>'. $_POST["matChoisie"] . '</p>';
+            break;
+        case "2":
+            echo '<p>'. $_POST["matChoisie"] . '</p>';
+            break;
+        case "3":
+            echo '<p>'. $_POST["matChoisie"] . '</p>';
+            break;
+        case "4":
+            echo '<p>'. $_POST["matChoisie"] . '</p>';
+            break;
+        case "5":
+            echo '<p>'. $_POST["matChoisie"] . '</p>';
+            break;
+        case "6":
+            echo '<p>'. $_POST["matChoisie"] . '</p>';
+            break;
+        case "7":
+            echo '<p>'. $_POST["matChoisie"] . '</p>';
+            break;
+        case "8":
+            echo '<p>'. $_POST["matChoisie"] . '</p>';
+            break;
+        case "9":
+            echo '<p>'. $_POST["matChoisie"] . '</p>';
+            break;
         default:
             break;
     }
-
 ?>
-
 </html>

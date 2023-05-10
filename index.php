@@ -26,12 +26,12 @@
         <form method="post" action="index.php">
             <div>
                 <label for="prenom">Login :</label>
-                <input type="text" name="login" id="login">
+                <input type="text" name="login" id="login" required>
             </div>
             <br>
             <div>
                 <label for="prenom">mdp :</label>
-                <input type="text" name="mdp" id="mdp">
+                <input type="text" name="mdp" id="mdp" required> <!-- changer text par password apres -->
             </div>
             <br>
             <div>

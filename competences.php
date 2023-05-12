@@ -47,8 +47,6 @@
             </form>
             </div>
 
-        </div>
-
         <div class="col-sm-2 sidenav">
             <div id = "cercle"></div>
             <br><br><br><br>
@@ -57,11 +55,14 @@
             <p><a href="competences_transverses.php">Compétences transverses</a></p><br>
             <p><a href="toutes_mes_competences.php">Toutes mes compétences</a></p>
         </div>
-    </div>
+</div>
 </div>
 
-<footer class="container-fluid text-center">
+
+</body>
+
+<footer class="footer">
     <p>Footer Text</p>
 </footer>
-</body>
+
 </html>

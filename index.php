@@ -1,21 +1,21 @@
 <?php
 
 $host = 'localhost';
-$db   = 'Omnes MySkills';
+$db = 'Omnes MySkills';
 $user = 'root';
 $pass = 'root';
 $charset = 'utf8mb4';
 
 $dsn = "mysql:host=$host;dbname=$db;charset=$charset";
 $options = [
-    PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
+    PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
     PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-    PDO::ATTR_EMULATE_PREPARES   => false,
+    PDO::ATTR_EMULATE_PREPARES => false,
 ];
 try {
-     $bdd = new PDO($dsn, $user, $pass, $options);
+    $bdd = new PDO($dsn, $user, $pass, $options);
 } catch (\PDOException $e) {
-     throw new \PDOException($e->getMessage(), (int)$e->getCode());
+    throw new \PDOException($e->getMessage(), (int)$e->getCode());
 }
 
 ini_set('display_errors', 1);
@@ -60,7 +60,7 @@ if (isset($_POST['email']) && isset($_POST['mot_de_passe'])) {
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <link href="style1.css" rel="stylesheet" type="text/css" />
+    <link href="style1.css" rel="stylesheet" type="text/css"/>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
@@ -70,43 +70,43 @@ if (isset($_POST['email']) && isset($_POST['mot_de_passe'])) {
 
 <body>
 
-    <nav class="navbar navbar-inverse">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <a class="navbar-brand" href="accueil.php">OMNES</a>
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="accueil.php">OMNES</a>
+        </div>
+    </div>
+</nav>
+
+<div class="container-fluid text-left">
+    <div class="raw content text-align center">
+        <?php if (isset($erreur)): ?>
+            <p style="color: red;">
+                <?= $erreur ?>
+            </p>
+        <?php endif; ?>
+        <form method="post" action="index.php">
+            <br><br><br>
+
+            <div>
+                <label for="login">Login :</label>
+                <input type="email" id="email" name="email" required>
             </div>
-        </div>
-    </nav>
+            <br><br>
+            <div>
+                <label for="mdp">Mot de passe :</label>
+                <input type="password" id="mot_de_passe" name="mot_de_passe" required>
+            </div>
+            <br>
+            <div class="text-align left">
+                <input type="submit" value="Valider">
+            </div>
+        </form>
+    </div>
 
-    <div class="container-fluid text-left">
-        <div class="raw content text-align center">
-            <?php if (isset($erreur)): ?>
-                <p style="color: red;">
-                    <?= $erreur ?>
-                </p>
-            <?php endif; ?>
-            <form method="post" action="index.php">
-                <br><br><br>
-
-                <div>
-                    <label for="login">Login :</label>
-                    <input type="email" id="email" name="email" required>
-                </div>
-                <br><br>
-                <div>
-                    <label for="mdp">Mot de passe :</label>
-                    <input type="password" id="mot_de_passe" name="mot_de_passe" required>
-                </div>
-                <br>
-                <div class="text-align left">
-                    <input type="submit" value="Valider">
-                </div>
-            </form>
-        </div>
-
-        <footer class="container-fluid text-center" id="footer1">
-            <p>Footer Text</p>
-        </footer>
+    <footer class="container-fluid text-center" id="footer1">
+        <p>Footer Text</p>
+    </footer>
 
 </body>
 

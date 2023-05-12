@@ -21,7 +21,7 @@ CREATE TABLE Competences (
 );
 
 -- Table: status
-CREATE TABLE Status (
+CREATE TABLE Statut (
   id INT AUTO_INCREMENT PRIMARY KEY,
   statut VARCHAR(255) NOT NULL UNIQUE
 );
@@ -33,8 +33,8 @@ CREATE TABLE Utilisateurs (
   prenom VARCHAR(255) NOT NULL,
   email VARCHAR(255) UNIQUE NOT NULL,
   mot_de_passe VARCHAR(255) NOT NULL,
-  status_id INT NOT NULL,
-  FOREIGN KEY (status_id) REFERENCES Status(id)
+  statut_id INT NOT NULL,
+  FOREIGN KEY (statut_id) REFERENCES Statut(id)
 );
 
 -- Table: autoevaluations
@@ -87,7 +87,16 @@ CREATE TABLE Matieres_competences (
   FOREIGN KEY (id_matiere) REFERENCES matieres(id)
 );
 
-INSERT INTO Status (statut)
-VALUES ('étudiant'), ('professeur'), ('administrateur');
+INSERT INTO Statut (statut)
+VALUES ('etudiant'), ('professeur'), ('administrateur');
+
+
+
+-- Pour les tests :
+
+
+
+
+
 
 

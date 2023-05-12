@@ -62,7 +62,7 @@
             </form>
         </div>
 
-        <div class="col-sm-2 sidenav">
+        <div class="col-sm-2 sidenav raw-content">
             <div id="cercle"></div>
             <br><br><br><br>
             <p><a href="matieres.php">Matières</a></p><br>

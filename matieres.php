@@ -26,26 +26,40 @@
 
         <div class="col-sm-10 text-left">
             <h1>Matieres</h1>
-            <p>Hello world</p>
             <form action="matieres.php" method="post">
-            <table style = "width: 100%;">
+             <table class="tableMat">
+                 <tr>
+                     <td><span class="title">Matière 1</span></td>
+                     <td><span class="title">Matière 2</span></td>
+                     <td><span class="title">Matière 3</span></td>
+                 </tr>
                 <tr>
-                    <td><button class = "circle" name="matChoisie" value="1"></button></td>
-                    <td><button class = "circle" name="matChoisie" value="2"></button></td>
-                    <td><button class = "circle" name="matChoisie" value="3"></button></td>
+                    <td><button class = "circle" name="matChoisie" value="1">1</button></td>
+                    <td><button class = "circle" name="matChoisie" value="2">2</button></td>
+                    <td><button class = "circle" name="matChoisie" value="3">3</button></td>
                 </tr>
+                 <tr>
+                     <td><span class="title">Matière 4</span></td>
+                     <td><span class="title">Matière 5</span></td>
+                     <td><span class="title">Matière 6</span></td>
+                 </tr>
                 <tr>
-                    <td><button class = "circle" name="matChoisie" value="4"></button></td>
-                    <td><button class = "circle" name="matChoisie" value="5"></button></td>
-                    <td><button class = "circle" name="matChoisie" value="6"></button></td>
+                    <td><button class = "circle" name="matChoisie" value="4">4</button></td>
+                    <td><button class = "circle" name="matChoisie" value="5">5</button></td>
+                    <td><button class = "circle" name="matChoisie" value="6">6</button></td>
                 </tr>
+                 <tr>
+                     <td><span class="title">Matière 7</span></td>
+                     <td><span class="title">Matière 8</span></td>
+                     <td><span class="title">Matière 9</span></td>
+                 </tr>
                 <tr>
-                    <td><button class = "circle" name="matChoisie" value="6"></button></td>
-                    <td><button class = "circle" name="matChoisie" value="7"></button></td>
-                    <td><button class = "circle" name="matChoisie" value="8"></button></td>
+                    <td><button class = "circle" name="matChoisie" value="7">7</button></td>
+                    <td><button class = "circle" name="matChoisie" value="8">8</button></td>
+                    <td><button class = "circle" name="matChoisie" value="9">9</button></td>
                 </tr>
-            </table>
-                </form>
+             </table>
+            </form>
         </div>
 
         <div class="col-sm-2 sidenav">

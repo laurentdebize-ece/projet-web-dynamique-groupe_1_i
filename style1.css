@@ -8,7 +8,7 @@ html, body {
 }
 
 /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
-.row.content {height: 450px}
+.row.content {height: auto}
 
 /* Set gray background color and 100% height */
 .sidenav {
@@ -39,12 +39,13 @@ footer {
 }
 
 #cercle {
-    width: 50px;
-    height: 50px;
+    width: 80px;
+    height: 80px;
     border-radius: 40px;
     background: #007179;
-    float: right;
+    background-position: center;
     cursor: pointer;
+    margin:0 auto;
 }
 
 .center {
@@ -61,16 +62,24 @@ footer {
 }
 
 .circle {
-    width: 50px;
-    height: 50px;
+    text-align: center;
+    margin-bottom:50px;
+    width: 120px;
+    height: 120px;
     background: blue;
     cursor: pointer;
     border-radius: 50%;
-    justify-self: center;
 }
 
 .circle:hover {
     background-color: red;
+}
+
+.comp1 {
+    padding-top: 20px;
+    background-color: #f1f1f1;
+    height: 100px;
+    width: 200px;
 }
 
 .login {
@@ -88,7 +97,16 @@ footer {
     margin-left: 30px;
     margin-right: 30px;
     margin-bottom: 30px;
+}
 
+.tableMat {
+    width: 100%;
+    text-align: center;
+}
+
+.title {
+    font-weight: bold;
+    margin-top: 5px;
 }
 
 

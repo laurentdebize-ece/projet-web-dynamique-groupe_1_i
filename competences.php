@@ -26,7 +26,26 @@
 
         <div class="col-sm-10 text-left">
             <h1>Competences</h1>
-            <p>Hello world</p>
+            <form action="matieres.php" method="post">
+                <table class="tableComp">
+                    <tr>
+                        <td><button class = "rectangle" name="matChoisie" value="1">1</button></td>
+                        <td><button class = "rectangle" name="matChoisie" value="2">2</button></td>
+                        <td><button class = "rectangle" name="matChoisie" value="3">3</button></td>
+                    </tr>
+                    <tr>
+                        <td><button class = "rectangle" name="matChoisie" value="4">4</button></td>
+                        <td><button class = "rectangle" name="matChoisie" value="5">5</button></td>
+                        <td><button class = "rectangle" name="matChoisie" value="6">6</button></td>
+                    </tr>
+                    <tr>
+                        <td><button class = "rectangle" name="matChoisie" value="7">7</button></td>
+                        <td><button class = "rectangle" name="matChoisie" value="8">8</button></td>
+                        <td><button class = "rectangle" name="matChoisie" value="9">9</button></td>
+                    </tr>
+                </table>
+            </form>
+            </div>
 
         </div>
 
@@ -44,3 +63,5 @@
 <footer class="container-fluid text-center">
     <p>Footer Text</p>
 </footer>
+</body>
+</html>

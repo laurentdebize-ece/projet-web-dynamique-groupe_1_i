@@ -33,9 +33,6 @@ if (isset($_POST['email']) && isset($_POST['mot_de_passe'])) {
     $user = $requete->fetch(PDO::FETCH_ASSOC);
 
     if ($user) {
-        //echo "Utilisateur trouvé : ";
-        //var_dump($user);
-
         if (password_verify($mot_de_passe, $user['mot_de_passe'])) {
             $_SESSION['user'] = $user;
             if ($user['statut'] == 'etudiant') {
@@ -112,34 +109,5 @@ if (isset($_POST['email']) && isset($_POST['mot_de_passe'])) {
         </footer>
 
 </body>
-
-
-<?php
-$users = array(
-    array('user123', 'motdepasse123'),
-    array('admin', 'password')
-);
-
-if (isset($_POST['login']) && isset($_POST['mdp'])) {
-    $login = $_POST['login'];
-    $pass = $_POST['mdp'];
-
-    $connected = false;
-    foreach ($users as $user) {
-        if ($login === $user[0] && $pass === $user[1]) {
-            $connected = true;
-            break;
-        }
-    }
-
-    if ($connected) {
-        echo "Connection okay";
-        header("Location: accueil.php");
-    } else {
-        echo "Identifiant ou mot de passe incorrect";
-    }
-}
-?>
-
 
 </html>

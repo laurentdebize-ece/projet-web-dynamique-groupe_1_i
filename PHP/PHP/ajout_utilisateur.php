@@ -1,5 +1,5 @@
 <?php
-require_once 'initBDD.php';
+require_once '../../BDD/initBDD.php';
 
 $nom = $_POST['nom'];
 $prenom = $_POST['prenom'];

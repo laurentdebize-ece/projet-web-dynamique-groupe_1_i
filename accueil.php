@@ -27,13 +27,48 @@
         <div class="col-sm-6 text-left">
             <h1>Omnes Skills</h1>
             <p>Omnes skills est une plateforme qui vous permetera de suivre vos competences<br>
-            acquises durant vos années d'études</p>
+                acquises durant vos années d'études</p>
+            <br><br><br><br>
+            <div>
+                <h1>Mes competences star</h1>
+                <br>
+                <table>
+                    <tr>
+                        <td>
+                            <button class="rectangle" name="compt" value="1"></button>
+                        </td>
+                        <td>
+                            <button class="rectangle" name="compt" value="2"></button>
+                        </td>
+                        <td>
+                            <button class="rectangle" name="compt" value="3"></button>
+                        </td>
+                        <td>
+                            <button class="rectangle" name="compt" value="4"></button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <button class="rectangle" name="compt" value="5"></button>
+                        </td>
+                        <td>
+                            <button class="rectangle" name="compt" value="6"></button>
+                        </td>
+                        <td>
+                            <button class="rectangle" name="compt" value="7"></button>
+                        </td>
+                        <td>
+                            <button class="rectangle" name="compt" value="8"></button>
+                        </td>
+                    </tr>
+                </table>
+            </div>
         </div>
         <div class="col-sm-4">
-            <img src="images/ECE_Lyon1.jpg" alt="images de differents campus">
+            <img src="img/ECE_Lyon1.jpg" alt="images de differents campus">
         </div>
         <div class="col-sm-2 sidenav">
-            <div id = "cercle"></div>
+            <div id="cercle"></div>
             <br><br><br><br>
             <p><a href="matieres.php">Matières</a></p><br>
             <p><a href="competences.php">Compétences</a></p><br>
@@ -41,7 +76,9 @@
             <p><a href="toutes_mes_competences.php">Toutes mes compétences</a></p>
         </div>
     </div>
+
 </div>
+
 <footer class="footer mt-auto py-3">
     <p>Footer Text</p>
 </footer>

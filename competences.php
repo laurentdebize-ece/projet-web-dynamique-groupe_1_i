@@ -27,6 +27,7 @@
         <div class="col-sm-10 text-left">
             <h1>Competences</h1>
             <p>Hello world</p>
+
         </div>
 
         <div class="col-sm-2 sidenav">

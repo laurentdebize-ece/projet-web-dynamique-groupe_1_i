@@ -105,7 +105,8 @@
             <p><a href="matieres.php">Matières</a></p><br>
             <p><a href="competences.php">Compétences</a></p><br>
             <p><a href="competences_transverses.php">Compétences transverses</a></p><br>
-            <p><a href="toutes_mes_competences.php">Toutes mes compétences</a></p>
+            <p><a href="toutes_mes_competences.php">Toutes mes compétences</a></p><br>
+            <p><a href="ajout_utilisateur.php">Ajouter utilisateur</a></p>
         </div>
     </div>
 </div>

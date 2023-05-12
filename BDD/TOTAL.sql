@@ -86,3 +86,8 @@ CREATE TABLE Matieres_competences (
   FOREIGN KEY (id_competence) REFERENCES competences(id),
   FOREIGN KEY (id_matiere) REFERENCES matieres(id)
 );
+
+INSERT INTO Status (statut)
+VALUES ('étudiant'), ('professeur'), ('administrateur');
+
+

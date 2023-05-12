@@ -26,7 +26,25 @@
 
         <div class="col-sm-10 text-left">
             <h1>Competences transverses</h1>
-            <p>Hello world</p>
+            <form action="competences.php" method="post">
+                <table class="tableComp">
+                    <tr>
+                        <td><button class = "rectangle" name="compChoisie" value="1">CompétenceT 1</button></td>
+                        <td><button class = "rectangle" name="compChoisie" value="2">CompétenceT 2</button></td>
+                        <td><button class = "rectangle" name="compChoisie" value="3">CompétenceT 3</button></td>
+                    </tr>
+                    <tr>
+                        <td><button class = "rectangle" name="compChoisie" value="4">CompétenceT 4</button></td>
+                        <td><button class = "rectangle" name="compChoisie" value="5">CompétenceT 5</button></td>
+                        <td><button class = "rectangle" name="compChoisie" value="6">CompétenceT 6</button></td>
+                    </tr>
+                    <tr>
+                        <td><button class = "rectangle" name="compChoisie" value="7">CompétenceT 7</button></td>
+                        <td><button class = "rectangle" name="compChoisie" value="8">CompétenceT 8</button></td>
+                        <td><button class = "rectangle" name="compChoisie" value="9">CompétenceT 9</button></td>
+                    </tr>
+                </table>
+            </form>
         </div>
 
         <div class="col-sm-2 sidenav">
@@ -43,3 +61,5 @@
 <footer class="container-fluid text-center">
     <p>Footer Text</p>
 </footer>
+</body>
+</html>

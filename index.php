@@ -23,7 +23,6 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
 session_start();
-//require_once '../PHP/connexion.php';
 
 if (isset($_POST['email']) && isset($_POST['mot_de_passe'])) {
     $email = $_POST['email'];
@@ -34,8 +33,8 @@ if (isset($_POST['email']) && isset($_POST['mot_de_passe'])) {
     $user = $requete->fetch(PDO::FETCH_ASSOC);
 
     if ($user) {
-        echo "Utilisateur trouvé : ";
-        var_dump($user);
+        //echo "Utilisateur trouvé : ";
+        //var_dump($user);
 
         if (password_verify($mot_de_passe, $user['mot_de_passe'])) {
             $_SESSION['user'] = $user;
@@ -95,13 +94,11 @@ if (isset($_POST['email']) && isset($_POST['mot_de_passe'])) {
                 <div>
                     <label for="login">Login :</label>
                     <input type="email" id="email" name="email" required>
-                    <!--<input type="text" name="login" id="login" required>-->
                 </div>
                 <br><br>
                 <div>
                     <label for="mdp">Mot de passe :</label>
                     <input type="password" id="mot_de_passe" name="mot_de_passe" required>
-                    <!--<input type="text" name="password" id="mdp" required>  changer text par password apres -->
                 </div>
                 <br>
                 <div class="text-align left">

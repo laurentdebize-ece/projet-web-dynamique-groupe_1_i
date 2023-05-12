@@ -48,7 +48,7 @@
     });
 </script>
 
-<div class="container-fluid text-center"> <!--style="height: 100%"-->
+<div class="container-fluid text-center flex-float"> <!--style="height: 100%"-->
     <div class="row content">
 
         <div class="col-sm-6 text-left">
@@ -110,9 +110,16 @@
     </div>
 </div>
 
+<footer class="footer">
+    <p>Footer Text</p>
+</footer>
+
+<!--
 <footer class="footer mt-auto py-3">
     <p>Footer Text</p>
 </footer>
+-->
+
 </body>
 
 </html>

@@ -58,6 +58,6 @@ if (isset($_POST['email']) && isset($_POST['mot_de_passe'])) {
         <br>
         <button type="submit">Se connecter</button>
     </form>
-    <p>Pas encore inscrit ? <a href="../HTML/inscription.html">Inscrivez-vous ici</a>.</p>
+    <!--<p>Pas encore inscrit ? <a href="../HTML/inscription.html">Inscrivez-vous ici</a>.</p>-->
 </body>
 </html>

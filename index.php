@@ -82,27 +82,29 @@ if (isset($_POST['email']) && isset($_POST['mot_de_passe'])) {
         </div>
     </nav>
 
-    <div class="container-fluid text-center">
-        <div class="row content">
+    <div class="container-fluid text-left">
+        <div class="raw content text-align center">
             <?php if (isset($erreur)): ?>
                 <p style="color: red;">
                     <?= $erreur ?>
                 </p>
             <?php endif; ?>
             <form method="post" action="index.php">
+                <br><br><br>
+
                 <div>
-                    <label for="prenom">Login :</label>
+                    <label for="login">Login :</label>
                     <input type="email" id="email" name="email" required>
                     <!--<input type="text" name="login" id="login" required>-->
                 </div>
-                <br>
+                <br><br>
                 <div>
-                    <label for="prenom">Mot de passe :</label>
+                    <label for="mdp">Mot de passe :</label>
                     <input type="password" id="mot_de_passe" name="mot_de_passe" required>
                     <!--<input type="text" name="password" id="mdp" required>  changer text par password apres -->
                 </div>
                 <br>
-                <div>
+                <div class="text-align left">
                     <input type="submit" value="Valider">
                 </div>
             </form>

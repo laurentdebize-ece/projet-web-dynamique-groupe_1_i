@@ -4,13 +4,13 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
 session_start();
-require_once 'connexion.php';
+require_once '../PHP/connexion.php';
 
 if (isset($_POST['email']) && isset($_POST['mot_de_passe'])) {
     $email = $_POST['email'];
     $mot_de_passe = $_POST['mot_de_passe'];
 
-    $requete = $bdd->prepare("SELECT * FROM Utilisateurs WHERE email = :email");
+    $requete = $bdd->prepare("SELECT Utilisateurs.*, Status.statut FROM Utilisateurs INNER JOIN Status ON Utilisateurs.status_id = Status.id WHERE email = :email");
     $requete->execute(array('email' => $email));
     $user = $requete->fetch(PDO::FETCH_ASSOC);
 
@@ -20,11 +20,11 @@ if (isset($_POST['email']) && isset($_POST['mot_de_passe'])) {
 
         if (password_verify($mot_de_passe, $user['mot_de_passe'])) {
             $_SESSION['user'] = $user;
-            if ($user['type'] == 'etudiant') {
-                header('Location: etudiant.html');
+            if ($user['statut'] == 'etudiant') {
+                header('Location: ../HTML/etudiant.html');
                 exit;
-            } elseif ($user['type'] == 'professeur') {
-                header('Location: professeur.html');
+            } elseif ($user['statut'] == 'professeur') {
+                header('Location: ../HTML/professeur.html');
                 exit;
             } else {
                 $error_message = "Type d'utilisateur inconnu";
@@ -58,6 +58,6 @@ if (isset($_POST['email']) && isset($_POST['mot_de_passe'])) {
         <br>
         <button type="submit">Se connecter</button>
     </form>
-    <p>Pas encore inscrit ? <a href="inscription.html">Inscrivez-vous ici</a>.</p>
+    <!--<p>Pas encore inscrit ? <a href="../HTML/inscription.html">Inscrivez-vous ici</a>.</p>-->
 </body>
 </html>

@@ -91,6 +91,12 @@ INSERT INTO Statut (statut)
 VALUES ('etudiant'), ('professeur'), ('administrateur');
 
 
+INSERT INTO Utilisateurs (nom, prenom, email, mot_de_passe, statut_id)
+VALUES ('Admin', 'Laurent', 'admin@ece.fr', '$2y$10$55.Ebfl/vSXK2IVwPl7kw.djRxFSno5A9wm9D4RqklnIxoPLjNJ8K', '3'),   --mdp : 123admin
+       ('Etu', 'Laurent', 'etudiant@ece.fr', '$2y$10$FL5zoBNMgE0M6J1t1E7bHujsQGnyP.h5nxVTQhoxziezL4WUmVFJO', '1'),   --mdp : 123etu
+       ('Pro', 'Laurent', 'professeur@ece.fr', '$2y$10$QjqyQmpPgHbnEVAZrSjcGuv7./e/hQtlFxlQtWVWoNByQ.nTQG3TC', '2');   --mdp : 123prof
+
+
 
 -- Pour les tests :
 

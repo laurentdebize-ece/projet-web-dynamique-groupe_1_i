@@ -1,17 +1,12 @@
 <?php
-// Connexion à la base de données
+
 $connexion = mysqli_connect("localhost", "root", "root", "omnes myskills");
+$data = mysqli_query($connexion, "SELECT * FROM autoevaluations");
+$nb_lignes = mysqli_num_rows($data);
 
-// Requête SQL pour récupérer les données
-$resultat = mysqli_query($connexion, "SELECT * FROM autoevaluations");
-
-// Nombre de lignes dans la base de données
-$nb_lignes = mysqli_num_rows($resultat);
-
-// Génération du tableau HTML
 echo "<table>";
 echo "<tr><th>ID</th><th>statut</th></tr>";
-while ($ligne = mysqli_fetch_assoc($resultat)) {
+while ($ligne = mysqli_fetch_assoc($data)) {
     echo "<tr>";
     echo "<td><div class='rectanglePourCmpListe'>" . $ligne["id"] . "</div></td>";
     if($ligne["statut"] == "non_acquis") {
@@ -33,6 +28,6 @@ while ($ligne = mysqli_fetch_assoc($resultat)) {
 }
 echo "</table>";
 
-// Fermeture de la connexion à la base de données
+
 mysqli_close($connexion);
 ?>

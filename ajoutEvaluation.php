@@ -27,15 +27,33 @@
     <div class="row content">
 
         <div class="col-sm-10 text-left">
-            <h1>Omnes Skills</h1>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam interdum arcu nec augue convallis, vitae
-                lacinia nibh convallis. Etiam nec blandit magna, quis ultrices nisl. Ut vestibulum turpis ac diam
-                elementum, a ultrices ipsum suscipit.</p><br>
-            <a href="ajoutEvaluation.php">Ajout eval</a>
 
-            <div>
-                <h1>Tableau dynamique</h1>
-                <?php include "TableauEvalutation.php"; ?>
+            <h1>Ajouter une evaluation</h1><br>
+            <div class="container-fluid text-left flex-float">
+                <form method="post" action="ajoutEvaluation.php">
+                    <!--
+                    <label for="id">id</label>
+                    <input type="text" id="id" name="id" required><br><br>-->
+
+                    <label for="id_etudiant">id etudiant :</label>
+                    <select>
+                        <option value="acquis">acquis</option>
+                        <option value="en_cours">en_cours</option>
+                        <option value="non_acquis">non_acquis</option>
+                    </select>
+                    <br><br>
+
+                    <label for="id_competence">id_competence :</label>
+                    <input type="number" id="id_competence" name="id_competence" required><br><br>
+
+                    <label for="statut">statut :</label>
+                    <input type="tel" id="statut" name="statut" required><br><br>
+
+                    <label for="date">date :</label>
+                    <input type="date" id="date" name="date" required><br><br>
+
+                    <input type="submit" value="Envoyer">
+                </form>
             </div>
         </div>
 
@@ -61,3 +79,10 @@
 </body>
 
 </html>
+
+
+<?php
+
+$connexion = mysqli_connect("localhost", "root", "root", "omnes myskills");
+
+?>

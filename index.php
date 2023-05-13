@@ -1,113 +1,175 @@
 <?php
-
-$host = 'localhost';
-$db = 'Omnes MySkills';
-$user = 'root';
-$pass = 'root';
-$charset = 'utf8mb4';
-
-$dsn = "mysql:host=$host;dbname=$db;charset=$charset";
-$options = [
-    PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-    PDO::ATTR_EMULATE_PREPARES => false,
-];
-try {
-    $bdd = new PDO($dsn, $user, $pass, $options);
-} catch (\PDOException $e) {
-    throw new \PDOException($e->getMessage(), (int)$e->getCode());
-}
-
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
-
-session_start();
+require_once 'BDD/initBDD.php';
 
 if (isset($_POST['email']) && isset($_POST['mot_de_passe'])) {
     $email = $_POST['email'];
     $mot_de_passe = $_POST['mot_de_passe'];
 
-    $requete = $bdd->prepare("SELECT Utilisateurs.*, Status.statut FROM Utilisateurs INNER JOIN Status ON Utilisateurs.status_id = Status.id WHERE email = :email");
-    $requete->execute(array('email' => $email));
-    $user = $requete->fetch(PDO::FETCH_ASSOC);
+    try {
+        $requete = $bdd->prepare("SELECT * FROM Utilisateurs WHERE email = :email");
+        $requete->bindParam(':email', $email);
+        $requete->execute();
+        $utilisateur = $requete->fetch();
 
-    if ($user) {
-        if (password_verify($mot_de_passe, $user['mot_de_passe'])) {
-            $_SESSION['user'] = $user;
-            if ($user['statut'] == 'etudiant') {
+        if ($utilisateur && password_verify($mot_de_passe, $utilisateur['mot_de_passe'])) {
+            session_start();
+            $_SESSION['utilisateur'] = $utilisateur;
+
+            $requete = $bdd->prepare("SELECT statut FROM Statut WHERE id = :statut_id");
+            $requete->bindParam(':statut_id', $utilisateur['statut_id']);
+            $requete->execute();
+            $status = $requete->fetchColumn();
+
+            $_SESSION['type'] = $status;
+
+            if ($status == 'administrateur') {
+                header('Location: ajout_utilisateur.php');
+                exit;
+            } else if ($status == 'etudiant') {
                 header('Location: accueil.php');
                 exit;
-            } elseif ($user['statut'] == 'professeur') {
+            } else if ($status == 'professeur') {
                 header('Location: accueil.php');
                 exit;
-            } else {
-                $error_message = "Type d'utilisateur inconnu";
             }
         } else {
-            $erreur = "Le mot de passe est incorrect.";
+            $erreur = "Email ou mot de passe incorrect.";
         }
-    } else {
-        $erreur = "L'adresse e-mail n'existe pas.";
+    } catch (PDOException $e) {
+        $erreur = "Erreur : " . $e->getMessage();
     }
+    $nom_utilisateur = $email;
+
+    if (isset($_POST['maintenir_connexion'])) {
+        $temps_expiration = time() + (10 * 365 * 24 * 60 * 60);  // 10 ans
+    } else {
+        $temps_expiration = null;
+    }
+
+    // Lors de la connexion, stocker le nom d'utilisateur dans un cookie
+    //setcookie('nom_utilisateur', $nom_utilisateur, $temps_expiration);
 }
 ?>
-
-
 <!DOCTYPE html>
 <html lang="fr">
-
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <link href="style1.css" rel="stylesheet" type="text/css"/>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-    <script src="test.js"></script>
-    <title>Omnes MySkill</title>
+    <meta charset="UTF-8">
+    <title>Connexion</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background: #f8f9fa;
+        }
+
+        .connexion-container {
+            width: 30%;
+            padding: 50px;
+            background: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo {
+            width: 70%;
+            height: auto;
+            margin-bottom: 10px;
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        input[type="email"], input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ced4da;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        .remember-me {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .submit-btn {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-transform: uppercase;
+            font-weight: bold;
+        }
+
+        .info-text {
+            color: gray;
+            text-align: center;
+            text-decoration: none;
+            margin-bottom: 20px;
+        }
+
+        .forgotten-password {
+            color: #007bff;
+            text-align: center;
+            text-decoration: none;
+            margin-bottom: 20px;
+        }
+
+        .error-message {
+            color: red;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        footer {
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            color: darkgray;
+            text-align: center;
+            padding: 0px 0;
+        }
+
+    </style>
 </head>
-
 <body>
-
-<nav class="navbar navbar-inverse">
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <a class="navbar-brand" href="accueil.php">OMNES</a>
+<div class="connexion-container">
+    <img src="img/logo%20ece%20copie%20PNG.png" alt="Logo" class="logo">
+    <h1>Connexion avec votre compte</h1>
+    <?php if (isset($erreur)) : ?>
+        <p class="error-message"><?php echo $erreur; ?></p>
+    <?php endif; ?>
+    <form action="index.php" method="post">
+        <input type="email" name="email" placeholder="xyz@example.com" required>
+        <input type="password" name="mot_de_passe" placeholder="Mot de passe" required>
+        <div class="remember-me">
+            <input type="checkbox" id="remember" name="remember">
+            <label for="remember">Maintenir la connexion</label>
         </div>
-    </div>
-</nav>
-
-<div class="container-fluid text-left">
-    <div class="raw content text-align center">
-        <?php if (isset($erreur)): ?>
-            <p style="color: red;">
-                <?= $erreur ?>
-            </p>
-        <?php endif; ?>
-        <form method="post" action="index.php">
-            <br><br><br>
-
-            <div>
-                <label for="login">Login :</label>
-                <input type="email" id="email" name="email" required>
-            </div>
-            <br><br>
-            <div>
-                <label for="mdp">Mot de passe :</label>
-                <input type="password" id="mot_de_passe" name="mot_de_passe" required>
-            </div>
-            <br>
-            <div class="text-align left">
-                <input type="submit" value="Valider">
-            </div>
-        </form>
-    </div>
-
-    <footer class="container-fluid text-center" id="footer1">
-        <p>Footer Text</p>
-    </footer>
-
+        <button type="submit" class="submit-btn">Connexion</button>
+    </form>
+    <p class="info-text">Cette connexion vous redirigera automatiquement vers votre site.</p>
+    <a href="#" class="forgotten-password">Étudiants : mot de passe oublié ?</a>
+</div>
 </body>
-
+<footer>
+    ©Projet web dynamique - Groupe_1_i©
+</footer>
 </html>

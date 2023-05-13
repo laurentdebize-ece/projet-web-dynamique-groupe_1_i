@@ -41,7 +41,7 @@
         <div class="col-sm-2 sidenav">
             <div id="cercle"></div>
             <br><br><br>
-            <p><a href="connexion.php">Connectez-vous ici</a></p><br><br>
+            <p><a href="index.php">Connectez-vous ici</a></p><br><br>
             <p><a href="matieres.php">Matières</a></p><br>
             <p><a href="competences.php">Compétences</a></p><br>
             <p><a href="competences_transverses.php">Compétences transverses</a></p><br>

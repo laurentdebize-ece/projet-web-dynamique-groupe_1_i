@@ -1,4 +1,3 @@
-
 <?php
 require_once 'BDD/initBDD.php';
 

@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -44,6 +47,7 @@
                 slideImg(); // on oublie pas de relancer la fonction à la fin
             }, 4000); // on définit l'intervalle à 4000 millisecondes (4s)
         }
+
         slideImg();
     });
 </script>
@@ -94,13 +98,16 @@
         <div class="col-sm-4">
             <div id="carrousel">
                 <ul>
-                    <li><img src="img/ECE_Lyon1.jpg" width="350" height="200" /></li>
-                    <li><img src="img/logo%20ece%20copie%20PNG.png" width="350" height="200" /></li>
+                    <li><img src="img/ECE_Lyon1.jpg" width="350" height="200"/></li>
+                    <li><img src="img/logo%20ece%20copie%20PNG.png" width="350" height="200"/></li>
                 </ul>
             </div>
         </div>
         <div class="col-sm-2 sidenav">
-            <div id="cercle"></div>
+            <a href="pageCompte.php"><img src = 'img/OIP.jpg' width="80" height="80" style ="border-radius: 40px;";</a>
+            <?php
+            echo "<br><strong>" . $_SESSION['type'] . "</strong>";
+            ?>
             <br><br><br>
             <p><a href="index.php">Connectez-vous ici</a></p><br><br>
             <p><a href="matieres.php">Matières</a></p><br>
@@ -108,7 +115,7 @@
             <p><a href="competences_transverses.php">Compétences transverses</a></p><br>
             <p><a href="toutes_mes_competences.php">Toutes mes compétences</a></p><br>
             <p><a href="ajout_utilisateur.php">AJOUTER UTILISATEUR</a></p><br>
-            <p><a href="pageCmp.php">tableauEvaluationTTCompt</a></p><br>
+            <p><a href="pageCompetences.php">tableauEvaluationTTCompt</a></p><br>
             <!--<p><a href="connexion.php">CONNEXION</a></p>-->
         </div>
     </div>

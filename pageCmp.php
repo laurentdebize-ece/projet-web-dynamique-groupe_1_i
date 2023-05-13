@@ -31,7 +31,9 @@
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam interdum arcu nec augue convallis, vitae
                 lacinia nibh convallis. Etiam nec blandit magna, quis ultrices nisl. Ut vestibulum turpis ac diam
                 elementum, a ultrices ipsum suscipit.</p><br>
-            <a href="ajoutEvaluation.php">Ajout eval</a>
+
+            <a href="ajoutEvaluation.php" class="bouton">Ajout eval</a>
+
 
             <div>
                 <h1>Tableau dynamique</h1>

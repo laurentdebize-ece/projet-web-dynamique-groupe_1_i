@@ -131,3 +131,62 @@ footer {
     left: 0;
     list-style: none;
 }
+
+.rectanglePourCmp{
+    height: 80px;
+    width: 200px;
+    background: #007179;
+    justify-self: center;
+    cursor: pointer;
+    border-radius: 10px;
+    border-color: white;
+    margin-right: 20px;
+    margin-bottom: 10px;
+}
+
+.rectanglePourCmpNonAcqui{
+    height: 80px;
+    width: 200px;
+    background: red;
+    justify-self: center;
+    cursor: pointer;
+    border-radius: 10px;
+    border-color: white;
+    margin-right: 20px;
+    margin-bottom: 10px;
+}
+.rectanglePourCmpEnCours{
+    height: 80px;
+    width: 200px;
+    background: yellow;
+    justify-self: center;
+    cursor: pointer;
+    border-radius: 10px;
+    border-color: white;
+    margin-right: 20px;
+    margin-bottom: 10px;
+}
+.rectanglePourCmpvalide{
+    height: 80px;
+    width: 200px;
+    background: green;
+    justify-self: center;
+    cursor: pointer;
+    border-radius: 10px;
+    border-color: white;
+    margin-right: 20px;
+    margin-bottom: 10px;
+}
+
+.rectanglePourCmpListe{
+    height: 80px;
+    width: 300px;
+    background: #007179;
+    justify-self: center;
+    cursor: pointer;
+    border-radius: 10px;
+    border-color: white;
+    margin-right: 50px;
+    margin-bottom: 10px;
+}
+

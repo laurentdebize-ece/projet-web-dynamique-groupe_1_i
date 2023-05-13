@@ -108,6 +108,7 @@
             <p><a href="competences_transverses.php">Compétences transverses</a></p><br>
             <p><a href="toutes_mes_competences.php">Toutes mes compétences</a></p><br>
             <p><a href="ajout_utilisateur.php">AJOUTER UTILISATEUR</a></p><br>
+            <p><a href="pageCmp.php">tableauEvaluationTTCompt</a></p><br>
             <!--<p><a href="connexion.php">CONNEXION</a></p>-->
         </div>
     </div>

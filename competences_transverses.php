@@ -48,12 +48,16 @@
         </div>
 
         <div class="col-sm-2 sidenav">
-            <div id = "cercle"></div>
-            <br><br><br><br>
+            <div id="cercle"></div>
+            <br><br><br>
+            <p><a href="index.php">Connectez-vous ici</a></p><br><br>
             <p><a href="matieres.php">Matières</a></p><br>
             <p><a href="competences.php">Compétences</a></p><br>
             <p><a href="competences_transverses.php">Compétences transverses</a></p><br>
-            <p><a href="toutes_mes_competences.php">Toutes mes compétences</a></p>
+            <p><a href="toutes_mes_competences.php">Toutes mes compétences</a></p><br>
+            <p><a href="ajout_utilisateur.php">AJOUTER UTILISATEUR</a></p><br>
+            <p><a href="pageCmp.php">tableauEvaluationTTCompt</a></p><br>
+            <!--<p><a href="connexion.php">CONNEXION</a></p>-->
         </div>
     </div>
 </div>

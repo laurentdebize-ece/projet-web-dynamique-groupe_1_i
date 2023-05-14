@@ -12,6 +12,11 @@ session_start();
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <title>Omnes MySkill</title>
+    <style>
+        .etat {
+            font-weight: bold;
+        }
+    </style>
 </head>
 <body>
 
@@ -61,8 +66,9 @@ session_start();
             <a href="pageCompte.php"><img src='img/OIP.jpg' width="80" height="80" style="border-radius: 40px;"> ;</a>
             <?php
             if (isset($_SESSION['type'])) {
-                if ($_SESSION['type'] === 'etudiant') {
+                if ($_SESSION['type'] == 'etudiant') {
                     ?>
+                    <p class="etat"><a>Etudiant &#128104;&#8205;&#127891;</a></p><br>
                     <p><a href="matieres.php">Matières</a></p><br>
                     <p><a href="competences.php">Compétences</a></p><br>
                     <p><a href="competences_transverses.php">Compétences transverses</a></p><br>
@@ -72,6 +78,7 @@ session_start();
                     <?php
                 } else if ($_SESSION['type'] === 'professeur') {
                     ?>
+                    <p class="etat"><a>Professeur &#128104;&#8205;&#127979;</a></p>
                     <p><a href="matieres.php">Matières</a></p><br>
                     <p><a href="competences.php">Compétences</a></p><br>
                     <p><a href="competences_transverses.php">Compétences transverses</a></p><br>
@@ -80,12 +87,12 @@ session_start();
                     <p><a href="pageCompetences.php">tableauEvaluationTTCompt</a></p><br>
                     <?php
                 } else if ($_SESSION['type'] === 'administrateur') {
-                    echo "<br><strong>" . $_SESSION['type'] . "</strong>";
                     ?>
-                    <br><br><br>
-                    <p><a href="matieres_admin.php">Matières</a></p><br>
-                    <p><a href="etudiants_admin.php">Etudiants</a></p><br>
-                    <p><a href="professeurs_admin.php">Professeurs</a></p><br>
+                    <p class="etat" ><a> Administrateur &#128104;&#8205;&#128187;</a></p>
+                    <br><br ><br >
+                    <p><a href = "matieres_admin.php" > Matières</a ></p ><br >
+                    <p><a href = "etudiants_admin.php" > Etudiants</a ></p ><br >
+                    <p><a href = "professeurs_admin.php" > Professeurs</a ></p ><br >
                     <?php
                 } else {
                     ?>

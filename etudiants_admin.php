@@ -14,25 +14,36 @@ if (isset($_POST['nom'], $_POST['prenom'], $_POST['ecole'], $_POST['email'], $_P
     $email = $_POST['email'];
     $ecole = $_POST['ecole'];
     $mot_de_passe = password_hash($_POST['mot_de_passe'], PASSWORD_DEFAULT);
-    $statut_id = $_POST['type']; // Récupérer la valeur du statut depuis le formulaire
+    $statut_id = 1;
 
-    if (isset($_POST['groupe'])) {
+    if (isset($_POST['groupe'], $_POST['promotion'])) {
         $groupe = $_POST['groupe'];
         $promotion = $_POST['promotion'];
 
         // Vérifier si la classe existe déjà
-        $requete = $bdd->prepare("SELECT * FROM Classes WHERE groupe = :groupe AND promotion = :promotion");
-        $requete->bindParam(':groupe', $groupe); // Utilisation de la variable $groupe au lieu de $groupe
+        $requete = $bdd->prepare("SELECT * FROM Classes WHERE groupe = :groupe AND promotion = :promotion AND ecole = :ecole");
+        $requete->bindParam(':groupe', $groupe);
         $requete->bindParam(':promotion', $promotion);
+        $requete->bindParam(':ecole', $ecole);
         $requete->execute();
+
+        $classe_id = null;
 
         // Si la classe n'existe pas, la créer
         if ($requete->rowCount() == 0) {
-            $requete = $bdd->prepare("INSERT INTO Classes (groupe, promotion) VALUES (:groupe, :promotion)");
+            $requete = $bdd->prepare("INSERT INTO Classes (groupe, promotion, ecole) VALUES (:groupe, :promotion, :ecole)");
             $requete->bindParam(':groupe', $groupe);
             $requete->bindParam(':promotion', $promotion);
+            $requete->bindParam(':ecole', $ecole);
             $requete->execute();
         }
+        else {
+            // Si la classe existe déjà, récupérer son ID
+            $classe = $requete->fetch();
+            $classe_id = $classe['id'];
+        }
+        // Récupérer l'ID de la classe
+        $classe_id = $bdd->lastInsertId();
     }
 
     try {
@@ -45,29 +56,14 @@ if (isset($_POST['nom'], $_POST['prenom'], $_POST['ecole'], $_POST['email'], $_P
         $requete->bindParam(':statut_id', $statut_id);
         $requete->execute();
 
-        // Récupérer l'ID de la classe
-        $requete = $bdd->prepare("SELECT id FROM Classes WHERE groupe = :groupe AND promotion = :promotion");
-        $requete->bindParam(':groupe', $groupe); // Utilisation de la variable $groupe au lieu de $groupe
-        $requete->bindParam(':promotion', $promotion);
+        // Récupérer l'ID de l'utilisateur
+        $user_id = $bdd->lastInsertId();
+
+        // Insérer l'ID de l'utilisateur et l'ID de la classe dans la table etudiant_classe
+        $requete = $bdd->prepare("INSERT INTO Etudiants_classes (id_etudiant, id_classe) VALUES (:id_etudiant, :id_classe)");
+        $requete->bindParam(':id_etudiant', $user_id);
+        $requete->bindParam(':id_classe', $classe_id);
         $requete->execute();
-
-        $classe = $requete->fetch();
-        $id_classe = $classe['id'];
-
-        // Récupérer l'ID du nouvel utilisateur
-        $requete = $bdd->prepare("SELECT id FROM Utilisateurs WHERE email = :email");
-        $requete->bindParam(':email', $email);
-        $requete->execute();
-
-        $utilisateur = $requete->fetch();
-        $id_utilisateur = $utilisateur['id'];
-
-        // Créer une nouvelle entrée dans la table 'Etudiant_classe'
-        $requete = $bdd->prepare("INSERT INTO Etudiant_classe (id_etudiant, id_classe) VALUES (:id_etudiant, :id_classe)");
-        $requete->bindParam(':id_etudiant', $id_utilisateur);
-        $requete->bindParam(':id_classe', $id_classe);
-        $requete->execute();
-
 
         echo "L'utilisateur a été ajouté avec succès.";
     } catch (PDOException $e) {
@@ -129,6 +125,7 @@ $etudiants = $query->fetchAll();
     <div class="left">
         <h2>Ajouter un étudiant</h2>
         <form action="etudiants_admin.php" method="post">
+            <input type="hidden" id="type" name="type" value="etudiant">
             <div>
                 <label for="nom">Nom :</label>
                 <input type="text" id="nom" name="nom" required>

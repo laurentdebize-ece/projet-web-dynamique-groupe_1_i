@@ -93,6 +93,7 @@ session_start();
                     <p><a href = "matieres_admin.php" > Matières/Classes</a ></p ><br >
                     <p><a href = "etudiants_admin.php" > Etudiants</a ></p ><br >
                     <p><a href = "professeurs_admin.php" > Professeurs</a ></p ><br >
+                    <p><a href = "supprimer_utilisateurs.php" > Supprimer utilisateurs</a ></p ><br >
                     <?php
                 } else {
                     ?>

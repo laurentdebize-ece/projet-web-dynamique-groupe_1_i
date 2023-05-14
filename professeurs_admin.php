@@ -49,6 +49,40 @@ if (isset($_POST['nom'], $_POST['prenom'], $_POST['ecole'], $_POST['email'], $_P
             echo "Erreur : " . $e->getMessage();
         }
     }
+    // Enlever un professeur d'une classe
+    if (isset($_POST['delete_class'], $_POST['professeur_id'], $_POST['classe_id'])) {
+        $professeur_id = $_POST['professeur_id'];
+        $classe_id = $_POST['classe_id'];
+
+        try {
+            $requete = $bdd->prepare("DELETE FROM Professeurs_classes WHERE id_professeur = :id_professeur AND id_classe = :id_classe");
+            $requete->bindParam(':id_professeur', $professeur_id);
+            $requete->bindParam(':id_classe', $classe_id);
+            $requete->execute();
+
+            echo "Le professeur a été enlevé de la classe avec succès.";
+        } catch (PDOException $e) {
+            echo "Erreur : " . $e->getMessage();
+        }
+    }
+
+    // Enlever un professeur d'une matière
+    if (isset($_POST['delete_subject'], $_POST['professeur_id_matiere'], $_POST['matiere_id'])) {
+        $professeur_id = $_POST['professeur_id_matiere'];
+        $matiere_id = $_POST['matiere_id'];
+
+        try {
+            $requete = $bdd->prepare("DELETE FROM Professeurs_Matieres WHERE id_professeur = :id_professeur AND id_matiere = :id_matiere");
+            $requete->bindParam(':id_professeur', $professeur_id);
+            $requete->bindParam(':id_matiere', $matiere_id);
+            $requete->execute();
+
+            echo "Le professeur a été enlevé de la matière avec succès.";
+        } catch (PDOException $e) {
+            echo "Erreur : " . $e->getMessage();
+        }
+    }
+
 
     try {
         $requete = $bdd->prepare("INSERT INTO Utilisateurs (nom, prenom, email, mot_de_passe, ecole, statut_id) VALUES (:nom, :prenom, :email, :mot_de_passe, :ecole, :statut_id)");
@@ -78,8 +112,7 @@ $classes = $query->fetchAll();
 
 $query = $bdd->prepare("SELECT * FROM Matieres");
 $query->execute();
-
-$nom_matiere = $query->fetchAll();
+$matieres = $query->fetchAll();
 ?>
 
 <!DOCTYPE html>
@@ -176,10 +209,10 @@ $nom_matiere = $query->fetchAll();
                 <th>Nom</th>
                 <th>Volume horaire</th>
             </tr>
-            <?php foreach ($nom_matiere as $nom_matiere): ?>
+            <?php foreach ($matieres as $matiere): ?>
                 <tr>
-                    <td><?php echo htmlspecialchars($nom_matiere['nom_matiere']); ?></td>
-                    <td><?php echo htmlspecialchars($nom_matiere['volume_horaire']); ?></td>
+                    <td><?php echo htmlspecialchars($matiere['nom_matiere']); ?></td>
+                    <td><?php echo htmlspecialchars($matiere['volume_horaire']); ?></td>
                 </tr>
             <?php endforeach; ?>
         </table>
@@ -201,14 +234,14 @@ $nom_matiere = $query->fetchAll();
         <select id="professeur_id" name="professeur_id" required>
             <?php foreach ($professeurs as $professeur): ?>
                 <option
-                    value="<?php echo $professeur['id']; ?>"><?php echo htmlspecialchars($professeur['nom'] . " " . $professeur['prenom']); ?></option>
+                    value="<?php echo $professeur['id']; ?>"><?php echo htmlspecialchars($professeur['prenom'] . " " . $professeur['nom']); ?></option>
             <?php endforeach; ?>
         </select>
         <label for="classe_id">Classe :</label>
         <select id="classe_id" name="classe_id" required>
             <?php foreach ($classes as $classe): ?>
                 <option
-                    value="<?php echo $classe['id']; ?>"><?php echo htmlspecialchars($classe['groupe'] . " " . $classe['promotion'] . " " . $classe['ecole']); ?></option>
+                    value="<?php echo $classe['id']; ?>"><?php echo htmlspecialchars("Groupe n°" . $classe['groupe'] . " -- Promo : " . $classe['promotion'] . " -- Ecole : " . $classe['ecole']); ?></option>
             <?php endforeach; ?>
         </select>
         <button type="submit">Assigner</button>
@@ -220,19 +253,60 @@ $nom_matiere = $query->fetchAll();
         <select id="professeur_id_matiere" name="professeur_id_matiere" required>
             <?php foreach ($professeurs as $professeur): ?>
                 <option
-                    value="<?php echo $professeur['id']; ?>"><?php echo htmlspecialchars($professeur['nom'] . " " . $professeur['prenom']); ?></option>
+                    value="<?php echo $professeur['id']; ?>"><?php echo htmlspecialchars($professeur['prenom'] . " " . $professeur['nom']); ?></option>
             <?php endforeach; ?>
         </select>
         <label for="matiere_id">Matière :</label>
         <select id="matiere_id" name="matiere_id" required>
             <?php foreach ($matieres as $matiere): ?>
                 <option value="<?php echo $matiere['id']; ?>">
-                    <?php echo htmlspecialchars($matiere['nom']); ?></option>
+                    <?php echo htmlspecialchars("Matière : " . $matiere['nom_matiere'] . " -- Volume horaire : " . $matiere['volume_horaire']); ?></option>
             <?php endforeach; ?>
         </select>
         <button type="submit">Assigner</button>
     </form>
 </div>
+
+<div class="centered-title">
+    <h2>Enlever un professeur d'une classe</h2>
+    <form action="professeurs_admin.php" method="post">
+        <label for="professeur_id">Professeur :</label>
+        <select id="professeur_id" name="professeur_id" required>
+            <?php foreach ($professeurs as $professeur): ?>
+                <option
+                    value="<?php echo $professeur['id']; ?>"><?php echo htmlspecialchars($professeur['prenom'] . " " . $professeur['nom']); ?></option>
+            <?php endforeach; ?>
+        </select>
+        <label for="classe_id">Classe :</label>
+        <select id="classe_id" name="classe_id" required>
+            <?php foreach ($classes as $classe): ?>
+                <option
+                    value="<?php echo $classe['id']; ?>"><?php echo htmlspecialchars("Groupe n°" . $classe['groupe'] . " -- Promo : " . $classe['promotion'] . " -- Ecole : " . $classe['ecole']); ?></option>
+            <?php endforeach; ?>
+        </select>
+        <button type="submit" name="delete_class">Enlever</button>
+    </form>
+
+    <h2>Enlever un professeur d'une matière</h2>
+    <form action="professeurs_admin.php" method="post">
+        <label for="professeur_id_matiere">Professeur :</label>
+        <select id="professeur_id_matiere" name="professeur_id_matiere" required>
+            <?php foreach ($professeurs as $professeur): ?>
+                <option
+                    value="<?php echo $professeur['id']; ?>"><?php echo htmlspecialchars($professeur['prenom'] . " " . $professeur['nom']); ?></option>
+            <?php endforeach; ?>
+        </select>
+        <label for="matiere_id">Matière :</label>
+        <select id="matiere_id" name="matiere_id" required>
+            <?php foreach ($matieres as $matiere): ?>
+                <option value="<?php echo $matiere['id']; ?>">
+                    <?php echo htmlspecialchars("Matière : " . $matiere['nom_matiere'] . " -- Volume horaire : " . $matiere['volume_horaire']); ?></option>
+            <?php endforeach; ?>
+        </select>
+        <button type="submit" name="delete_subject">Enlever</button>
+    </form>
+</div>
+
 
 </body>
 </html>

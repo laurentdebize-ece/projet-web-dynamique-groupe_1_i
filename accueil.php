@@ -106,17 +106,26 @@ session_start();
         <div class="col-sm-2 sidenav">
             <a href="pageCompte.php"><img src = 'img/OIP.jpg' width="80" height="80" style ="border-radius: 40px;";</a>
             <?php
-            echo "<br><strong>" . $_SESSION['type'] . "</strong>";
+            if (isset($_SESSION['type'])) {
+                echo "<br><strong>" . $_SESSION['type'] . "</strong>";
+            } else {
+                echo "<br><strong> Visiteur </strong>";
+
+            }
             ?>
             <br><br><br>
-            <p><a href="index.php">Connectez-vous ici</a></p><br><br>
+            <?php
+            if(isset($_SESSION['type'])) {
+                echo '<p><a href="logout.php">Déconnectez-vous ici</a></p><br><br>';
+            } else {
+                echo '<p><a href="index.php">Connectez-vous ici</a></p><br><br>';
+            }
+            ?>
             <p><a href="matieres.php">Matières</a></p><br>
             <p><a href="competences.php">Compétences</a></p><br>
             <p><a href="competences_transverses.php">Compétences transverses</a></p><br>
             <p><a href="toutes_mes_competences.php">Toutes mes compétences</a></p><br>
-            <p><a href="ajout_utilisateur.php">AJOUTER UTILISATEUR</a></p><br>
             <p><a href="pageCompetences.php">tableauEvaluationTTCompt</a></p><br>
-            <!--<p><a href="connexion.php">CONNEXION</a></p>-->
         </div>
     </div>
 </div>

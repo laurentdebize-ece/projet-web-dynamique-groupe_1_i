@@ -23,7 +23,7 @@ if (isset($_POST['email']) && isset($_POST['mot_de_passe'])) {
             $_SESSION['type'] = $status;
 
             if ($status == 'administrateur') {
-                header('Location: accueil_admin.php');
+                header('Location: accueil.php');
                 exit;
             } else if ($status == 'etudiant') {
                 header('Location: accueil.php');

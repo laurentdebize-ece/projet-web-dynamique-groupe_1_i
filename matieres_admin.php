@@ -75,7 +75,7 @@ $matiere = $query->fetchAll();
     </style>
 </head>
 <body>
-<h1 class="centered-title">Liste des matières</h1>
+<h1 class="centered-title">Gestion des matières</h1>
 
 <div class="container">
     <div class="left">
@@ -87,7 +87,7 @@ $matiere = $query->fetchAll();
             </div>
             <div>
                 <label for="volume_horaire">Volume horaire :</label>
-                <input type="number" id="volume_horaire" name="volume_horaire" required>
+                <input type="number" id="volume_horaire" min="0" name="volume_horaire" required>
             </div>
             <button type="submit" class="submit-btn">Ajouter</button>
         </form>

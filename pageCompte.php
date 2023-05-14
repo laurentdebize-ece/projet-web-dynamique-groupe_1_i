@@ -90,7 +90,7 @@ session_start();
                     ?>
                     <p class="etat" ><a> Administrateur &#128104;&#8205;&#128187;</a></p>
                     <br><br ><br >
-                    <p><a href = "matieres_admin.php" > Matières</a ></p ><br >
+                    <p><a href = "matieres_admin.php" > Matières/Classes</a ></p ><br >
                     <p><a href = "etudiants_admin.php" > Etudiants</a ></p ><br >
                     <p><a href = "professeurs_admin.php" > Professeurs</a ></p ><br >
                     <?php

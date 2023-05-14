@@ -82,7 +82,6 @@ $etudiants = $query->fetchAll();
 <head>
     <meta charset="UTF-8">
     <title>Liste des étudiants</title>
-    <link rel="stylesheet" href="style.css">
     <style>
         .container {
             display: flex;

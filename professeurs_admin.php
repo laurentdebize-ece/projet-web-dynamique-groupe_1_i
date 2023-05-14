@@ -4,7 +4,7 @@ require_once 'BDD/initBDD.php';
 session_start();
 
 if (!isset($_SESSION['type']) || $_SESSION['type'] !== 'administrateur') {
-    echo "Vous devez être connecté en tant qu'administrateur pour ajouter un utilisateur.";
+    echo "Vous devez être connecté en tant qu'administrateur pour gérer les professeurs.";
     exit;
 }
 
@@ -16,32 +16,38 @@ if (isset($_POST['nom'], $_POST['prenom'], $_POST['ecole'], $_POST['email'], $_P
     $mot_de_passe = password_hash($_POST['mot_de_passe'], PASSWORD_DEFAULT);
     $statut_id = 2;
 
-    if (isset($_POST['matiere'], $_POST['volume_horaire'])) {
-        $matiere = $_POST['matiere'];
-        $volume_horaire = $_POST['volume_horaire'];
+    // Assigner un professeur à une classe
+    if (isset($_POST['professeur_id'], $_POST['classe_id'])) {
+        $professeur_id = $_POST['professeur_id'];
+        $classe_id = $_POST['classe_id'];
 
-        // Vérifier si la matière existe déjà
-        $requete = $bdd->prepare("SELECT * FROM Matieres WHERE nom = :nom AND volume_horaire = :volume_horaire");
-        $requete->bindParam(':nom', $matiere);
-        $requete->bindParam(':volume_horaire', $volume_horaire);
-        $requete->execute();
-
-        $matiere_id = null;
-
-        // Si la classe n'existe pas, la créer
-        if ($requete->rowCount() == 0) {
-            $requete = $bdd->prepare("INSERT INTO Matieres (nom, volume_horaire) VALUES (:nom, :volume_horaire)");
-            $requete->bindParam(':nom', $nom);
-            $requete->bindParam(':volume_horaire', $volume_horaire);
+        try {
+            $requete = $bdd->prepare("INSERT INTO Professeurs_classes (id_professeur, id_classe) VALUES (:id_professeur, :id_classe)");
+            $requete->bindParam(':id_professeur', $professeur_id);
+            $requete->bindParam(':id_classe', $classe_id);
             $requete->execute();
+
+            echo "Le professeur a été assigné à la classe avec succès.";
+        } catch (PDOException $e) {
+            echo "Erreur : " . $e->getMessage();
         }
-        else {
-            // Si la classe existe déjà, récupérer son ID
-            $classe = $requete->fetch();
-            $matiere_id = $matiere['id'];
+    }
+
+    // Assigner un professeur à une matière
+    if (isset($_POST['professeur_id_matiere'], $_POST['matiere_id'])) {
+        $professeur_id = $_POST['professeur_id_matiere'];
+        $matiere_id = $_POST['matiere_id'];
+
+        try {
+            $requete = $bdd->prepare("INSERT INTO Professeurs_Matieres (id_professeur, id_matiere) VALUES (:id_professeur, :id_matiere)");
+            $requete->bindParam(':id_professeur', $professeur_id);
+            $requete->bindParam(':id_matiere', $matiere_id);
+            $requete->execute();
+
+            echo "Le professeur a été assigné à la matière avec succès.";
+        } catch (PDOException $e) {
+            echo "Erreur : " . $e->getMessage();
         }
-        // Récupérer l'ID de la classe
-        $matiere_id = $bdd->lastInsertId();
     }
 
     try {
@@ -57,30 +63,30 @@ if (isset($_POST['nom'], $_POST['prenom'], $_POST['ecole'], $_POST['email'], $_P
         // Récupérer l'ID de l'utilisateur
         $user_id = $bdd->lastInsertId();
 
-        // Insérer l'ID de l'utilisateur et l'ID de la classe dans la table etudiant_classe
-        $requete = $bdd->prepare("INSERT INTO Etudiants_classes (id_etudiant, id_classe) VALUES (:id_etudiant, :id_classe)");
-        $requete->bindParam(':id_etudiant', $user_id);
-        $requete->bindParam(':id_classe', $classe_id);
-        $requete->execute();
-
         echo "L'utilisateur a été ajouté avec succès.";
     } catch (PDOException $e) {
         echo "Erreur : " . $e->getMessage();
     }
 }
+$query = $bdd->prepare("SELECT * FROM Utilisateurs WHERE statut_id = (SELECT id FROM Statut WHERE statut = 'professeur')");
+$query->execute();
+$professeurs = $query->fetchAll();
 
-$query = $bdd->prepare("SELECT * FROM Utilisateurs WHERE statut_id = 2");
+$query = $bdd->prepare("SELECT * FROM Classes");
+$query->execute();
+$classes = $query->fetchAll();
+
+$query = $bdd->prepare("SELECT * FROM Matieres");
 $query->execute();
 
-$professeurs = $query->fetchAll();
+$nom_matiere = $query->fetchAll();
 ?>
 
 <!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>Liste des étudiants</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Gestion des professeurs</title>
     <style>
         .container {
             display: flex;
@@ -122,8 +128,8 @@ $professeurs = $query->fetchAll();
 <div class="container">
     <div class="left">
         <h2>Ajouter un professeur</h2>
-        <form action="etudiants_admin.php" method="post">
-            <input type="hidden" id="type" name="type" value="etudiant">
+        <form action="professeurs_admin.php" method="post">
+            <input type="hidden" id="type" name="type" value="professeur">
             <div>
                 <label for="nom">Nom :</label>
                 <input type="text" id="nom" name="nom" required>
@@ -144,14 +150,6 @@ $professeurs = $query->fetchAll();
                 <label for="mot_de_passe">Mot de passe :</label>
                 <input type="password" id="mot_de_passe" name="mot_de_passe" required>
             </div>
-            <div>
-                <label for="matiere">Matière :</label>
-                <input type="number" id="matiere" name="matiere" min="1" max="10">
-            </div>
-            <div>
-                <label for="promotion">Promotion :</label>
-                <input type="number" id="promotion" name="promotion" min="1919" value="2026">
-            </div>
             <button type="submit" class="submit-btn">Ajouter</button>
         </form>
     </div>
@@ -164,15 +162,76 @@ $professeurs = $query->fetchAll();
                 <th>Prénom</th>
                 <th>Email</th>
             </tr>
-            <?php foreach ($professeurs as $professeurs): ?>
+            <?php foreach ($professeurs as $professeur): ?>
                 <tr>
-                    <td><?php echo htmlspecialchars($professeurs['nom']); ?></td>
-                    <td><?php echo htmlspecialchars($professeurs['prenom']); ?></td>
-                    <td><?php echo htmlspecialchars($professeurs['email']); ?></td>
+                    <td><?php echo htmlspecialchars($professeur['nom']); ?></td>
+                    <td><?php echo htmlspecialchars($professeur['prenom']); ?></td>
+                    <td><?php echo htmlspecialchars($professeur['email']); ?></td>
+                </tr>
+            <?php endforeach; ?>
+        </table>
+        <h2>Matières existantes</h2>
+        <table>
+            <tr>
+                <th>Nom</th>
+                <th>Volume horaire</th>
+            </tr>
+            <?php foreach ($nom_matiere as $nom_matiere): ?>
+                <tr>
+                    <td><?php echo htmlspecialchars($nom_matiere['nom_matiere']); ?></td>
+                    <td><?php echo htmlspecialchars($nom_matiere['volume_horaire']); ?></td>
                 </tr>
             <?php endforeach; ?>
         </table>
     </div>
+</div>
+
+<br>
+
+<div class="centered-title">
+    <button>
+        <a href="matieres_admin.php" style="text-decoration: none; color: inherit;">Ajouter une matière/classe</a>
+    </button>
+</div>
+
+<div class="centered-title">
+    <h2>Assigner un professeur à une classe</h2>
+    <form action="professeurs_admin.php" method="post">
+        <label for="professeur_id">Professeur :</label>
+        <select id="professeur_id" name="professeur_id" required>
+            <?php foreach ($professeurs as $professeur): ?>
+                <option
+                    value="<?php echo $professeur['id']; ?>"><?php echo htmlspecialchars($professeur['nom'] . " " . $professeur['prenom']); ?></option>
+            <?php endforeach; ?>
+        </select>
+        <label for="classe_id">Classe :</label>
+        <select id="classe_id" name="classe_id" required>
+            <?php foreach ($classes as $classe): ?>
+                <option
+                    value="<?php echo $classe['id']; ?>"><?php echo htmlspecialchars($classe['groupe'] . " " . $classe['promotion'] . " " . $classe['ecole']); ?></option>
+            <?php endforeach; ?>
+        </select>
+        <button type="submit">Assigner</button>
+    </form>
+
+    <h2>Assigner un professeur à une matière</h2>
+    <form action="professeurs_admin.php" method="post">
+        <label for="professeur_id_matiere">Professeur :</label>
+        <select id="professeur_id_matiere" name="professeur_id_matiere" required>
+            <?php foreach ($professeurs as $professeur): ?>
+                <option
+                    value="<?php echo $professeur['id']; ?>"><?php echo htmlspecialchars($professeur['nom'] . " " . $professeur['prenom']); ?></option>
+            <?php endforeach; ?>
+        </select>
+        <label for="matiere_id">Matière :</label>
+        <select id="matiere_id" name="matiere_id" required>
+            <?php foreach ($matieres as $matiere): ?>
+                <option value="<?php echo $matiere['id']; ?>">
+                    <?php echo htmlspecialchars($matiere['nom']); ?></option>
+            <?php endforeach; ?>
+        </select>
+        <button type="submit">Assigner</button>
+    </form>
 </div>
 
 </body>

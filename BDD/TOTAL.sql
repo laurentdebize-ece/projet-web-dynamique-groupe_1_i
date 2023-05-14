@@ -2,7 +2,7 @@
 CREATE TABLE Matieres
 (
     id             INT AUTO_INCREMENT PRIMARY KEY,
-    nom            VARCHAR(255) NOT NULL,
+    nom_matiere    VARCHAR(255) NOT NULL,
     volume_horaire INT          NOT NULL
 );
 
@@ -87,6 +87,16 @@ CREATE TABLE Professeurs_classes
     PRIMARY KEY (id_professeur, id_classe),
     FOREIGN KEY (id_professeur) REFERENCES utilisateurs (id),
     FOREIGN KEY (id_classe) REFERENCES classes (id)
+);
+
+-- Table: professeurs_matieres
+CREATE TABLE Professeurs_Matieres
+(
+    id_professeur INT,
+    id_matiere    INT,
+    PRIMARY KEY (id_professeur, id_matiere),
+    FOREIGN KEY (id_professeur) REFERENCES Utilisateurs (id),
+    FOREIGN KEY (id_matiere) REFERENCES Matieres (id)
 );
 
 -- Table: matieres_competences

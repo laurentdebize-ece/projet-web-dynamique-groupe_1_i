@@ -33,6 +33,7 @@ CREATE TABLE Utilisateurs (
   prenom VARCHAR(255) NOT NULL,
   email VARCHAR(255) UNIQUE NOT NULL,
   mot_de_passe VARCHAR(255) NOT NULL,
+  ecole VARCHAR(255) NOT NULL,
   statut_id INT NOT NULL,
   FOREIGN KEY (statut_id) REFERENCES Statut(id)
 );
@@ -91,10 +92,10 @@ INSERT INTO Statut (statut)
 VALUES ('etudiant'), ('professeur'), ('administrateur');
 
 
-INSERT INTO Utilisateurs (nom, prenom, email, mot_de_passe, statut_id)
-VALUES ('Admin', 'Laurent', 'admin@ece.fr', '$2y$10$55.Ebfl/vSXK2IVwPl7kw.djRxFSno5A9wm9D4RqklnIxoPLjNJ8K', '3'),
-       ('Etu', 'Laurent', 'etudiant@ece.fr', '$2y$10$FL5zoBNMgE0M6J1t1E7bHujsQGnyP.h5nxVTQhoxziezL4WUmVFJO', '1'),
-       ('Pro', 'Laurent', 'professeur@ece.fr', '$2y$10$QjqyQmpPgHbnEVAZrSjcGuv7./e/hQtlFxlQtWVWoNByQ.nTQG3TC', '2');
+INSERT INTO Utilisateurs (nom, prenom, email, mot_de_passe, ecole, statut_id)
+VALUES ('Etu', 'Laurent', 'etu@ece.fr', '$2y$10$FL5zoBNMgE0M6J1t1E7bHujsQGnyP.h5nxVTQhoxziezL4WUmVFJO', 'ECE', '1'),
+       ('Prof', 'Laurent', 'prof@ece.fr', '$2y$10$QjqyQmpPgHbnEVAZrSjcGuv7./e/hQtlFxlQtWVWoNByQ.nTQG3TC', 'ECE', '2'),
+       ('Admin', 'Laurent', 'admin@ece.fr', '$2y$10$55.Ebfl/vSXK2IVwPl7kw.djRxFSno5A9wm9D4RqklnIxoPLjNJ8K', 'ECE', '3');
 
 
 

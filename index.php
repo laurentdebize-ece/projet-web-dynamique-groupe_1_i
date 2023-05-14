@@ -23,7 +23,7 @@ if (isset($_POST['email']) && isset($_POST['mot_de_passe'])) {
             $_SESSION['type'] = $status;
 
             if ($status == 'administrateur') {
-                header('Location: ajout_utilisateur.php');
+                header('Location: accueil_admin.php');
                 exit;
             } else if ($status == 'etudiant') {
                 header('Location: accueil.php');
@@ -40,14 +40,14 @@ if (isset($_POST['email']) && isset($_POST['mot_de_passe'])) {
     }
     $nom_utilisateur = $email;
 
-    if (isset($_POST['maintenir_connexion'])) {
+    /*if (isset($_POST['maintenir_connexion'])) {
         $temps_expiration = time() + (10 * 365 * 24 * 60 * 60);  // 10 ans
     } else {
         $temps_expiration = null;
     }
 
-    // Lors de la connexion, stocker le nom d'utilisateur dans un cookie
-    //setcookie('nom_utilisateur', $nom_utilisateur, $temps_expiration);
+    //Lors de la connexion, stocker le nom d'utilisateur dans un cookie
+    setcookie('nom_utilisateur', $nom_utilisateur, $temps_expiration);*/
 }
 ?>
 <!DOCTYPE html>

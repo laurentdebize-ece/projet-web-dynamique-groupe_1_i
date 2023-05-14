@@ -1,16 +1,92 @@
 <?php
+require_once 'BDD/initBDD.php';
+
 session_start();
 
-if (isset($_SESSION['type'])) {
-    if ($_SESSION['type'] === 'administrateur') {
-        echo "Bienvenue ! Vous êtes connecté en tant qu'administrateur.";
-    } else {
-        echo "Vous n'êtes pas un administrateur.";
-        exit;
-    }
-} else {
-    echo "Vous n'êtes pas connecté.";
+if (!isset($_SESSION['type']) || $_SESSION['type'] !== 'administrateur') {
+    echo "Vous devez être connecté en tant qu'administrateur pour ajouter un utilisateur.";
     exit;
+}
+
+if (isset($_POST['nom'], $_POST['prenom'], $_POST['ecole'], $_POST['email'], $_POST['mot_de_passe'], $_POST['type'])) {
+    $nom = $_POST['nom'];
+    $prenom = $_POST['prenom'];
+    $email = $_POST['email'];
+    $ecole = $_POST['ecole'];
+    $mot_de_passe = password_hash($_POST['mot_de_passe'], PASSWORD_DEFAULT);
+    $type = $_POST['type'];
+
+    $statut_id = ($type === 'etudiant') ? 1 : 2;
+
+    if ($statut_id === 1 && isset($_POST['nom_classe'])) {
+        $nom_classe = $_POST['nom_classe'];
+        $promotion = $_POST['promotion'];
+
+        // Vérifier si la classe existe déjà
+        $requete = $bdd->prepare("SELECT * FROM Classes WHERE nom_classe = :nom_classe AND promotion = :promotion");
+        $requete->bindParam(':nom_classe', $nom_classe);
+        $requete->bindParam(':promotion', $promotion);
+        $requete->execute();
+
+        // Si la classe n'existe pas, la créer
+        if ($requete->rowCount() == 0) {
+            $requete = $bdd->prepare("INSERT INTO Classes (nom_classe, promotion) VALUES (:nom_classe, :promotion)");
+            $requete->bindParam(':nom_classe', $nom_classe);
+            $requete->bindParam(':promotion', $promotion);
+            $requete->execute();
+        }
+
+    } else if ($statut_id === 2 && isset($_POST['matiere'], $_POST['volume_horaire'])) {
+        $matiere = $_POST['matiere'];
+        $volume_horaire = $_POST['volume_horaire'];
+
+        // Vérifier si la matière existe déjà
+        $requete = $bdd->prepare("SELECT * FROM Matieres WHERE nom = :matiere AND volume_horaire = :volume_horaire");
+        $requete->bindParam(':matiere', $matiere);
+        $requete->bindParam(':volume_horaire', $volume_horaire);
+        $requete->execute();
+
+        // Si la matière n'existe pas, la créer
+        if ($requete->rowCount() == 0) {
+            $requete = $bdd->prepare("INSERT INTO Matieres (nom, volume_horaire) VALUES (:matiere, :volume_horaire)");
+            $requete->bindParam(':matiere', $matiere);
+            $requete->bindParam(':volume_horaire', $volume_horaire);
+            $requete->execute();
+        }
+    }
+
+    try {
+        $requete = $bdd->prepare("INSERT INTO Utilisateurs (nom, prenom, email, mot_de_passe, ecole, statut_id) VALUES (:nom, :prenom, :email, :mot_de_passe, :ecole, :statut_id)");
+        $requete->bindParam(':nom', $nom);
+        $requete->bindParam(':prenom', $prenom);
+        $requete->bindParam(':email', $email);
+        $requete->bindParam(':mot_de_passe', $mot_de_passe);
+        $requete->bindParam(':ecole', $ecole);
+        $requete->bindParam(':statut_id', $statut_id);
+        $requete->execute();
+
+        echo "L'utilisateur a été ajouté avec succès.";
+    } catch (PDOException $e) {
+        echo "Erreur : " . $e->getMessage();
+    }
+}
+
+if (isset($_POST['email_suppression'])) {
+    $email_suppression = $_POST['email_suppression'];
+
+    try {
+        $requete = $bdd->prepare("DELETE FROM Utilisateurs WHERE email = :email");
+        $requete->bindParam(':email', $email_suppression);
+        $requete->execute();
+
+        if ($requete->rowCount() > 0) {
+            echo "L'utilisateur a été supprimé avec succès.";
+        } else {
+            echo "Aucun utilisateur trouvé avec cet email.";
+        }
+    } catch (PDOException $e) {
+        echo "Erreur : " . $e->getMessage();
+    }
 }
 ?>
 
@@ -20,7 +96,7 @@ if (isset($_SESSION['type'])) {
 
 <head>
     <meta charset="UTF-8">
-    <title>Inscription</title>
+    <title>Administration</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -96,7 +172,7 @@ if (isset($_SESSION['type'])) {
 </head>
 
 <body>
-<h1>Inscription</h1>
+<h1>Ajout utilisateur</h1>
 
 <form action="ajout_utilisateur.php" method="post">
     <div>
@@ -106,6 +182,10 @@ if (isset($_SESSION['type'])) {
     <div>
         <label for="prenom">Prénom :</label>
         <input type="text" id="prenom" name="prenom" required>
+    </div>
+    <div>
+        <label for="ecole">Ecole :</label>
+        <input type="text" id="ecole" name="ecole" value="ECE" required>
     </div>
     <div>
         <label for="email">Email :</label>
@@ -148,7 +228,7 @@ if (isset($_SESSION['type'])) {
         </div>
         <div>
             <label for="promotion">Promotion :</label>
-            <input type="number" id="promotion" name="promotion">
+            <input type="number" id="promotion" name="promotion" value="2026">
         </div>
     </div>
 
@@ -158,8 +238,8 @@ if (isset($_SESSION['type'])) {
             <input type="text" id="matiere" name="matiere">
         </div>
         <div>
-            <label for="grade">Grade :</label>
-            <input type="text" id="grade" name="grade">
+            <label for="volume_horaire">Volume horaire :</label>
+            <input type="number" id="volume_horaire" name="volume_horaire">
         </div>
     </div>
 
@@ -167,6 +247,15 @@ if (isset($_SESSION['type'])) {
 
     <button type="submit" class="submit-btn">Inscription</button>
 
+</form>
+
+<h1>Suppression d'utilisateur</h1>
+<form action="ajout_utilisateur.php" method="post">
+    <div>
+        <label for="email_suppression">Email de l'utilisateur à supprimer :</label>
+        <input type="email" id="email_suppression" name="email_suppression" required>
+    </div>
+    <button type="submit" class="submit-btn">Supprimer l'utilisateur</button>
 </form>
 
 </body>

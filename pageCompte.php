@@ -63,7 +63,7 @@ session_start();
         <div class="col-sm-10 text-left">
         </div>
         <div class="col-sm-2 sidenav">
-            <a href="pageCompte.php"><img src='img/OIP.jpg' width="80" height="80" style="border-radius: 40px;"> ;</a>
+            <a href="pageCompte.php"><img src='img/OIP.jpg' width="80" height="80" style="border-radius: 40px;"></a>
             <?php
             if (isset($_SESSION['type'])) {
                 if ($_SESSION['type'] == 'etudiant') {

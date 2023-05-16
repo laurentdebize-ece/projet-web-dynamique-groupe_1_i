@@ -66,38 +66,10 @@ session_start();
                 acquises durant vos années d'études</p>
             <br><br><br><br>
             <div>
+                <br>
                 <h1>Mes competences star</h1>
                 <br>
-                <table>
-                    <tr>
-                        <td>
-                            <button class="rectangle" name="compt" value="1"></button>
-                        </td>
-                        <td>
-                            <button class="rectangle" name="compt" value="2"></button>
-                        </td>
-                        <td>
-                            <button class="rectangle" name="compt" value="3"></button>
-                        </td>
-                        <td>
-                            <button class="rectangle" name="compt" value="4"></button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <button class="rectangle" name="compt" value="5"></button>
-                        </td>
-                        <td>
-                            <button class="rectangle" name="compt" value="6"></button>
-                        </td>
-                        <td>
-                            <button class="rectangle" name="compt" value="7"></button>
-                        </td>
-                        <td>
-                            <button class="rectangle" name="compt" value="8"></button>
-                        </td>
-                    </tr>
-                </table>
+                <?php include "tableauAccueil.php"; ?>
             </div>
         </div>
         <div class="col-sm-4">

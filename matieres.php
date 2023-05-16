@@ -67,19 +67,41 @@ session_start();
         </div>
 
         <div class="col-sm-2 sidenav">
-            <a href="pageCompte.php"><img src = 'img/OIP.jpg' width="80" height="80" style ="border-radius: 40px;";</a>
+            <a href="pageCompte.php"><img src='img/OIP.jpg' width="80" height="80" style="border-radius: 40px;" ;</a>
             <?php
-            echo "<br><strong>" . $_SESSION['type'] . "</strong>";
+            if (isset($_SESSION['type'])) {
+                if ($_SESSION['type'] == 'administrateur') {
+                    ?>
+                    <p class="etat">Administrateur &#128104;&#8205;&#128187;</p>
+                    <?php
+                } else if ($_SESSION['type'] == 'etudiant') {
+                    ?>
+                    <p class="etat">Etudiant &#128104;&#8205;&#127891;</p>
+                    <?php
+                } else if ($_SESSION['type'] == 'professeur') {
+                    ?>
+                    <p class="etat">Professeur &#128104;&#8205;&#127979;</p>
+                    <?php
+                }
+            } else {
+                ?>
+                <p class="etat">Visiteur &#129335;&#8205;&#9794;</p>
+                <?php
+            }
             ?>
-            <br><br><br>
-            <p><a href="index.php">Connectez-vous ici</a></p><br><br>
+            <br><br>
+            <?php
+            if (isset($_SESSION['type'])) {
+                echo '<p><a href="logout.php">Déconnectez-vous ici</a></p><br><br>';
+            } else {
+                echo '<p><a href="index.php">Connectez-vous ici</a></p><br><br>';
+            }
+            ?>
             <p><a href="matieres.php">Matières</a></p><br>
             <p><a href="competences.php">Compétences</a></p><br>
             <p><a href="competences_transverses.php">Compétences transverses</a></p><br>
             <p><a href="toutes_mes_competences.php">Toutes mes compétences</a></p><br>
-            <p><a href="ajout_utilisateur.php">AJOUTER UTILISATEUR</a></p><br>
             <p><a href="pageCompetences.php">tableauEvaluationTTCompt</a></p><br>
-            <!--<p><a href="connexion.php">CONNEXION</a></p>-->
         </div>
     </div>
 </div>

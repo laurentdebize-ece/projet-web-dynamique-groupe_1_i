@@ -39,18 +39,23 @@ session_start();
                     <input type="text" id="id" name="id" required><br><br>-->
 
                     <label for="id_etudiant">id etudiant :</label>
-                    <select>
-                        <option value="acquis">acquis</option>
-                        <option value="en_cours">en_cours</option>
-                        <option value="non_acquis">non_acquis</option>
-                    </select>
-                    <br><br>
+                    <input type="number" id="id_etudiant" name="id_etudiant" required><br><br>
 
                     <label for="id_competence">id_competence :</label>
                     <input type="number" id="id_competence" name="id_competence" required><br><br>
 
                     <label for="statut">statut :</label>
-                    <input type="tel" id="statut" name="statut" required><br><br>
+                    <input type="text" id="statut" name="statut" required>
+                    <!--
+                    <label>
+                        <select>
+                            <option name="statut" value="acquis">acquis</option>
+                            <option name="statut" value="en_cours">en_cours</option>
+                            <option name="statut" value="non_acquis">non_acquis</option>
+                        </select>
+                    </label>
+                    -->
+                    <br><br>
 
                     <label for="date">date :</label>
                     <input type="date" id="date" name="date" required><br><br>
@@ -61,7 +66,7 @@ session_start();
         </div>
 
         <div class="col-sm-2 sidenav">
-            <a href="pageCompte.php"><img src = 'img/OIP.jpg' width="80" height="80" style ="border-radius: 40px;";</a>
+            <a href="pageCompte.php"><img src='img/OIP.jpg' width="80" height="80" style="border-radius: 40px;" ;</a>
             <?php
             echo "<br><strong>" . $_SESSION['type'] . "</strong>";
             ?>
@@ -92,4 +97,23 @@ session_start();
 
 $connexion = mysqli_connect("localhost", "root", "root", "omnes myskills");
 
+$id_etudiant = isset($_POST["id_etudiant"]) ? $_POST["id_etudiant"] : "";
+$id_competence = isset($_POST["id_competence"]) ? $_POST["id_competence"] : "";
+$statut = isset($_POST["statut"]) ? $_POST["statut"] : "";
+$date = isset($_POST["date"]) ? $_POST["date"] : "";
+
+echo "<p>". $id_etudiant . "</p>";
+echo "<p>". $id_competence . "</p>";
+echo "<p>". $statut . "</p>";
+echo "<p>". $date . "</p>";
+
+if ($id_etudiant != "" && $id_competence != "" && $statut != "" && $date != "") {
+    $sql = " INSERT INTO autoevaluations (id_etudiant, id_competence, statut, date)
+               VALUES ('$id_etudiant', '$id_competence', '$statut', '$date')";
+}
+if (mysqli_query($connexion, $sql)) {
+    echo "Employé ajouté avec succès";
+} else {
+    echo "Erreur lors de l'ajout de l'employé: " . mysqli_error($connexion);
+}
 ?>

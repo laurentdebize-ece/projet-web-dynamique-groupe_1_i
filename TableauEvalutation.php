@@ -1,3 +1,6 @@
+<!DOCTYPE html>
+<html lang="fr">
+<body>
 <?php
 
 $connexion = mysqli_connect("localhost", "root", "root", "omnes myskills");
@@ -11,19 +14,19 @@ while ($ligne = mysqli_fetch_assoc($data)) {
     echo "<tr>";
     echo "<td><div class='rectanglePourCmpListe'>" . $description['description'] . "</div></td>";
     if ($ligne["statut"] == "non_acquis") {
-        echo "<td><button class='rectanglePourCmpNonAcqui' onClick='test()'>Non acquis</button></td>";
+        echo "<td><button class='rectanglePourCmpNonAcqui'>Non acquis</button></td>";
     } else {
-        echo "<td><button class='rectanglePourCmp'></button></td>";
+        echo "<td><button class='rectanglePourCmp' onClick='click_NonAcquis(" . $ligne['id'] . ")' name = '" . $ligne['id'] . "' value = '1'></button></td>";
     }
-    if($ligne["statut"] == "en_cours") {
+    if ($ligne["statut"] == "en_cours") {
         echo "<td><button class='rectanglePourCmpEnCours'>" . "</button></td>";
     } else {
-        echo "<td><button class='rectanglePourCmp'>" . "</button></td>";
+        echo "<td><button class='rectanglePourCmp' onClick='click_EnCours(" . $ligne['id'] . ")'>" . "</button></td>";
     }
-    if($ligne["statut"] == "acquis") {
-        echo "<td><button class='rectanglePourCmpvalide'>" ."</button></td>";
+    if ($ligne["statut"] == "acquis") {
+        echo "<td><button class='rectanglePourCmpvalide'>" . "</button></td>";
     } else {
-        echo "<td><button class='rectanglePourCmp'>" . "</button></td>";
+        echo "<td><button class='rectanglePourCmp' onClick = 'click_Acquis(" . $ligne['id'] . ")'>" . "</button></td>";
     }
     echo "</tr>";
 }
@@ -34,8 +37,52 @@ mysqli_close($connexion);
 ?>
 
 <script>
-    function test(){
-        alert("test");
+    function click_NonAcquis(var ID)
+    {
+        alert("click_NonAcquis");
+        if(ID === 1){
+            <?php
+                $connexion = mysqli_connect("localhost", "root", "root", "omnes myskills");
+                $sql = mysqli_query($connexion, "UPDATE autoevaluations
+                                                        SET statut = 'non_acquis'
+                                                        WHERE id = ID;");
+                mysqli_close($connexion);
+                header("Location = pageCompetences.php");
+            ?>
+        }
+    }
+
+    function click_EnCours(var ID)
+    {
+        alert("click_EnCours");
+        if(1==0){
+            <?php
+            $connexion = mysqli_connect("localhost", "root", "root", "omnes myskills");
+            $sql = mysqli_query($connexion, "UPDATE autoevaluations
+                                                        SET statut = 'en_cours'
+                                                        WHERE id = ID;");
+            mysqli_close($connexion);
+            header("Location = pageCompetences.php");
+            ?>
+        }
+
+    }
+
+    function click_Acquis(var ID)
+    {
+        alert("click_Acquis");
+        if(1==0){
+            <?php
+            $connexion = mysqli_connect("localhost", "root", "root", "omnes myskills");
+            $sql = mysqli_query($connexion, "UPDATE autoevaluations
+                                                        SET statut = 'acquis'
+                                                        WHERE id = ID;");
+            mysqli_close($connexion);
+            header("Location = pageCompetences.php");
+            ?>
+        }
     }
 
 </script>
+</body>
+</html>

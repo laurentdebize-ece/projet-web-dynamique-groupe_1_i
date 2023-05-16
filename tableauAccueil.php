@@ -8,7 +8,7 @@ $nb_lignes = mysqli_num_rows($data);
 echo "<table>";
 while ($ligne = mysqli_fetch_assoc($data)) {
     echo "<tr>";
-    echo "<td><div class='rectangle'>" . $ligne['nom'] . "</div></td>";
+    echo "<td><button class='rectangle'>" . $ligne['nom'] . "</button></td>";
     echo "</tr>";
 }
 echo "</table>";

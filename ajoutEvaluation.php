@@ -45,16 +45,14 @@ session_start();
                     <input type="number" id="id_competence" name="id_competence" required><br><br>
 
                     <label for="statut">statut :</label>
-                    <input type="text" id="statut" name="statut" required>
-                    <!--
-                    <label>
-                        <select>
-                            <option name="statut" value="acquis">acquis</option>
-                            <option name="statut" value="en_cours">en_cours</option>
-                            <option name="statut" value="non_acquis">non_acquis</option>
-                        </select>
-                    </label>
-                    -->
+                    <!--<input type="text" id="statut" name="statut" required> -->
+
+                    <select name="statut">
+                        <option value="acquis">acquis</option>
+                        <option value="en_cours">en_cours</option>
+                        <option value="non_acquis">non_acquis</option>
+                    </select>
+
                     <br><br>
 
                     <label for="date">date :</label>
@@ -102,10 +100,10 @@ $id_competence = isset($_POST["id_competence"]) ? $_POST["id_competence"] : "";
 $statut = isset($_POST["statut"]) ? $_POST["statut"] : "";
 $date = isset($_POST["date"]) ? $_POST["date"] : "";
 
-echo "<p>". $id_etudiant . "</p>";
-echo "<p>". $id_competence . "</p>";
-echo "<p>". $statut . "</p>";
-echo "<p>". $date . "</p>";
+echo "<p>" . $id_etudiant . "</p>";
+echo "<p>" . $id_competence . "</p>";
+echo "<p>" . $statut . "</p>";
+echo "<p>" . $date . "</p>";
 
 if ($id_etudiant != "" && $id_competence != "" && $statut != "" && $date != "") {
     $sql = " INSERT INTO autoevaluations (id_etudiant, id_competence, statut, date)

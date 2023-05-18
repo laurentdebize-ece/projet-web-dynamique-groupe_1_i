@@ -40,11 +40,6 @@ if (isset($_POST['email_suppression'])) {
             $requete->execute();
         }
 
-        // Supprimer les références dans la table etudiants_classes
-        $requete = $bdd->prepare("DELETE FROM etudiants_classes WHERE id_classe = :id_classe");
-        $requete->bindParam(':id_classe', $resultat['id']);
-        $requete->execute();
-
         // Requête pour supprimer l'utilisateur
         $requete = $bdd->prepare("DELETE FROM Utilisateurs WHERE email = :email");
         $requete->bindParam(':email', $email_suppression);
@@ -73,25 +68,30 @@ if (isset($_POST['id_matiere_suppression'])) {
         echo "Erreur : " . $e->getMessage();
     }
 }
-
 if (isset($_POST['id_classe_suppression'])) {
     $id_classe_suppression = $_POST['id_classe_suppression'];
 
     try {
+        // Supprimer les références dans la table professeurs_classes
+        $requete = $bdd->prepare("DELETE FROM professeurs_classes WHERE id_classe = :id_classe_suppression");
+        $requete->bindParam(':id_classe_suppression', $id_classe_suppression);
+        $requete->execute();
+
         // Supprimer les références dans la table etudiants_classes
-        $requete = $bdd->prepare("DELETE FROM etudiants_classes WHERE id_classe = :id_classe");
-        $requete->bindParam(':id_classe', $id_classe_suppression);
+        $requete = $bdd->prepare("DELETE FROM etudiants_classes WHERE id_classe = :id_classe_suppression");
+        $requete->bindParam(':id_classe_suppression', $id_classe_suppression);
         $requete->execute();
 
         // Requête pour supprimer la classe
-        $requete = $bdd->prepare("DELETE FROM Classes WHERE id = :id");
-        $requete->bindParam(':id', $id_classe_suppression);
+        $requete = $bdd->prepare("DELETE FROM Classes WHERE id = :id_classe_suppression");
+        $requete->bindParam(':id_classe_suppression', $id_classe_suppression);
         $requete->execute();
 
     } catch (PDOException $e) {
         echo "Erreur : " . $e->getMessage();
     }
 }
+
 
 
 $query = $bdd->prepare("SELECT * FROM Utilisateurs WHERE statut_id IN ((SELECT id FROM Statut WHERE statut = 'professeur'), (SELECT id FROM Statut WHERE statut = 'etudiant'))");
@@ -106,7 +106,6 @@ $query = $bdd->prepare("SELECT * FROM Classes");
 $query->execute();
 $classes = $query->fetchAll();
 ?>
-
 
 
 

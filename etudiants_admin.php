@@ -36,14 +36,14 @@ if (isset($_POST['nom'], $_POST['prenom'], $_POST['ecole'], $_POST['email'], $_P
             $requete->bindParam(':promotion', $promotion);
             $requete->bindParam(':ecole', $ecole);
             $requete->execute();
-        }
-        else {
+
+            // Récupérer l'ID de la classe
+            $classe_id = $bdd->lastInsertId();
+        } else {
             // Si la classe existe déjà, récupérer son ID
             $classe = $requete->fetch();
             $classe_id = $classe['id'];
         }
-        // Récupérer l'ID de la classe
-        $classe_id = $bdd->lastInsertId();
     }
 
     try {
@@ -59,13 +59,13 @@ if (isset($_POST['nom'], $_POST['prenom'], $_POST['ecole'], $_POST['email'], $_P
         // Récupérer l'ID de l'utilisateur
         $user_id = $bdd->lastInsertId();
 
-        // Insérer l'ID de l'utilisateur et l'ID de la classe dans la table etudiant_classe
-        $requete = $bdd->prepare("INSERT INTO Etudiants_classes (id_etudiant, id_classe) VALUES (:id_etudiant, :id_classe)");
-        $requete->bindParam(':id_etudiant', $user_id);
-        $requete->bindParam(':id_classe', $classe_id);
-        $requete->execute();
-
-        echo "L'utilisateur a été ajouté avec succès.";
+        if ($classe_id) {
+            // Insérer l'ID de l'utilisateur et l'ID de la classe dans la table etudiants_classes
+            $requete = $bdd->prepare("INSERT INTO Etudiants_classes (id_etudiant, id_classe) VALUES (:id_etudiant, :id_classe)");
+            $requete->bindParam(':id_etudiant', $user_id);
+            $requete->bindParam(':id_classe', $classe_id);
+            $requete->execute();
+        }
     } catch (PDOException $e) {
         echo "Erreur : " . $e->getMessage();
     }
@@ -76,6 +76,7 @@ $query->execute();
 
 $etudiants = $query->fetchAll();
 ?>
+
 
 <!DOCTYPE html>
 <html lang="fr">

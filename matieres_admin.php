@@ -156,6 +156,7 @@ $groupe = $query->fetchAll();
             <tr>
                 <th>Groupe</th>
                 <th>Promotion</th>
+                <th>Ecole</th>
             </tr>
             <?php foreach ($groupe as $groupe): ?>
                 <tr>

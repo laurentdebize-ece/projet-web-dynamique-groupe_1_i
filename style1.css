@@ -207,4 +207,40 @@ footer {
     margin-right: 0;
 }
 
+.container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.left, .right {
+    flex: 1;
+    padding: 20px;
+}
+
+.centered-title {
+    text-align: center;
+}
+
+.submit-btn {
+    display: block;
+    width: 30%;
+    padding: 10px;
+    margin-top: 10px;
+    background-color: #6c757d;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+.submit-btn:hover {
+    background-color: #5a6268;
+}
+
+.etat {
+    font-weight: bold;
+}
+
 

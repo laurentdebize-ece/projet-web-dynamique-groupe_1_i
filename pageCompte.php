@@ -12,11 +12,6 @@ session_start();
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <title>Omnes MySkill</title>
-    <style>
-        .etat {
-            font-weight: bold;
-        }
-    </style>
 </head>
 <body>
 
@@ -29,38 +24,18 @@ session_start();
     </div>
 </nav>
 
-<script>
-    $(document).ready(function () {
-        var $carrousel = $('#carrousel'); // on cible le bloc du carrousel
-        $img = $('#carrousel img'); // on cible les images contenues dans le carrousel
-        indexImg = $img.length - 1; // on définit l'index du dernier élément
-        i = 0; // on initialise un compteur
-        $currentImg = $img.eq(i); // enfin, on cible l'image courante, qui possède l'index i (0 pour l'instant)
-        $img.css('display', 'none'); // on cache les images
-        $currentImg.css('display', 'block'); // on affiche seulement l'image courante
-
-        function slideImg() {
-            setTimeout(function () { // on utilise une fonction anonyme
-                if (i < indexImg) { // si le compteur est inférieur au dernier index
-                    i++; // on l'incrémente
-                } else { // sinon, on le remet à 0 (première image)
-                    i = 0;
-                }
-                $img.css('display', 'none');
-                $currentImg = $img.eq(i);
-                $currentImg.css('display', 'block');
-                slideImg(); // on oublie pas de relancer la fonction à la fin
-            }, 4000); // on définit l'intervalle à 4000 millisecondes (4s)
-        }
-
-        slideImg();
-    });
-</script>
-
-<div class="container-fluid text-center flex-float"> <!--style="height: 100%"-->
+<div class="container-fluid text-center flex-float">
     <div class="row content">
 
         <div class="col-sm-10 text-left">
+            <h2>Mon Profil</h2>
+            <div class="profile">
+                <img src='img/OIP.jpg' width="150">
+                <h3>Nom: Admin Admin</h3>
+                <p>Email: admin@ece.fr</p>
+                <p>Ecole: ECE</p>
+                <p>Statut: Admin</p>
+            </div>
         </div>
         <div class="col-sm-2 sidenav">
             <a href="pageCompte.php"><img src='img/OIP.jpg' width="80" height="80" style="border-radius: 40px;"></a>

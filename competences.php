@@ -1,6 +1,29 @@
 <?php
 session_start();
+
+// Connectez-vous à votre base de données ici, remplacez les valeurs par les vôtres
+$servername = "localhost";
+$username = "root";
+$password = "root";
+$dbname = "Omnes MySkills";
+
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+$sql = "SELECT * FROM Competences";
+$result = $conn->query($sql);
+
+$competences = [];
+while ($row = $result->fetch_assoc()) {
+    $competences[] = $row;
+}
+$conn->close();
+
 ?>
+
 
 <!DOCTYPE html>
 <html lang="fr">

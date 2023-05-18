@@ -126,6 +126,24 @@ VALUES ('Etu', 'Laurent', 'etu@ece.fr', '$2y$10$FL5zoBNMgE0M6J1t1E7bHujsQGnyP.h5
 
 
 
+INSERT INTO Competences (nom, description, type)
+VALUES ('Competence1', 'Algèbre linéaire : Maîtriser les opérations sur les vecteurs et les matrices, résoudre des systèmes d équations linéaires.', 'specifique'),
+       ('Competence2', 'Connaissance des méthodes de calcul des intégrales généralisées, telles que la méthode de comparaison, la méthode de Cauchy, la méthode des limites et les intégrales impropres de premières et deuxièmes espèces.', 'specifique'),
+       ('Competence3', 'Connaissance des séries de Fourier, qui permettent de représenter des fonctions périodiques comme une somme infinie de fonctions trigonométriques (sinus et cosinus).', 'specifique'),
+       ('Competence4', 'Compréhension des critères de convergence des séries numériques, tels que les critères de convergence absolue et de convergence conditionnelle, le critère de comparaison, le critère du rapport et le critère de la racine.', 'specifique'),
+       ('Competence5', 'Maîtrise des lois de Gauss et d Ampère pour l analyse des champs électromagnétiques.', 'specifique'),
+       ('Competence6', 'Capacité à utiliser les équations de Maxwell pour analyser et prédire le comportement des champs électriques et magnétiques.', 'specifique'),
+       ('Competence7', 'Capacité à calculer le flux électrique à travers une surface donnée en utilisant la loi de Gauss.', 'specifique'),
+       ('Competence8', 'Capacité à appliquer la loi de Faraday et la loi de Lenz pour résoudre des problèmes d induction.', 'specifique'),
+       ('Competence9', 'Capacité à utiliser des algorithmes de parcours de graphes, comme l algorithme de Dijkstra ou l algorithme de Kruskal, pour résoudre des problèmes spécifiques.', 'specifique'),
+       ('Competence10', 'Compétence dans l écriture et l exécution de requêtes SQL pour récupérer, filtrer et manipuler les données.', 'specifique'),
+       ('Competence11', 'Maîtrise des langages de développement web, tels que HTML, CSS et JavaScript.', 'specifique'),
+       ('Competence12', 'Compétence dans l écriture et l exécution de requêtes SQL pour récupérer, filtrer et manipuler les données.', 'specifique'),
+       ('Competence13', 'Transformées de Fourier : Comprendre les concepts de base des transformations de Fourier, telles que la transformation de Fourier discrète (DFT) et la transformation de Fourier rapide (FFT).', 'specifique'),
+       ('Competence14', 'Savoir calculé dans le domaine de Laplace ', 'specifique'),
+       ('Competence15', 'Conception de circuits imprimés : Avoir une compréhension des techniques de conception de circuits imprimés (PCB), savoir utiliser des logiciels de conception assistée par ordinateur (CAO) pour réaliser des schémas et des routages de circuits.', 'specifique'),
+       ('Competence16', 'Électronique numérique : Comprendre les principes de base des circuits logiques et des systèmes numériques, tels que les portes logiques, les mémoires, les compteurs, les multiplexeurs, etc.', 'specifique');
+
 
 
 

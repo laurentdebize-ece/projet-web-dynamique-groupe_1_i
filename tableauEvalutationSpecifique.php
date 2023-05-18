@@ -1,29 +1,3 @@
-<?php
-session_start();
-
-$servername = "localhost";
-$username = "root";
-$password = "root";
-$dbname = "Omnes MySkills";
-
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
-
-$sql = "SELECT * FROM Competences";
-$result = $conn->query($sql);
-
-$competences = [];
-while ($row = $result->fetch_assoc()) {
-    $competences[] = $row;
-}
-$conn->close();
-
-?>
-
-
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -42,7 +16,7 @@ $conn->close();
     <div class="container-fluid">
         <div class="navbar-header">
             <a class="navbar-brand" href="accueil.php">OMNES</a>
-            <a class="navbar-brand center" href="competences.php">Competences</a>
+            <a class="navbar-brand center" href="">changer</a>
         </div>
     </div>
 </nav>
@@ -51,8 +25,42 @@ $conn->close();
     <div class="row content">
 
         <div class="col-sm-10 text-left">
-            <h1>Competences</h1>
-            <?php include "tableauCompetences.php"; ?>
+            <h1>Evaluations</h1>
+            <?php
+
+            $connexion = mysqli_connect("localhost", "root", "root", "omnes myskills");
+            $cmptChoisie = $_POST['cmptChoisie'];
+            $data = mysqli_query($connexion, "SELECT autoevaluations.statut, competences.description FROM autoevaluations JOIN competences ON autoevaluations.id_competence = competences.id WHERE autoevaluations.id_competence = '$cmptChoisie'");
+            $nb_lignes = mysqli_num_rows($data);
+
+
+            echo "<table>";
+            echo "<tr><th>description</th><th>non acquis</th><th>en cours</th><th>acquis</th></tr>";
+            while ($ligne = mysqli_fetch_assoc($data)) {
+                echo "<tr>";
+                echo "<td><div class='rectanglePourCmpListe'>" . $ligne['description'] . "</div></td>";
+                if ($ligne["statut"] == "non_acquis") {
+                    echo "<td><button class='rectanglePourCmpNonAcqui'>Non acquis</button></td>";
+                } else {
+                    echo "<td><button class='rectanglePourCmp'></button></td>";
+                }
+                if ($ligne["statut"] == "en_cours") {
+                    echo "<td><button class='rectanglePourCmpEnCours'>en cours</button></td>";
+                } else {
+                    echo "<td><button class='rectanglePourCmp'></button></td>";
+                }
+                if ($ligne["statut"] == "acquis") {
+                    echo "<td><button class='rectanglePourCmpvalide'>Acquis</button></td>";
+                } else {
+                    echo "<td><button class='rectanglePourCmp'></button></td>";
+                }
+                echo "</tr>";
+            }
+            echo "</table>";
+
+            mysqli_close($connexion);
+            ?>
+
         </div>
 
         <div class="col-sm-2 sidenav">
@@ -92,7 +100,7 @@ $conn->close();
             <p><a href="toutes_mes_competences.php">Toutes mes compétences</a></p><br>
             <p><a href="pageCompetences.php">tableauEvaluationTTCompt</a></p><br>
         </div>
-</div>
+    </div>
 </div>
 
 

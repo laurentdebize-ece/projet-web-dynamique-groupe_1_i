@@ -16,7 +16,16 @@
     <div class="container-fluid">
         <div class="navbar-header">
             <a class="navbar-brand" href="accueil.php">OMNES</a>
-            <a class="navbar-brand center" href="">changer</a>
+            <a class="navbar-brand center" href=""><?php
+
+                $connexion = mysqli_connect("localhost", "root", "root", "omnes myskills");
+                $MATChoisie = $_POST['cmptChoisie'];
+                $data = mysqli_query($connexion, "SELECT * FROM competences WHERE id = '$MATChoisie'");
+                $matiere = mysqli_fetch_assoc($data);
+                echo $matiere['nom'];
+                mysqli_close($connexion);
+
+                ?></a>
         </div>
     </div>
 </nav>

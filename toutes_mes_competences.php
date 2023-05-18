@@ -30,6 +30,14 @@ session_start();
 
         <div class="col-sm-10 text-left">
             <h1>Toutes mes compétences</h1>
+            <div class="dropdown pull-right">
+                <select id="ecole" class="form-control">
+                    <option value="tout">Toutes les écoles</option>
+                    <option value="ece">ECE</option>
+                    <option value="supdepub">SupDePub</option>
+                    <option value="inseec">Inseec</option>
+                </select>
+            </div>
             <?php include "tableau_ttcompetences.php";?>
 
         </div>

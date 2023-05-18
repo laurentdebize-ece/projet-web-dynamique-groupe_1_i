@@ -203,4 +203,8 @@ footer {
     border-radius: 5px;
 }
 
+.pull-right {
+    margin-right: 0;
+}
+
 

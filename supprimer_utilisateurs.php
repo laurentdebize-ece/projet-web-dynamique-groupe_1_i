@@ -11,6 +11,12 @@ if (!isset($_SESSION['type']) || $_SESSION['type'] !== 'administrateur') {
 if (isset($_POST['email_suppression'])) {
     $email_suppression = $_POST['email_suppression'];
 
+    // Vérification pour empêcher un administrateur de se supprimer lui-même
+    if ($_SESSION['statut_id'] == 3) {
+        echo "Vous ne pouvez pas vous supprimer vous-même.";
+        exit;
+    }
+
     try {
         $requete = $bdd->prepare("DELETE FROM Utilisateurs WHERE email = :email");
         $requete->bindParam(':email', $email_suppression);
@@ -151,11 +157,14 @@ $utilisateurs = $query->fetchAll();
                     <td><?php echo htmlspecialchars($utilisateur['prenom']); ?></td>
                     <td><?php echo htmlspecialchars($utilisateur['email']); ?></td>
                     <?php
-                    if ($utilisateur['statut_id'] == 1) { ?>
-                        <td><?php echo htmlspecialchars("Etudiant"); ?></td>
+
+                    if ($utilisateur['statut_id'] == 3) { ?>
+                        <td><?php echo htmlspecialchars("Administrateur"); ?></td>
                         <?php
-                    }
-                    if ($utilisateur['statut_id'] == 2) { ?>
+                    } else if ($utilisateur['statut_id'] == 1) { ?>
+                    <td><?php echo htmlspecialchars("Etudiant"); ?></td>
+                    <?php
+                    } else if ($utilisateur['statut_id'] == 2) { ?>
                         <td><?php echo htmlspecialchars("Professeur"); ?></td>
                         <?php
                     } ?>

@@ -53,25 +53,7 @@ $conn->close();
 
         <div class="col-sm-10 text-left">
             <h1>Competences</h1>
-            <form action="competences.php" method="post">
-                <table class="tableComp">
-                    <tr>
-                        <td><button class = "rectangle" name="compChoisie" value="1">Compétence 1</button></td>
-                        <td><button class = "rectangle" name="compChoisie" value="2">Compétence 2</button></td>
-                        <td><button class = "rectangle" name="compChoisie" value="3">Compétence 3</button></td>
-                    </tr>
-                    <tr>
-                        <td><button class = "rectangle" name="compChoisie" value="4">Compétence 4</button></td>
-                        <td><button class = "rectangle" name="compChoisie" value="5">Compétence 5</button></td>
-                        <td><button class = "rectangle" name="compChoisie" value="6">Compétence 6</button></td>
-                    </tr>
-                    <tr>
-                        <td><button class = "rectangle" name="compChoisie" value="7">Compétence 7</button></td>
-                        <td><button class = "rectangle" name="compChoisie" value="8">Compétence 8</button></td>
-                        <td><button class = "rectangle" name="compChoisie" value="9">Compétence 9</button></td>
-                    </tr>
-                </table>
-                </form>
+            <?php include "tableauCompetences.php"; ?>
             </div>
 
         <div class="col-sm-2 sidenav">

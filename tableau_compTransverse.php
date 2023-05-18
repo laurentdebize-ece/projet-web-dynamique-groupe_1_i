@@ -1,7 +1,7 @@
 <?php
 
 $connexion = mysqli_connect("localhost", "root", "root", "omnes myskills");
-$data = mysqli_query($connexion, "SELECT * FROM competences WHERE type = 'specifique'");
+$data = mysqli_query($connexion, "SELECT * FROM competences WHERE type = 'transverse'");
 $nb_lignes = mysqli_num_rows($data);
 $nb_rectangles = 0;
 echo "<table>";

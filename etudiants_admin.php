@@ -91,98 +91,130 @@ $etudiants = $query->fetchAll();
 
 <!DOCTYPE html>
 <html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <title>Liste des étudiants</title>
-    <style>
-        .container {
-            display: flex;
-            justify-content: space-between;
-        }
-
-        .left, .right {
-            flex: 1;
-            padding: 20px;
-        }
-
-        .centered-title {
-            text-align: center;
-        }
-
-        .submit-btn {
-            display: block;
-            width: 30%;
-            padding: 10px;
-            margin-top: 10px;
-            background-color: #6c757d;
-            color: #fff;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            text-transform: uppercase;
-            font-weight: bold;
-        }
-
-        .submit-btn:hover {
-            background-color: #5a6268;
-        }
-    </style>
-</head>
-<body>
-
-<h1 class="centered-title">Gestion des étudiants</h1>
-
-<div class="container">
-    <div class="left">
-        <h2>Ajouter un étudiant</h2>
-        <form action="etudiants_admin.php" method="post">
-            <input type="hidden" id="type" name="type" value="etudiant">
-            <div>
-                <label for="nom">Nom :</label>
-                <input type="text" id="nom" name="nom" required>
+    <head>
+        <meta charset="UTF-8">
+        <title>Liste des matières</title>
+        <link rel="stylesheet" href="style1.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+        <title>Omnes MySkill</title>
+    </head>
+    <body>
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="accueil.php">OMNES</a>
+                <a class="navbar-brand center" href="pageCompte.php">Compte</a>
             </div>
-            <div>
-                <label for="prenom">Prénom :</label>
-                <input type="text" id="prenom" name="prenom" required>
+        </div>
+    </nav>
+    <div class="container-fluid text-center flex-float">
+        <div class="row content">
+            <div class="col-sm-10 text-left">
+                <h1>Gestion des étudiants</h1>
+
+                <div class="container">
+                    <div class="left">
+                        <h2>Ajouter un étudiant</h2>
+                        <form action="etudiants_admin.php" method="post">
+                            <input type="hidden" id="type" name="type" value="etudiant">
+                            <div>
+                                <label for="nom">Nom :</label>
+                                <input type="text" id="nom" name="nom" required>
+                            </div>
+                            <div>
+                                <label for="prenom">Prénom :</label>
+                                <input type="text" id="prenom" name="prenom" required>
+                            </div>
+                            <div>
+                                <label for="ecole">Ecole :</label>
+                                <input type="text" id="ecole" name="ecole" value="ECE" required>
+                            </div>
+                            <div>
+                                <label for="email">Email :</label>
+                                <input type="email" id="email" name="email" required>
+                            </div>
+                            <div>
+                                <label for="groupe">Groupe :</label>
+                                <input type="number" id="groupe" name="groupe" min="1" max="10">
+                            </div>
+                            <div>
+                                <label for="promotion">Promotion :</label>
+                                <input type="number" id="promotion" name="promotion" min="1919" value="2026">
+                            </div>
+                            <button type="submit" class="submit-btn">Ajouter</button>
+                        </form>
+                    </div>
+
+                    <div class="right">
+                        <h2>Etudiants existants</h2>
+                        <table>
+                            <tr>
+                                <th>Nom</th>
+                                <th>Prénom</th>
+                                <th>Email</th>
+                            </tr>
+                            <?php foreach ($etudiants as $etudiant): ?>
+                                <tr>
+                                    <td><?php echo htmlspecialchars($etudiant['nom']); ?></td>
+                                    <td><?php echo htmlspecialchars($etudiant['prenom']); ?></td>
+                                    <td><?php echo htmlspecialchars($etudiant['email']); ?></td>
+                                </tr>
+                            <?php endforeach; ?>
+                        </table>
+                    </div>
+                </div>
             </div>
-            <div>
-                <label for="ecole">Ecole :</label>
-                <input type="text" id="ecole" name="ecole" value="ECE" required>
+            <div class="col-sm-2 sidenav">
+                <a href="pageCompte.php"><img src='img/OIP.jpg' width="80" height="80" style="border-radius: 40px;"></a>
+                <?php
+                if (isset($_SESSION['type'])) {
+                    if ($_SESSION['type'] == 'etudiant') {
+                        ?>
+                        <p class="etat"><a>Etudiant &#128104;&#8205;&#127891;</a></p><br>
+                        <p><a href="matieres.php">Matières</a></p><br>
+                        <p><a href="competences.php">Compétences</a></p><br>
+                        <p><a href="competences_transverses.php">Compétences transverses</a></p><br>
+                        <p><a href="toutes_mes_competences.php">Toutes mes compétences</a></p><br>
+                        <p><a href="ajout_utilisateur.php">AJOUTER UTILISATEUR</a></p><br>
+                        <p><a href="pageCompetences.php">tableauEvaluationTTCompt</a></p><br>
+                        <?php
+                    } else if ($_SESSION['type'] === 'professeur') {
+                        ?>
+                        <p class="etat"><a>Professeur &#128104;&#8205;&#127979;</a></p>
+                        <p><a href="matieres.php">Matières</a></p><br>
+                        <p><a href="competences.php">Compétences</a></p><br>
+                        <p><a href="competences_transverses.php">Compétences transverses</a></p><br>
+                        <p><a href="toutes_mes_competences.php">Toutes mes compétences</a></p><br>
+                        <p><a href="ajout_utilisateur.php">AJOUTER UTILISATEUR</a></p><br>
+                        <p><a href="pageCompetences.php">tableauEvaluationTTCompt</a></p><br>
+                        <?php
+                    } else if ($_SESSION['type'] === 'administrateur') {
+                        ?>
+                        <p class="etat" ><a> Administrateur &#128104;&#8205;&#128187;</a></p>
+                        <br><br ><br >
+                        <p><a href = "matieres_admin.php" > Matières/Classes</a ></p ><br >
+                        <p><a href = "etudiants_admin.php" > Etudiants</a ></p ><br >
+                        <p><a href = "professeurs_admin.php" > Professeurs</a ></p ><br >
+                        <p><a href = "supprimer_utilisateurs.php" > Supprimer</a ></p ><br >
+                        <?php
+                    } else {
+                        ?>
+                        <h1>Connectez-vous</h1>
+                        <?php
+                    }
+                    echo '<p><a href="logout.php">Déconnectez-vous ici</a></p><br><br>';
+                } else {
+                    echo '<p><a href="index.php">Connectez-vous ici</a></p><br><br>';
+                } ?>
+
+                <!--<p><a href="connexion.php">CONNEXION</a></p>-->
             </div>
-            <div>
-                <label for="email">Email :</label>
-                <input type="email" id="email" name="email" required>
-            </div>
-            <div>
-                <label for="groupe">Groupe :</label>
-                <input type="number" id="groupe" name="groupe" min="1" max="10">
-            </div>
-            <div>
-                <label for="promotion">Promotion :</label>
-                <input type="number" id="promotion" name="promotion" min="1919" value="2026">
-            </div>
-            <button type="submit" class="submit-btn">Ajouter</button>
-        </form>
+        </div>
     </div>
-
-    <div class="right">
-        <h2>Etudiants existants</h2>
-        <table>
-            <tr>
-                <th>Nom</th>
-                <th>Prénom</th>
-                <th>Email</th>
-            </tr>
-            <?php foreach ($etudiants as $etudiant): ?>
-                <tr>
-                    <td><?php echo htmlspecialchars($etudiant['nom']); ?></td>
-                    <td><?php echo htmlspecialchars($etudiant['prenom']); ?></td>
-                    <td><?php echo htmlspecialchars($etudiant['email']); ?></td>
-                </tr>
-            <?php endforeach; ?>
-        </table>
-    </div>
-</div>
-
-</body>
+    <footer class="footer">
+        <p>Footer Text</p>
+    </footer>
+    </body>
 </html>

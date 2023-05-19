@@ -11,9 +11,16 @@ if (isset($_POST['email']) && isset($_POST['mot_de_passe'])) {
         $requete->execute();
         $utilisateur = $requete->fetch();
 
+        if ($utilisateur['first_login']) {
+            // Redirigez vers la page de changement de mot de passe
+            header('Location: change_password.php');
+            exit;
+        }
+
         if ($utilisateur && password_verify($mot_de_passe, $utilisateur['mot_de_passe'])) {
             session_start();
             $_SESSION['utilisateur'] = $utilisateur;
+            $_SESSION['email'] = $email;
 
             $requete = $bdd->prepare("SELECT statut FROM Statut WHERE id = :statut_id");
             $requete->bindParam(':statut_id', $utilisateur['statut_id']);
@@ -50,6 +57,8 @@ if (isset($_POST['email']) && isset($_POST['mot_de_passe'])) {
     setcookie('nom_utilisateur', $nom_utilisateur, $temps_expiration);*/
 }
 ?>
+
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -166,7 +175,7 @@ if (isset($_POST['email']) && isset($_POST['mot_de_passe'])) {
         <button type="submit" class="submit-btn">Connexion</button>
     </form>
     <p class="info-text">Cette connexion vous redirigera automatiquement vers votre site.</p>
-    <a href="#" class="forgotten-password">Étudiants : mot de passe oublié ?</a>
+    <a href="mdp_oublie.php" class="forgotten-password">Mot de passe oublié ?</a>
 </div>
 </body>
 <footer>

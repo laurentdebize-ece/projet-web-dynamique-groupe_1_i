@@ -1,6 +1,6 @@
 <?php
 
-$connexion = mysqli_connect("localhost", "root", "root", "omnes myskills");
+$connexion = mysqli_connect("localhost", "root", "root", "Omnes myskills");
 $data = mysqli_query($connexion, "SELECT * FROM competences WHERE type = 'specifique'");
 $nb_lignes = mysqli_num_rows($data);
 $nb_rectangles = 0;

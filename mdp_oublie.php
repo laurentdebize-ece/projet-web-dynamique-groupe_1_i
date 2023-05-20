@@ -44,6 +44,11 @@ try {
     <meta charset="UTF-8">
     <title>Changement de mot de passe</title>
     <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+        }
+
         .container {
             max-width: 400px;
             margin: 0 auto;

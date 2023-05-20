@@ -98,11 +98,6 @@ if (isset($_POST['email_suppression'])) {
     <meta charset="UTF-8">
     <title>Administration</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f8f9fa;
-            color: #333;
-        }
 
         h1 {
             text-align: center;

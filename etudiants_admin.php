@@ -93,12 +93,11 @@ $etudiants = $query->fetchAll();
 <html lang="fr">
     <head>
         <meta charset="UTF-8">
-        <title>Liste des matières</title>
+        <title>Gestion des étudiants</title>
         <link rel="stylesheet" href="style1.css">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-        <title>Omnes MySkill</title>
     </head>
     <body>
     <nav class="navbar navbar-inverse">

@@ -297,4 +297,18 @@ footer {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
+.non-acquis {
+    background-color: red;
+    color: white;
+}
+
+.en-cours {
+    background-color: yellow;
+    color: black;
+}
+
+.acquis {
+    background-color: green;
+    color: white;
+}
 

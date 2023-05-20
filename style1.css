@@ -255,13 +255,13 @@ footer {
     margin-top: 20px;
 }
 
-#tableSupp th,#tableSupp td {
+table th,table td {
     border: 1px solid #ced4da;
     padding: 10px;
     text-align: left;
 }
 
-#tableSupp th {
+table th {
     background-color: #6c757d;
     color: #fff;
 }

@@ -108,7 +108,7 @@ $etudiants = $query->fetchAll();
             </div>
         </div>
     </nav>
-    <div class="container-fluid text-center flex-float">
+    <div id="divSupp" class="container-fluid text-center flex-float">
         <div class="row content">
             <div class="col-sm-10 text-left">
                 <h1>Gestion des étudiants</h1>

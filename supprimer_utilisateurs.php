@@ -119,7 +119,6 @@ $classes = $query->fetchAll();
         <link rel="stylesheet" href="style1.css">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     </head>
     <body>
     <nav class="navbar navbar-inverse">
@@ -148,7 +147,7 @@ $classes = $query->fetchAll();
 
                     <div class="right">
                         <h2>Utilisateurs existants</h2>
-                        <table id="tableSupp">
+                        <table>
                             <tr>
                                 <th>Nom</th>
                                 <th>Prénom</th>
@@ -197,7 +196,7 @@ $classes = $query->fetchAll();
 
                     <div class="right">
                         <h2>Matières existantes</h2>
-                        <table id="tableSupp">
+                        <table>
                             <tr>
                                 <th>ID</th>
                                 <th>Nom</th>
@@ -214,7 +213,7 @@ $classes = $query->fetchAll();
                     </div>
                     <div class="right">
                         <h2>Classes existantes</h2>
-                        <table id="tableSupp">
+                        <table>
                             <tr>
                                 <th>ID</th>
                                 <th>Groupe</th>

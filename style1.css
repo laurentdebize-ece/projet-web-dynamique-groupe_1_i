@@ -2,6 +2,12 @@ html, body {
     height: 100%;
 }
 
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa;
+    color: #333;
+}
+
 .navbar {
     margin-bottom: 0;
     border-radius: 0;
@@ -223,7 +229,7 @@ footer {
 
 .submit-btn {
     display: block;
-    width: 30%;
+    width: 100%;
     padding: 10px;
     margin-top: 10px;
     background-color: #6c757d;
@@ -241,6 +247,54 @@ footer {
 
 .etat {
     font-weight: bold;
+}
+
+#tableSupp {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+#tableSupp th,#tableSupp td {
+    border: 1px solid #ced4da;
+    padding: 10px;
+    text-align: left;
+}
+
+#tableSupp th {
+    background-color: #6c757d;
+    color: #fff;
+}
+
+#divSupp input,#divSupp select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    box-sizing: border-box;
+}
+
+#divSupp label {
+    display: block;
+    margin-bottom: 5px;
+    color: #6c757d;
+}
+
+
+#divSupp h1,#divSupp h2 {
+    text-align: center;
+    color: #6c757d;
+}
+
+#divSupp form {
+    max-width: 500px;
+    margin: 20px auto;
+    padding: 20px;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 

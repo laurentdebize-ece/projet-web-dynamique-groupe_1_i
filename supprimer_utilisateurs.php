@@ -113,196 +113,175 @@ $classes = $query->fetchAll();
 <!DOCTYPE html>
 <html lang="fr">
 
-<head>
-    <meta charset="UTF-8">
-    <title>Administration</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f8f9fa;
-            color: #333;
-        }
-
-        h1, h2 {
-            text-align: center;
-            color: #6c757d;
-        }
-
-        form {
-            max-width: 500px;
-            margin: 20px auto;
-            padding: 20px;
-            border: 1px solid #ced4da;
-            border-radius: 5px;
-            background-color: #fff;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-
-        label {
-            display: block;
-            margin-bottom: 5px;
-            color: #6c757d;
-        }
-
-        input,
-        select {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ced4da;
-            border-radius: 5px;
-            margin-bottom: 15px;
-            box-sizing: border-box;
-        }
-
-        .container {
-            display: flex;
-            justify-content: space-between;
-        }
-
-        .left, .right {
-            flex: 1;
-            padding: 20px;
-        }
-
-        .submit-btn {
-            display: block;
-            width: 100%;
-            padding: 10px;
-            margin-top: 10px;
-            background-color: #6c757d;
-            color: #fff;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            text-transform: uppercase;
-            font-weight: bold;
-        }
-
-        .submit-btn:hover {
-            background-color: #5a6268;
-        }
-
-        /* Ajout de styles pour le tableau */
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-        }
-
-        th, td {
-            border: 1px solid #ced4da;
-            padding: 10px;
-            text-align: left;
-        }
-
-        th {
-            background-color: #6c757d;
-            color: #fff;
-        }
-    </style>
-
-</head>
-
-<body>
-<div class="container">
-    <div class="left">
-        <h1>Suppression d'utilisateur</h1>
-        <form action="supprimer_utilisateurs.php" method="post">
-            <div>
-                <label for="email_suppression">Email de l'utilisateur à supprimer :</label>
-                <input type="email" id="email_suppression" name="email_suppression" required>
+    <head>
+        <meta charset="UTF-8">
+        <title>Administration</title>
+        <link rel="stylesheet" href="style1.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    </head>
+    <body>
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="accueil.php">OMNES</a>
+                <a class="navbar-brand center" href="pageCompte.php">Compte</a>
             </div>
-            <button type="submit" class="submit-btn">Supprimer l'utilisateur</button>
-        </form>
-    </div>
+        </div>
+    </nav>
+    <div id="divSupp" class="container-fluid text-center flex-float">
+        <div class="row content">
+            <div class="col-sm-10 text-left">
+                <h1>Administration</h1>
+                <div class="container">
+                    <div class="left">
+                        <h1>Suppression d'utilisateur</h1>
+                        <form action="supprimer_utilisateurs.php" method="post">
+                            <div>
+                                <label for="email_suppression">Email de l'utilisateur à supprimer :</label>
+                                <input type="email" id="email_suppression" name="email_suppression" required>
+                            </div>
+                            <button type="submit" class="submit-btn">Supprimer l'utilisateur</button>
+                        </form>
+                    </div>
 
-    <div class="right">
-        <h2>Utilisateurs existants</h2>
-        <table>
-            <tr>
-                <th>Nom</th>
-                <th>Prénom</th>
-                <th>Email</th>
-                <th>Statut</th>
-            </tr>
-            <?php foreach ($utilisateurs as $utilisateur): ?>
-                <tr>
-                    <td><?php echo htmlspecialchars($utilisateur['nom']); ?></td>
-                    <td><?php echo htmlspecialchars($utilisateur['prenom']); ?></td>
-                    <td><?php echo htmlspecialchars($utilisateur['email']); ?></td>
-                    <?php
-                    if ($utilisateur['statut_id'] == 1) { ?>
-                        <td><?php echo htmlspecialchars("Etudiant"); ?></td>
+                    <div class="right">
+                        <h2>Utilisateurs existants</h2>
+                        <table id="tableSupp">
+                            <tr>
+                                <th>Nom</th>
+                                <th>Prénom</th>
+                                <th>Email</th>
+                                <th>Statut</th>
+                            </tr>
+                            <?php foreach ($utilisateurs as $utilisateur): ?>
+                                <tr>
+                                    <td><?php echo htmlspecialchars($utilisateur['nom']); ?></td>
+                                    <td><?php echo htmlspecialchars($utilisateur['prenom']); ?></td>
+                                    <td><?php echo htmlspecialchars($utilisateur['email']); ?></td>
+                                    <?php
+                                    if ($utilisateur['statut_id'] == 1) { ?>
+                                        <td><?php echo htmlspecialchars("Etudiant"); ?></td>
+                                        <?php
+                                    } else if ($utilisateur['statut_id'] == 2) { ?>
+                                        <td><?php echo htmlspecialchars("Professeur"); ?></td>
+                                        <?php
+                                    } ?>
+                                </tr>
+                            <?php endforeach; ?>
+                        </table>
+                    </div>
+                </div>
+                <div class="container">
+                    <div class="left">
+                        <h1>Suppression de matières</h1>
+                        <form action="supprimer_utilisateurs.php" method="post">
+                            <div>
+                                <label for="id_matiere_suppression">ID de la matière à supprimer :</label>
+                                <input type="number" id="id_matiere_suppression" name="id_matiere_suppression" required>
+                            </div>
+                            <button type="submit" class="submit-btn">Supprimer la matière</button>
+                        </form>
+                    </div>
+                    <div class="left">
+                        <h1>Suppression de classes</h1>
+                        <form action="supprimer_utilisateurs.php" method="post">
+                            <div>
+                                <label for="id_classe_suppression">ID de la classe à supprimer :</label>
+                                <input type="number" id="id_classe_suppression" name="id_classe_suppression" required>
+                            </div>
+                            <button type="submit" class="submit-btn">Supprimer la classe</button>
+                        </form>
+                    </div>
+
+                    <div class="right">
+                        <h2>Matières existantes</h2>
+                        <table id="tableSupp">
+                            <tr>
+                                <th>ID</th>
+                                <th>Nom</th>
+                                <th>Volume horaire</th>
+                            </tr>
+                            <?php foreach ($matieres as $matiere): ?>
+                                <tr>
+                                    <td><?php echo htmlspecialchars($matiere['id']); ?></td>
+                                    <td><?php echo htmlspecialchars($matiere['nom_matiere']); ?></td>
+                                    <td><?php echo htmlspecialchars($matiere['volume_horaire']); ?></td>
+                                </tr>
+                            <?php endforeach; ?>
+                        </table>
+                    </div>
+                    <div class="right">
+                        <h2>Classes existantes</h2>
+                        <table id="tableSupp">
+                            <tr>
+                                <th>ID</th>
+                                <th>Groupe</th>
+                                <th>Promotion</th>
+                                <th>Ecole</th>
+                            </tr>
+                            <?php foreach ($classes as $classe): ?>
+                                <tr>
+                                    <td><?php echo htmlspecialchars($classe['id']); ?></td>
+                                    <td><?php echo htmlspecialchars($classe['groupe']); ?></td>
+                                    <td><?php echo htmlspecialchars($classe['promotion']); ?></td>
+                                    <td><?php echo htmlspecialchars($classe['ecole']); ?></td>
+                                </tr>
+                            <?php endforeach; ?>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-2 sidenav">
+                <a href="pageCompte.php"><img src='img/OIP.jpg' width="80" height="80" style="border-radius: 40px;"></a>
+                <?php
+                if (isset($_SESSION['type'])) {
+                    if ($_SESSION['type'] == 'etudiant') {
+                        ?>
+                        <p class="etat"><a>Etudiant &#128104;&#8205;&#127891;</a></p><br>
+                        <p><a href="matieres.php">Matières</a></p><br>
+                        <p><a href="competences.php">Compétences</a></p><br>
+                        <p><a href="competences_transverses.php">Compétences transverses</a></p><br>
+                        <p><a href="toutes_mes_competences.php">Toutes mes compétences</a></p><br>
+                        <p><a href="ajout_utilisateur.php">AJOUTER UTILISATEUR</a></p><br>
+                        <p><a href="pageCompetences.php">tableauEvaluationTTCompt</a></p><br>
                         <?php
-                    } else if ($utilisateur['statut_id'] == 2) { ?>
-                        <td><?php echo htmlspecialchars("Professeur"); ?></td>
+                    } else if ($_SESSION['type'] === 'professeur') {
+                        ?>
+                        <p class="etat"><a>Professeur &#128104;&#8205;&#127979;</a></p>
+                        <p><a href="matieres.php">Matières</a></p><br>
+                        <p><a href="competences.php">Compétences</a></p><br>
+                        <p><a href="competences_transverses.php">Compétences transverses</a></p><br>
+                        <p><a href="toutes_mes_competences.php">Toutes mes compétences</a></p><br>
+                        <p><a href="ajout_utilisateur.php">AJOUTER UTILISATEUR</a></p><br>
+                        <p><a href="pageCompetences.php">tableauEvaluationTTCompt</a></p><br>
                         <?php
-                    } ?>
-                </tr>
-            <?php endforeach; ?>
-        </table>
-    </div>
-</div>
-<div class="container">
-    <div class="left">
-        <h1>Suppression de matières</h1>
-        <form action="supprimer_utilisateurs.php" method="post">
-            <div>
-                <label for="id_matiere_suppression">ID de la matière à supprimer :</label>
-                <input type="number" id="id_matiere_suppression" name="id_matiere_suppression" required>
+                    } else if ($_SESSION['type'] === 'administrateur') {
+                        ?>
+                        <p class="etat" ><a> Administrateur &#128104;&#8205;&#128187;</a></p>
+                        <br><br ><br >
+                        <p><a href = "matieres_admin.php" > Matières/Classes</a ></p ><br >
+                        <p><a href = "etudiants_admin.php" > Etudiants</a ></p ><br >
+                        <p><a href = "professeurs_admin.php" > Professeurs</a ></p ><br >
+                        <p><a href = "supprimer_utilisateurs.php" > Supprimer</a ></p ><br >
+                        <?php
+                    } else {
+                        ?>
+                        <h1>Connectez-vous</h1>
+                        <?php
+                    }
+                    echo '<p><a href="logout.php">Déconnectez-vous ici</a></p><br><br>';
+                } else {
+                    echo '<p><a href="index.php">Connectez-vous ici</a></p><br><br>';
+                } ?>
+
+                <!--<p><a href="connexion.php">CONNEXION</a></p>-->
             </div>
-            <button type="submit" class="submit-btn">Supprimer la matière</button>
-        </form>
+        </div>
     </div>
-    <div class="left">
-        <h1>Suppression de classes</h1>
-        <form action="supprimer_utilisateurs.php" method="post">
-            <div>
-                <label for="id_classe_suppression">ID de la classe à supprimer :</label>
-                <input type="number" id="id_classe_suppression" name="id_classe_suppression" required>
-            </div>
-            <button type="submit" class="submit-btn">Supprimer la classe</button>
-        </form>
-    </div>
-
-    <div class="right">
-        <h2>Matières existantes</h2>
-        <table>
-            <tr>
-                <th>ID</th>
-                <th>Nom</th>
-                <th>Volume horaire</th>
-            </tr>
-            <?php foreach ($matieres as $matiere): ?>
-                <tr>
-                    <td><?php echo htmlspecialchars($matiere['id']); ?></td>
-                    <td><?php echo htmlspecialchars($matiere['nom_matiere']); ?></td>
-                    <td><?php echo htmlspecialchars($matiere['volume_horaire']); ?></td>
-                </tr>
-            <?php endforeach; ?>
-        </table>
-    </div>
-    <div class="right">
-        <h2>Classes existantes</h2>
-        <table>
-            <tr>
-                <th>ID</th>
-                <th>Groupe</th>
-                <th>Promotion</th>
-                <th>Ecole</th>
-            </tr>
-            <?php foreach ($classes as $classe): ?>
-                <tr>
-                    <td><?php echo htmlspecialchars($classe['id']); ?></td>
-                    <td><?php echo htmlspecialchars($classe['groupe']); ?></td>
-                    <td><?php echo htmlspecialchars($classe['promotion']); ?></td>
-                    <td><?php echo htmlspecialchars($classe['ecole']); ?></td>
-                </tr>
-            <?php endforeach; ?>
-        </table>
-    </div>
-</div>
-
-</body>
-
+    <footer class="footer">
+        <p>Footer Text</p>
+    </footer>
+    </body>
 </html>

@@ -119,7 +119,6 @@ $matieres = $query->fetchAll();
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-        <title>Omnes MySkill</title>
     </head>
     <body>
     <nav class="navbar navbar-inverse">
@@ -283,6 +282,7 @@ $matieres = $query->fetchAll();
                         <button type="submit" name="delete_subject">Enlever</button>
                     </form>
                 </div>
+            </div>
                 <div class="col-sm-2 sidenav">
                     <a href="pageCompte.php"><img src='img/OIP.jpg' width="80" height="80" style="border-radius: 40px;"></a>
                     <?php
@@ -327,7 +327,6 @@ $matieres = $query->fetchAll();
                     } ?>
 
                     <!--<p><a href="connexion.php">CONNEXION</a></p>-->
-            </div>
             </div>
         </div>
     </div>

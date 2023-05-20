@@ -20,7 +20,6 @@ while ($row = $result->fetch_assoc()) {
     $competences[] = $row;
 }
 $conn->close();
-
 ?>
 
 

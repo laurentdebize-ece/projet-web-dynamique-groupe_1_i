@@ -58,7 +58,6 @@ session_start();
                     <p><a href="competences.php">Compétences</a></p><br>
                     <p><a href="competences_transverses.php">Compétences transverses</a></p><br>
                     <p><a href="toutes_mes_competences.php">Toutes mes compétences</a></p><br>
-                    <p><a href="ajout_utilisateur.php">AJOUTER UTILISATEUR</a></p><br>
                     <p><a href="pageCompetences.php">tableauEvaluationTTCompt</a></p><br>
                     <?php
                 } else if ($_SESSION['type'] === 'administrateur') {

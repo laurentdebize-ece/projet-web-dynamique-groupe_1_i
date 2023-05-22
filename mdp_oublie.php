@@ -1,37 +1,60 @@
 <?php
+require_once 'BDD/initBDD.php';
+
+session_start();
+
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
 require 'vendor/autoload.php';
 
-$email = $_POST['email'];
+$erreur = null;
 
-$encrypted_email = openssl_encrypt($email, 'AES-128-ECB', 'secret_key');
-$reset_link = "../reset_password.php?token=" . urlencode($encrypted_email);
+if (isset($_POST['email'])) {
+    $email = $_POST['email'];
 
-$mail = new PHPMailer(true);
+    // Vérifie si l'email existe dans la base de données
+    $query = $bdd->prepare("SELECT * FROM Utilisateurs WHERE email = :email");
+    $query->execute(['email' => $email]);
+    $user = $query->fetch();
 
-try {
-    $mail->SMTPDebug = 2;
-    $mail->isSMTP();
-    $mail->Host       = 'smtp.gmail.com';
-    $mail->SMTPAuth   = true;
-    $mail->Username   = 'pl.thomas013@gmail.com';
-    $mail->Password   = 'fvxarkfroomwiktn';
-    $mail->SMTPSecure = 'tls';
-    $mail->Port       = 587;
+    if ($user) {
+        $encrypted_email = openssl_encrypt($email, 'AES-128-ECB', 'secret_key');
+        $token = urlencode($encrypted_email);
 
-    $mail->setFrom('pl.thomas013@gmail.com', 'Mailer');
-    $mail->addAddress($email);
+        $mail = new PHPMailer(true);
 
-    $mail->isHTML(true);
-    $mail->Subject = 'Reset Password';
-    $mail->Body    = 'Click on this link to reset your password: ' . $reset_link;
+        if (isset($_POST['token'])) {
+            if ($token !== ($_POST['token'])) {
+                $erreur = 'Le token entré n\'est pas bon';
+            }
+        }
 
-    $mail->send();
-    echo 'Message has been sent';
-} catch (Exception $e) {
-    echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+        try {
+            $mail->SMTPDebug = 2;
+            $mail->isSMTP();
+            $mail->Host = 'smtp.gmail.com';
+            $mail->SMTPAuth = true;
+            $mail->Username = 'pl.thomas013@gmail.com';
+            $mail->Password = 'fvxarkfroomwiktn';
+            $mail->SMTPSecure = 'tls';
+            $mail->Port = 587;
+
+            $mail->setFrom('pl.thomas013@gmail.com', 'Mailer');
+            $mail->addAddress($email);
+
+            $mail->isHTML(true);
+            $mail->Subject = 'Réinitialiser votre mot de passe';
+            $mail->Body = 'Votre token pour réinitialiser votre mot de passe est : <strong>' . $token . '</strong>';
+
+            $mail->send();
+            echo 'Message envoyé';
+        } catch (Exception $e) {
+            $erreur = "Le message n'a pas pu être envoyé. Mailer Error: {$mail->ErrorInfo}";
+        }
+    } else {
+        $erreur = "Cette adresse email n'existe pas.";
+    }
 }
 ?>
 
@@ -104,16 +127,39 @@ try {
 <body>
 <div class="container">
     <h2>Changement de mot de passe</h2>
-    <form action="mdp_oublie.php" method="post">
-        <div class="form-group">
-            <label for="email">Adresse e-mail :</label>
-            <input type="email" id="email" name="email" required>
-        </div>
+    <?php if (!isset($token)) : ?>
+        <?php if (isset($erreur)) : ?>
+            <p class="error-message"><?php echo $erreur; ?></p>
+        <?php endif; ?>
+        <form action="mdp_oublie.php" method="post">
+            <div class="form-group">
+                <label for="email">Adresse e-mail :</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <button type="submit">Changer le mot de passe</button>
+            </div>
+        </form>
+    <?php endif; ?>
+    <?php if (isset($token)) : ?>
+        <?php if (isset($erreur)) : ?>
+            <p class="error-message"><?php echo $erreur; ?></p>
+        <?php endif; ?>
+        <form action="reset_password.php" method="post">
+            <div class="form-group">
+                <label for="email">Adresse e-mail :</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div>
+                <label for="token">Entrez le token reçu par mail :</label>
+                <input type="text" id="token" name="token" required>
+            </div>
+            <div class="form-group">
+                <button type="submit">Valider</button>
+            </div>
 
-        <div class="form-group">
-            <button type="submit">Changer le mot de passe</button>
-        </div>
-    </form>
+        </form>
+    <?php endif; ?>
 </div>
 </body>
 

@@ -4,7 +4,6 @@ require_once 'BDD/initBDD.php';
 session_start();
 
 if (!isset($_SESSION['type']) || $_SESSION['type'] !== 'administrateur') {
-    echo "Vous devez être connecté en tant qu'administrateur pour gérer les professeurs.";
     exit;
 }
 
@@ -37,6 +36,15 @@ if (isset($_POST['email_suppression'])) {
             // Supprimer les références dans la table professeurs_classes
             $requete = $bdd->prepare("DELETE FROM professeurs_classes WHERE id_professeur = :id_professeur");
             $requete->bindParam(':id_professeur', $id_professeur);
+            $requete->execute();
+        }
+
+        if ($resultat['statut_id'] == 1) {
+            $id_etudiant = $resultat['id'];
+
+            // Supprimer les références dans la table etudiants_classes
+            $requete = $bdd->prepare("DELETE FROM etudiants_classes WHERE id_etudiant = :id_etudiant");
+            $requete->bindParam(':id_etudiant', $id_etudiant);
             $requete->execute();
         }
 

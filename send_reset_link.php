@@ -7,7 +7,7 @@ require 'vendor/autoload.php';
 $email = $_POST['email'];
 
 $encrypted_email = openssl_encrypt($email, 'AES-128-ECB', 'secret_key');
-$reset_link = "../reset_password.php?token=" . urlencode($encrypted_email);
+$reset_link = urlencode($encrypted_email);
 
 $mail = new PHPMailer(true);
 
@@ -25,12 +25,12 @@ try {
     $mail->addAddress($email);
 
     $mail->isHTML(true);
-    $mail->Subject = 'Reset Password';
-    $mail->Body    = 'Click on this link to reset your password: ' . $reset_link;
+    $mail->Subject = 'Réinitialisation du mot de passe';
+    $mail->Body    = 'Token pour réinitialiser votre mot de passe: ' . $reset_link;
 
     $mail->send();
-    echo 'Message has been sent';
+    echo 'Message envoyé';
 } catch (Exception $e) {
-    echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+    echo "Le message n'a pas pu être envoyé. Mailer Error: {$mail->ErrorInfo}";
 }
 ?>

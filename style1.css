@@ -142,7 +142,7 @@ footer {
 
 .rectanglePourCmp {
     height: 80px;
-    width: 200px;
+    width: 175px;
     background: #007179;
     justify-self: center;
     cursor: pointer;
@@ -154,7 +154,7 @@ footer {
 
 .rectanglePourCmpNonAcqui {
     height: 80px;
-    width: 200px;
+    width: 175px;
     background: red;
     justify-self: center;
     cursor: pointer;
@@ -166,7 +166,7 @@ footer {
 
 .rectanglePourCmpEnCours {
     height: 80px;
-    width: 200px;
+    width: 175px;
     background: yellow;
     justify-self: center;
     cursor: pointer;
@@ -178,7 +178,7 @@ footer {
 
 .rectanglePourCmpvalide {
     height: 80px;
-    width: 200px;
+    width: 175px;
     background: green;
     justify-self: center;
     cursor: pointer;
@@ -190,7 +190,7 @@ footer {
 
 .rectanglePourCmpListe {
     height: 80px;
-    width: 300px;
+    width: 175px;
     background: #007179;
     justify-self: center;
     cursor: pointer;
@@ -255,13 +255,13 @@ footer {
     margin-top: 20px;
 }
 
-table th,table td {
+#divSupp table th,#divSupp table td {
     border: 1px solid #ced4da;
     padding: 10px;
     text-align: left;
 }
 
-table th {
+#divSupp table th {
     background-color: #6c757d;
     color: #fff;
 }

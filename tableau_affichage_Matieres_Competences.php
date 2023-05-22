@@ -28,7 +28,6 @@ session_start();
                 $matiere = mysqli_fetch_assoc($data);
                 echo $matiere['nom'];
                 mysqli_close($connexion);
-
                 ?></a>
         </div>
     </div>

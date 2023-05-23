@@ -128,47 +128,29 @@ unset($_SESSION['token']);
     </div>
 </nav>
 <div id="divSupp">
-<form action="reset_password.php" method="post">
-    <?php if (isset($erreur)) : ?>
-        <p class="error-message"><?php echo $erreur; ?></p>
-    <?php endif; ?>
-    <h2>Bonjour <?php echo htmlspecialchars($email); ?>, veuillez entrer votre nouveau mot de passe.</h2>
-    <input type="hidden" name="email" value="<?php echo htmlspecialchars($email); ?>">
-    <div>
-        <label for="password">Nouveau mot de passe :</label>
-        <input type="password" id="password" name="password" required>
+    <div class="container">
+        <h2>Changement de mot de passe</h2>
+        <form action="change_password.php" method="post">
+            <div class="form-group">
+                <label for="email">Adresse e-mail :</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Nouveau mot de passe :</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <div class="form-group">
+                <label for="confirm_password">Confirmez le mot de passe :</label>
+                <input type="password" id="confirm_password" name="confirm_password" required>
+            </div>
+            <div class="form-group">
+                <button type="submit">Changer le mot de passe</button>
+            </div>
+        </form>
     </div>
-    <div>
-        <label for="confirm_password">Confirmez le nouveau mot de passe :</label>
-        <input type="password" id="confirm_password" name="confirm_password" required>
-    </div>
-    <div class="form-group">
-        <input type="submit" value="Valider">
-    </div>
-</form>
-<div class="container">
-    <h2>Changement de mot de passe</h2>
-    <form action="change_password.php" method="post">
-        <div class="form-group">
-            <label for="email">Adresse e-mail :</label>
-            <input type="email" id="email" name="email" required>
-        </div>
-        <div class="form-group">
-            <label for="password">Nouveau mot de passe :</label>
-            <input type="password" id="password" name="password" required>
-        </div>
-        <div class="form-group">
-            <label for="confirm_password">Confirmez le mot de passe :</label>
-            <input type="password" id="confirm_password" name="confirm_password" required>
-        </div>
-        <div class="form-group">
-            <button type="submit">Changer le mot de passe</button>
-        </div>
-    </form>
-</div>
-<footer class="footer">
-    <p>Footer Text</p>
-</footer>
+    <footer class="footer">
+        <p>Footer Text</p>
+    </footer>
 </body>
 
 </html>

@@ -127,31 +127,30 @@ unset($_SESSION['token']);
         </div>
     </div>
 </nav>
-<div id="divSupp">
-    <div class="container">
-        <h2>Changement de mot de passe</h2>
-        <form action="change_password.php" method="post">
-            <div class="form-group">
-                <label for="email">Adresse e-mail :</label>
-                <input type="email" id="email" name="email" required>
-            </div>
-            <div class="form-group">
-                <label for="password">Nouveau mot de passe :</label>
-                <input type="password" id="password" name="password" required>
-            </div>
-            <div class="form-group">
-                <label for="confirm_password">Confirmez le mot de passe :</label>
-                <input type="password" id="confirm_password" name="confirm_password" required>
-            </div>
-            <div class="form-group">
-                <button type="submit">Changer le mot de passe</button>
-            </div>
-        </form>
-    </div>
-    <footer class="footer">
-        <p>Footer Text</p>
-    </footer>
+<div class="container">
+    <h2>Changement de mot de passe</h2>
+    <form action="change_password.php" method="post">
+        <div class="form-group">
+            <label for="email">Adresse e-mail :</label>
+            <input type="email" id="email" name="email" required>
+        </div>
+        <div class="form-group">
+            <label for="password">Nouveau mot de passe :</label>
+            <input type="password" id="password" name="password" required>
+        </div>
+        <div class="form-group">
+            <label for="confirm_password">Confirmez le mot de passe :</label>
+            <input type="password" id="confirm_password" name="confirm_password" required>
+        </div>
+        <div class="form-group">
+            <button type="submit">Changer le mot de passe</button>
+        </div>
+    </form>
+</div>
 </body>
+<footer class="footer">
+    <p>Footer Text</p>
+</footer>
 
 </html>
 

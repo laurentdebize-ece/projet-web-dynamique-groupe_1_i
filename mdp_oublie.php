@@ -186,6 +186,7 @@ if (isset($_POST['email'])) {
     <?php endif; ?>
 </div>
 </body>
+
 <footer class="footer">
     <p>Footer Text</p>
 </footer>

@@ -145,7 +145,7 @@ if (isset($_POST['email'])) {
         <?php if (isset($erreur)) : ?>
             <p class="error-message"><?php echo $erreur; ?></p>
         <?php endif; ?>
-        <form action="reset_password.php" method="post">
+        <form action="../projet-web-dynamique-groupe_1_i/reset_password.php" method="post">
             <div class="form-group">
                 <label for="email">Adresse e-mail :</label>
                 <input type="email" id="email" name="email" required>
@@ -157,7 +157,6 @@ if (isset($_POST['email'])) {
             <div class="form-group">
                 <button type="submit">Valider</button>
             </div>
-
         </form>
     <?php endif; ?>
 </div>

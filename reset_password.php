@@ -2,21 +2,26 @@
 require_once 'BDD/initBDD.php';
 session_start();
 
-$erreur = null;
-$email = $_POST['email'] ?? null;
+$email = isset($_POST['email']) ? $_POST['email'] : '';
 
-$encrypted_email = openssl_encrypt($email, 'AES-128-ECB', 'secret_key');
-$token = urlencode($encrypted_email);
-if ($token !== ($_POST['token'] ?? null)) {
-    $erreur = 'Le token entré n\'est pas bon';
-    header('Location: mdp_oublie.php');
-    exit;
-}
+if (isset($_POST['email']) && isset($_POST['token'])) {
+    $token = $_POST['token'];
+    $erreur = null;
 
-if (isset($_POST['password'], $_POST['confirm_password'])) {
-    if ($_POST['password'] === $_POST['confirm_password']) {
-        if (strlen($_POST['password']) >= 8) {
+    $encrypted_email = openssl_encrypt($email, 'AES-128-ECB', 'secret_key');
+    $calculated_token = urlencode($encrypted_email);
+
+    if ($token !== ($_POST['token'])) {
+        $erreur = 'Le token entré n\'est pas bon';
+        exit;
+    }
+
+
+    if (isset($_POST['password'], $_POST['confirm_password'])) {
+        if ($_POST['password'] === $_POST['confirm_password']) {
             $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
+            $email = $_POST['email'];
+
             try {
                 $requete = $bdd->prepare("UPDATE Utilisateurs SET mot_de_passe = :password, first_login = 0 WHERE email = :email");
                 $requete->bindParam(':password', $password);
@@ -37,19 +42,24 @@ if (isset($_POST['password'], $_POST['confirm_password'])) {
                     $requete->execute();
 
                     header('Location: index.php');
-                    exit;
+                    echo "Votre mot de passe a été modifié avec succès.";
                 } else {
-                    $erreur = "L'utilisateur n'existe pas.";
+                    echo "L'utilisateur n'existe pas.";
                 }
+
+                //header('Location: index.php');
             } catch (PDOException $e) {
-                $erreur = "Erreur : " . $e->getMessage();
+                echo "Erreur : " . $e->getMessage();
             }
         } else {
-            $erreur = "Votre mot de passe doit contenir au moins 8 caractères.";
+            $erreur = "Les mots de passe ne correspondent pas.";
         }
-    } else {
-        $erreur = "Les mots de passe ne correspondent pas.";
     }
+
+} else if (!isset($_POST['email'])) {
+    $erreur = 'Mail manquant';
+} else if (!isset($_POST['token'])) {
+    $erreur = 'Token manquant';
 }
 ?>
 
@@ -107,7 +117,7 @@ if (isset($_POST['password'], $_POST['confirm_password'])) {
     </style>
 </head>
 <body>
-<form action="reset_password.php" method="post">
+<form action="../projet-web-dynamique-groupe_1_i/reset_password.php" method="post">
     <?php if (isset($erreur)) : ?>
         <p class="error-message"><?php echo $erreur; ?></p>
     <?php endif; ?>

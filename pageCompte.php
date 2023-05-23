@@ -48,7 +48,7 @@ session_start();
                     <p><a href="competences.php">Compétences</a></p><br>
                     <p><a href="competences_transverses.php">Compétences transverses</a></p><br>
                     <p><a href="toutes_mes_competences.php">Toutes mes compétences</a></p><br>
-                    <p><a href="pageCompetences.php">tableauEvaluationTTCompt</a></p><br>
+                    <p><a href="pageCompetences.php">tableauEvaluationTTCompte</a></p><br>
                     <?php
                 } else if ($_SESSION['type'] === 'professeur') {
                     ?>
@@ -77,8 +77,6 @@ session_start();
             } else {
                 echo '<p><a href="index.php">Connectez-vous ici</a></p><br><br>';
             } ?>
-
-            <!--<p><a href="connexion.php">CONNEXION</a></p>-->
         </div>
 
     </div>

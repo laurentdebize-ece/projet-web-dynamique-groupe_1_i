@@ -188,6 +188,7 @@ $conn->close();
 
 </body>
 
+
 <footer class="footer">
     <p>Footer Text</p>
 </footer>

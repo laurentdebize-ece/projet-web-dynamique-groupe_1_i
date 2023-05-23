@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["evaluation_id"], $_POST["new_status"])) {
+if (isset($_POST["evaluation_id"], $_POST["new_status"])) {
     $connexion = mysqli_connect("localhost", "root", "root", "omnes myskills");
 
     $evaluation_id = $_POST["evaluation_id"];

@@ -41,7 +41,7 @@ session_start();
             <a href="pageCompte.php"><img src='img/OIP.jpg' width="80" height="80" style="border-radius: 40px;"></a>
             <?php
             if (isset($_SESSION['type'])) {
-                if ($_SESSION['type'] == 'etudiant') {
+                if ($_SESSION['type'] === 'etudiant') {
                     ?>
                     <p class="etat"><a>Etudiant &#128104;&#8205;&#127891;</a></p><br>
                     <p><a href="matieres.php">Matières</a></p><br>
@@ -88,6 +88,7 @@ session_start();
         <p>Footer Text</p>
     </footer>
 
+</div>
 
 </body>
 

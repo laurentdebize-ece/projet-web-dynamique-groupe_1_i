@@ -31,6 +31,17 @@ session_start();
             <h2>Mon Profil</h2>
             <div class="profile">
                 <img src='img/OIP.jpg' width="150">
+                <?php
+
+                if (isset($_SESSION['type'])) {
+                    ?>
+                    <h3><?php echo "Nom : " . $_SESSION['nom']; ?></h3>
+                    <h3><?php echo "Prénom : " . $_SESSION['prenom']; ?></h3>
+                    <p><?php echo "Email : " . $_SESSION['email']; ?></p>
+                    <p><?php echo "Ecole : " . $_SESSION['ecole']; ?></p>
+                    <p><?php echo "Statut : " . $_SESSION['statut']; ?></p>
+                    <?php
+                } ?>
                 <h3>Nom: Admin Admin</h3>
                 <p>Email: admin@ece.fr</p>
                 <p>Ecole: ECE</p>

@@ -20,7 +20,11 @@ if (isset($_POST['email']) && isset($_POST['mot_de_passe'])) {
         if ($utilisateur && password_verify($mot_de_passe, $utilisateur['mot_de_passe'])) {
             session_start();
             $_SESSION['utilisateur'] = $utilisateur;
-            $_SESSION['email'] = $email;
+            $_SESSION['email'] = $utilisateur['email'];
+            $_SESSION['nom'] = $utilisateur['nom'];
+            $_SESSION['prenom'] = $utilisateur['prenom'];
+            $_SESSION['ecole'] = $utilisateur['ecole'];
+            $_SESSION['statut'] = $utilisateur['statut'];
 
             $requete = $bdd->prepare("SELECT statut FROM Statut WHERE id = :statut_id");
             $requete->bindParam(':statut_id', $utilisateur['statut_id']);
@@ -29,16 +33,9 @@ if (isset($_POST['email']) && isset($_POST['mot_de_passe'])) {
 
             $_SESSION['type'] = $status;
 
-            if ($status == 'administrateur') {
-                header('Location: accueil.php');
-                exit;
-            } else if ($status == 'etudiant') {
-                header('Location: accueil.php');
-                exit;
-            } else if ($status == 'professeur') {
-                header('Location: accueil.php');
-                exit;
-            }
+            header('Location: accueil.php');
+            exit;
+
         } else {
             $erreur = "Email ou mot de passe incorrect.";
         }
@@ -47,14 +44,14 @@ if (isset($_POST['email']) && isset($_POST['mot_de_passe'])) {
     }
     $nom_utilisateur = $email;
 
-    /*if (isset($_POST['maintenir_connexion'])) {
+    if (isset($_POST['maintenir_connexion'])) {
         $temps_expiration = time() + (10 * 365 * 24 * 60 * 60);  // 10 ans
     } else {
         $temps_expiration = null;
     }
 
     //Lors de la connexion, stocker le nom d'utilisateur dans un cookie
-    setcookie('nom_utilisateur', $nom_utilisateur, $temps_expiration);*/
+    setcookie('nom_utilisateur', $nom_utilisateur, $temps_expiration);
 }
 ?>
 

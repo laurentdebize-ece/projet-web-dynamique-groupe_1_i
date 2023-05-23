@@ -1,4 +1,3 @@
-
 <?php
 $connexion = mysqli_connect("localhost", "root", "root", "omnes myskills");
 $data = mysqli_query($connexion, "SELECT autoevaluations.statut, autoevaluations.id, autoevaluations.id_competence ,competences.description FROM autoevaluations JOIN competences ON autoevaluations.id_competence = competences.id 

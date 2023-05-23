@@ -77,7 +77,7 @@ $groupe = $query->fetchAll();
         </nav>
         <div class="container-fluid text-center flex-float">
             <div class="row content">
-                <div id="divSupp" class="col-sm-10 text-left">
+                <div class="col-sm-10 text-left">
                     <h1>Gestion des matières</h1>
                         <div class="container">
                             <div class="left">

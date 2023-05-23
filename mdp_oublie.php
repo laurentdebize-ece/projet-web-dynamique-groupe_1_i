@@ -9,6 +9,7 @@ use PHPMailer\PHPMailer\Exception;
 require 'vendor/autoload.php';
 
 $erreur = null;
+$email = '';
 
 if (isset($_POST['email'])) {
     $email = $_POST['email'];
@@ -22,13 +23,21 @@ if (isset($_POST['email'])) {
         $encrypted_email = openssl_encrypt($email, 'AES-128-ECB', 'secret_key');
         $token = urlencode($encrypted_email);
 
-        $mail = new PHPMailer(true);
-
         if (isset($_POST['token'])) {
             if ($token !== ($_POST['token'])) {
                 $erreur = 'Le token entré n\'est pas bon';
+            } else {
+                $_SESSION['token'] = $token;
+                header('Location: ../projet-web-dynamique-groupe_1_i/change_password.php');
+                exit;
             }
         }
+
+
+        $_SESSION['token'] = $token; // Stocke le token dans la session
+        $_SESSION['email'] = $email; // Stocke l'email dans la session
+
+        $mail = new PHPMailer(true);
 
         try {
             $mail->SMTPDebug = 2;
@@ -144,7 +153,7 @@ if (isset($_POST['email'])) {
             <p class="error-message"><?php echo $erreur; ?></p>
         <?php endif; ?>
     <div id="divSupp">
-        <form action="mdp_oublie.php" method="post">
+        <form action="../projet-web-dynamique-groupe_1_i/mdp_oublie.php" method="post">
             <div class="form-group">
                 <label for="email">Adresse e-mail :</label>
                 <input type="email" id="email" name="email" required>
@@ -156,23 +165,23 @@ if (isset($_POST['email'])) {
     </div>
     <?php endif; ?>
     <?php if (isset($token)) : ?>
-        <?php if (isset($erreur)) : ?>
-            <p class="error-message"><?php echo $erreur; ?></p>
+        <?php if (isset($_SESSION['erreur'])) : ?>
+            <p class="error-message"><?php echo $_SESSION['erreur']; ?></p>
         <?php endif; ?>
     <div id="divSupp">
         <form action="reset_password.php" method="post">
+        <form action="../projet-web-dynamique-groupe_1_i/mdp_oublie.php" method="post">
             <div class="form-group">
                 <label for="email">Adresse e-mail :</label>
                 <input type="email" id="email" name="email" required>
             </div>
             <div>
-                <label for="token">Entrez le token reçu par mail :</label>
+                <label for="token">Token reçu par mail :</label>
                 <input type="text" id="token" name="token" required>
             </div>
             <div class="form-group">
                 <button type="submit">Valider</button>
             </div>
-
         </form>
     </div>
     <?php endif; ?>

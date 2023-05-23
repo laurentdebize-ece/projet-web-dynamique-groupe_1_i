@@ -1,22 +1,14 @@
 <?php
 require_once 'BDD/initBDD.php';
+
 session_start();
-
-$erreur = null;
-$email = $_POST['email'] ?? null;
-
-$encrypted_email = openssl_encrypt($email, 'AES-128-ECB', 'secret_key');
-$token = urlencode($encrypted_email);
-if ($token !== ($_POST['token'] ?? null)) {
-    $erreur = 'Le token entré n\'est pas bon';
-    header('Location: mdp_oublie.php');
-    exit;
-}
-
-if (isset($_POST['password'], $_POST['confirm_password'])) {
-    if ($_POST['password'] === $_POST['confirm_password']) {
-        if (strlen($_POST['password']) >= 8) {
+if (isset($_SESSION['token'])) {
+    $token = $_SESSION['token'];
+    if (isset($_POST['password'], $_POST['confirm_password'])) {
+        if ($_POST['password'] === $_POST['confirm_password']) {
             $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
+            $email = $_POST['email'];
+
             try {
                 $requete = $bdd->prepare("UPDATE Utilisateurs SET mot_de_passe = :password, first_login = 0 WHERE email = :email");
                 $requete->bindParam(':password', $password);
@@ -36,28 +28,33 @@ if (isset($_POST['password'], $_POST['confirm_password'])) {
                     $requete->bindParam(':id', $utilisateur_id);
                     $requete->execute();
 
-                    header('Location: index.php');
-                    exit;
+                    echo "Votre mot de passe a été modifié avec succès.";
                 } else {
-                    $erreur = "L'utilisateur n'existe pas.";
+                    echo "L'utilisateur n'existe pas.";
                 }
+
+                header('Location: index.php');
             } catch (PDOException $e) {
-                $erreur = "Erreur : " . $e->getMessage();
+                echo "Erreur : " . $e->getMessage();
             }
         } else {
-            $erreur = "Votre mot de passe doit contenir au moins 8 caractères.";
+            echo "Les mots de passe ne correspondent pas.";
         }
-    } else {
-        $erreur = "Les mots de passe ne correspondent pas.";
     }
+} else {
+    // Redirigez l'utilisateur vers la page de réinitialisation du mot de passe si le token n'est pas défini
+    header('Location: mdp_oublie.php');
+    exit;
 }
+unset($_SESSION['token']);
 ?>
 
 
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
-    <title>Réinitialisation du mot de passe</title>
+    <title>Changement du mot de passe</title>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="style1.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -69,47 +66,58 @@ if (isset($_POST['password'], $_POST['confirm_password'])) {
             background-color: #f5f5f5;
         }
 
-        form {
-            background: white;
+        .container {
+            max-width: 400px;
+            margin: 0 auto;
             padding: 20px;
-            border-radius: 10px;
-            max-width: 500px;
-            margin: auto;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
 
-        h2, label {
-            color: #4a5568;
+        .container h2 {
+            text-align: center;
+            margin-bottom: 20px;
         }
 
-        input[type="password"] {
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        .form-group input {
             width: 100%;
-            padding: 10px;
-            margin: 10px 0;
-            box-sizing: border-box;
-            border-radius: 5px;
-            border: 1px solid #ced4da;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
         }
 
-        input[type="submit"] {
+        .form-group button {
+            padding: 8px 20px;
             background-color: #4caf50;
+            color: #fff;
             border: none;
-            color: white;
-            padding: 15px 32px;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 16px;
-            margin: 4px 2px;
+            border-radius: 3px;
             cursor: pointer;
-            border-radius: 5px;
+        }
+
+        .form-group button:hover {
+            background-color: #45a049;
         }
 
         .error-message {
             color: red;
-            text-align: center;
-            margin-bottom: 10px;
+            margin-top: 10px;
         }
     </style>
 </head>
+
 <body>
 <nav class="navbar navbar-inverse">
     <div class="container-fluid">
@@ -140,5 +148,27 @@ if (isset($_POST['password'], $_POST['confirm_password'])) {
 <footer class="footer">
     <p>Footer Text</p>
 </footer>
+<div class="container">
+    <h2>Changement de mot de passe</h2>
+    <form action="change_password.php" method="post">
+        <div class="form-group">
+            <label for="email">Adresse e-mail :</label>
+            <input type="email" id="email" name="email" required>
+        </div>
+        <div class="form-group">
+            <label for="password">Nouveau mot de passe :</label>
+            <input type="password" id="password" name="password" required>
+        </div>
+        <div class="form-group">
+            <label for="confirm_password">Confirmez le mot de passe :</label>
+            <input type="password" id="confirm_password" name="confirm_password" required>
+        </div>
+        <div class="form-group">
+            <button type="submit">Changer le mot de passe</button>
+        </div>
+    </form>
+</div>
 </body>
+
 </html>
+

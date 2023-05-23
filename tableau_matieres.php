@@ -7,7 +7,7 @@ $nb_cercles = 0;
 echo "<form method='post' action='tableau_affichage_Matieres_Competences.php'>";
 echo "<table>";
 while ($ligne = mysqli_fetch_assoc($data)) {
-    echo "<td><button class='circle' name='MATChoisie' value='" . $ligne['id'] . "'>" . $ligne['nom'] . "</button></td>";
+    echo "<td><button class='circle' name='MATChoisie' value='" . $ligne['id'] . "'>" . $ligne['nom_matiere'] . "</button></td>";
     $nb_cercles++;
     if ($nb_cercles % 4 == 0) {
         echo "</tr><tr>";

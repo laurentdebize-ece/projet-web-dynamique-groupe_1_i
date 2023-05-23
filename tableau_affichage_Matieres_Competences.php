@@ -26,7 +26,7 @@ session_start();
                 $MATChoisie = $_POST['MATChoisie'];
                 $data = mysqli_query($connexion, "SELECT * FROM matieres WHERE id = '$MATChoisie'");
                 $matiere = mysqli_fetch_assoc($data);
-                echo $matiere['nom'];
+                echo $matiere['nom_matiere'];
                 mysqli_close($connexion);
                 ?></a>
         </div>

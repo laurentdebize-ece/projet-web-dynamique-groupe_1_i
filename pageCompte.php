@@ -31,6 +31,17 @@ session_start();
             <h2>Mon Profil</h2>
             <div class="profile">
                 <img src='img/OIP.jpg' width="150">
+                <?php
+
+                if (isset($_SESSION['type'])) {
+                    ?>
+                    <h3><?php echo "Nom : " . $_SESSION['nom']; ?></h3>
+                    <h3><?php echo "Prénom : " . $_SESSION['prenom']; ?></h3>
+                    <p><?php echo "Email : " . $_SESSION['email']; ?></p>
+                    <p><?php echo "Ecole : " . $_SESSION['ecole']; ?></p>
+                    <p><?php echo "Statut : " . $_SESSION['statut']; ?></p>
+                    <?php
+                } ?>
                 <h3>Nom: Admin Admin</h3>
                 <p>Email: admin@ece.fr</p>
                 <p>Ecole: ECE</p>
@@ -41,15 +52,14 @@ session_start();
             <a href="pageCompte.php"><img src='img/OIP.jpg' width="80" height="80" style="border-radius: 40px;"></a>
             <?php
             if (isset($_SESSION['type'])) {
-                if ($_SESSION['type'] == 'etudiant') {
+                if ($_SESSION['type'] === 'etudiant') {
                     ?>
                     <p class="etat"><a>Etudiant &#128104;&#8205;&#127891;</a></p><br>
                     <p><a href="matieres.php">Matières</a></p><br>
                     <p><a href="competences.php">Compétences</a></p><br>
                     <p><a href="competences_transverses.php">Compétences transverses</a></p><br>
                     <p><a href="toutes_mes_competences.php">Toutes mes compétences</a></p><br>
-                    <p><a href="ajout_utilisateur.php">AJOUTER UTILISATEUR</a></p><br>
-                    <p><a href="pageCompetences.php">tableauEvaluationTTCompt</a></p><br>
+                    <p><a href="pageCompetences.php">tableauEvaluationTTCompte</a></p><br>
                     <?php
                 } else if ($_SESSION['type'] === 'professeur') {
                     ?>
@@ -78,8 +88,6 @@ session_start();
             } else {
                 echo '<p><a href="index.php">Connectez-vous ici</a></p><br><br>';
             } ?>
-
-            <!--<p><a href="connexion.php">CONNEXION</a></p>-->
         </div>
 
     </div>
@@ -88,6 +96,7 @@ session_start();
         <p>Footer Text</p>
     </footer>
 
+</div>
 
 </body>
 

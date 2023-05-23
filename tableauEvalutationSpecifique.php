@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["evaluation_id"], $_POST["new_status"])) {
+if (isset($_POST["evaluation_id"], $_POST["new_status"])) {
     $connexion = mysqli_connect("localhost", "root", "root", "omnes myskills");
 
     $evaluation_id = $_POST["evaluation_id"];
@@ -90,7 +90,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["evaluation_id"], $_POS
                 echo "<td>";
                 echo "<form method='post'>";
                 echo "<input type='hidden' name='evaluation_id' value='" . $ligne['id'] . "'>";
-                echo "<input type='hidden' name='cmptChoisie' value='" . $cmptChoisie . "'>"; // Ajout de cmptChoisie
+                echo "<input type='hidden' name='cmptChoisie' value='" . $cmptChoisie . "'>"; 
                 echo "<select name='new_status'>";
                 echo "<option value='non_acquis' " . (($ligne["statut"] == "non_acquis") ? "selected" : "") . ">Non acquis</option>";
                 echo "<option value='en_cours' " . (($ligne["statut"] == "en_cours") ? "selected" : "") . ">En cours</option>";

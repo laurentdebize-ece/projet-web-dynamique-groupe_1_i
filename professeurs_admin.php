@@ -8,12 +8,23 @@ if (!isset($_SESSION['type']) || $_SESSION['type'] !== 'administrateur') {
     exit;
 }
 
-if (isset($_POST['nom'], $_POST['prenom'], $_POST['ecole'], $_POST['email'], $_POST['mot_de_passe'], $_POST['type'])) {
+function generateRandomPassword($length = 8){
+    $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ\/¡!¿?';
+    $charactersLength = strlen($characters);
+    $randomPassword = '';
+    for ($i = 0; $i < $length; $i++) {
+        $randomPassword .= $characters[rand(0, $charactersLength - 1)];
+    }
+    return $randomPassword;
+}
+
+if (isset($_POST['nom'], $_POST['prenom'], $_POST['ecole'], $_POST['email'], $_POST['type'])) {
     $nom = $_POST['nom'];
     $prenom = $_POST['prenom'];
     $email = $_POST['email'];
     $ecole = $_POST['ecole'];
-    $mot_de_passe = password_hash($_POST['mot_de_passe'], PASSWORD_DEFAULT);
+    $mot_de_passe = generateRandomPassword();
+    $mot_de_passe = password_hash($mot_de_passe, PASSWORD_DEFAULT);
     $statut_id = 2;
 
     try {
@@ -153,10 +164,6 @@ $matieres = $query->fetchAll();
                             <div>
                                 <label for="email">Email :</label>
                                 <input type="email" id="email" name="email" required>
-                            </div>
-                            <div>
-                                <label for="mot_de_passe">Mot de passe :</label>
-                                <input type="password" id="mot_de_passe" name="mot_de_passe" required>
                             </div>
                             <button type="submit" class="submit-btn">Ajouter</button>
                         </form>
@@ -328,8 +335,6 @@ $matieres = $query->fetchAll();
                         <button type="submit" name="delete_subject">Enlever</button>
                     </form>
                 </div>
-            </div>
-            <div class="col-sm-2 sidenav">
             </div>
         </div>
     </div>

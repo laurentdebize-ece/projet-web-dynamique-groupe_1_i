@@ -336,7 +336,6 @@ $matieres = $query->fetchAll();
                     </form>
                 </div>
             </div>
-
         </div>
     </div>
     <footer class="footer">

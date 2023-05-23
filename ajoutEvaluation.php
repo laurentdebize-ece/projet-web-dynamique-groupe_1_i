@@ -26,7 +26,7 @@ session_start();
 </nav>
 
 
-<div class="container-fluid text-center flex-float"> <!--style="height: 100%"-->
+<div id="divSupp" class="container-fluid text-center flex-float"> <!--style="height: 100%"-->
     <div class="row content">
 
         <div class="col-sm-10 text-left">

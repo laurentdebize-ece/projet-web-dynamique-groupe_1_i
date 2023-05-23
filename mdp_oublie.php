@@ -142,7 +142,6 @@ if (isset($_POST['email'])) {
     <div class="container-fluid">
         <div class="navbar-header">
             <a class="navbar-brand" href="accueil.php">OMNES</a>
-            <a class="navbar-brand center" href="pageCompte.php">Compte</a>
         </div>
     </div>
 </nav>
@@ -153,7 +152,7 @@ if (isset($_POST['email'])) {
             <p class="error-message"><?php echo $erreur; ?></p>
         <?php endif; ?>
     <div id="divSupp">
-        <form action="../projet-web-dynamique-groupe_1_i/mdp_oublie.php" method="post">
+        <form action="mdp_oublie.php" method="post">
             <div class="form-group">
                 <label for="email">Adresse e-mail :</label>
                 <input type="email" id="email" name="email" required>
@@ -170,7 +169,7 @@ if (isset($_POST['email'])) {
         <?php endif; ?>
     <div id="divSupp">
         <form action="reset_password.php" method="post">
-        <form action="../projet-web-dynamique-groupe_1_i/mdp_oublie.php" method="post">
+        <form action="mdp_oublie.php" method="post">
             <div class="form-group">
                 <label for="email">Adresse e-mail :</label>
                 <input type="email" id="email" name="email" required>

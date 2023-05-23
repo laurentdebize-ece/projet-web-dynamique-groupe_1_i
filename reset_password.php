@@ -43,7 +43,7 @@ if (isset($_SESSION['token'])) {
     }
 } else {
     // Redirigez l'utilisateur vers la page de réinitialisation du mot de passe si le token n'est pas défini
-    header('Location: mdp_oublie.php');
+    header('Location: accueil.php');
     exit;
 }
 unset($_SESSION['token']);
@@ -123,10 +123,10 @@ unset($_SESSION['token']);
     <div class="container-fluid">
         <div class="navbar-header">
             <a class="navbar-brand" href="accueil.php">OMNES</a>
-            <a class="navbar-brand center" href="pageCompte.php">Compte</a>
         </div>
     </div>
 </nav>
+<div id="divSupp">
 <form action="reset_password.php" method="post">
     <?php if (isset($erreur)) : ?>
         <p class="error-message"><?php echo $erreur; ?></p>
@@ -141,33 +141,14 @@ unset($_SESSION['token']);
         <label for="confirm_password">Confirmez le nouveau mot de passe :</label>
         <input type="password" id="confirm_password" name="confirm_password" required>
     </div>
-    <div>
+    <div class="form-group">
         <input type="submit" value="Valider">
     </div>
 </form>
+</div>
 <footer class="footer">
     <p>Footer Text</p>
 </footer>
-<div class="container">
-    <h2>Changement de mot de passe</h2>
-    <form action="change_password.php" method="post">
-        <div class="form-group">
-            <label for="email">Adresse e-mail :</label>
-            <input type="email" id="email" name="email" required>
-        </div>
-        <div class="form-group">
-            <label for="password">Nouveau mot de passe :</label>
-            <input type="password" id="password" name="password" required>
-        </div>
-        <div class="form-group">
-            <label for="confirm_password">Confirmez le mot de passe :</label>
-            <input type="password" id="confirm_password" name="confirm_password" required>
-        </div>
-        <div class="form-group">
-            <button type="submit">Changer le mot de passe</button>
-        </div>
-    </form>
-</div>
 </body>
 
 </html>

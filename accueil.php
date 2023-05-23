@@ -81,7 +81,12 @@ session_start();
             if (isset($_SESSION['type'])) {
                 if ($_SESSION['type'] == 'administrateur') {
                     ?>
-                    <p class="etat">Administrateur &#128104;&#8205;&#128187;</p>
+                    <p class="etat"><a> Administrateur &#128104;&#8205;&#128187;</a></p>
+                    <br><br><br>
+                    <p><a href="matieres_admin.php"> Matières/Classes</a></p><br>
+                    <p><a href="etudiants_admin.php"> Etudiants</a></p><br>
+                    <p><a href="professeurs_admin.php"> Professeurs</a></p><br>
+                    <p><a href="supprimer_utilisateurs.php"> Supprimer</a></p><br>
                     <?php
                 } else if ($_SESSION['type'] == 'etudiant') {
                     ?>
@@ -105,12 +110,16 @@ session_start();
             } else {
                 echo '<p><a href="index.php">Connectez-vous ici</a></p><br><br>';
             }
-            ?>
-            <p><a href="matieres.php">Matières</a></p><br>
-            <p><a href="competences.php">Compétences</a></p><br>
-            <p><a href="competences_transverses.php">Compétences transverses</a></p><br>
-            <p><a href="toutes_mes_competences.php">Toutes mes compétences</a></p><br>
-            <p><a href="pageCompetences.php">tableauEvaluationTTCompt</a></p><br>
+            ?> <?php
+            if ($_SESSION['type'] != 'administrateur') {
+                ?>
+                <p><a href="matieres.php">Matières</a></p><br>
+                <p><a href="competences.php">Compétences</a></p><br>
+                <p><a href="competences_transverses.php">Compétences transverses</a></p><br>
+                <p><a href="toutes_mes_competences.php">Toutes mes compétences</a></p><br>
+                <p><a href="pageCompetences.php">tableauEvaluationTTCompt</a></p><br>
+                <?php
+            } ?>
         </div>
     </div>
 </div>

@@ -145,6 +145,8 @@ VALUES ('Competence1', 'Algèbre linéaire : Maîtriser les opérations sur les 
        ('Competence14', 'Savoir calculé dans le domaine de Laplace ', 'specifique'),
        ('Competence15', 'Conception de circuits imprimés : Avoir une compréhension des techniques de conception de circuits imprimés (PCB), savoir utiliser des logiciels de conception assistée par ordinateur (CAO) pour réaliser des schémas et des routages de circuits.', 'specifique'),
        ('Competence16', 'Électronique numérique : Comprendre les principes de base des circuits logiques et des systèmes numériques, tels que les portes logiques, les mémoires, les compteurs, les multiplexeurs, etc.', 'specifique');
+       ('Competence17', 'Capacité à travailler efficacement en équipe, à partager les responsabilités, à gérer les dynamiques de groupe et à contribuer à la réalisation des objectifs communs.', 'transverse'),
+       ('Competence18', 'Capacité à s exprimer clairement et efficacement en public, à transmettre des idées de manière convaincante et à gérer le trac et les réactions de l auditoire.', 'transverse');
 
 
 INSERT INTO matieres (nom_matiere, volume_horaire)
@@ -176,3 +178,13 @@ VALUES
 INSERT INTO Autoevaluations (id_etudiant, id_competence, statut, date)
 VALUES
     (4, 1, 'non_acquis', '2000-12-12');
+
+
+SELECT id FROM Utilisateurs WHERE statut_id = 1;
+-- Récupérer tous les identifiants de compétences
+SELECT id FROM Competences;
+-- Insérer toutes les compétences avec le statut "non acquis" pour chaque étudiant
+INSERT INTO Autoevaluations (id_etudiant, id_competence, statut, date)
+SELECT Utilisateurs.id, Competences.id, 'non_acquis', CURDATE()
+FROM Utilisateurs, Competences
+WHERE Utilisateurs.statut_id = 1;

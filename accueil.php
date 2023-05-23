@@ -13,7 +13,6 @@ session_start();
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <title>Omnes MySkill</title>
 </head>
-
 <body>
 
 <nav class="navbar navbar-inverse">

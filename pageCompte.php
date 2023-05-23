@@ -32,16 +32,33 @@ session_start();
             <div class="profile">
                 <img src='img/OIP.jpg' width="150">
                 <?php
-
                 if (isset($_SESSION['type'])) {
                     ?>
                     <h3><?php echo "Nom : " . $_SESSION['nom']; ?></h3>
                     <h3><?php echo "Prénom : " . $_SESSION['prenom']; ?></h3>
                     <p><?php echo "Email : " . $_SESSION['email']; ?></p>
                     <p><?php echo "Ecole : " . $_SESSION['ecole']; ?></p>
-                    <p><?php echo "Statut : " . $_SESSION['type']; ?></p>
+                    <p><?php echo "Statut : " . $_SESSION['statut']; ?></p>
                     <?php
+                    if ($_SESSION['type'] === 'etudiant') {
+                        ?>
+                        <p>Statut : Etudiant</p><br>
+                        <?php
+                    } else if ($_SESSION['type'] === 'professeur') {
+                        ?>
+                        <p>Statut : Professeur</p>
+                        <?php
+                    } else if ($_SESSION['type'] === 'administrateur') {
+                        ?>
+                        <p>Statut : Administrateur</p>
+                        <?php
+                    }
+
                 } ?>
+                <!--<h3>Nom: Admin Admin</h3>
+                <p>Email: admin@ece.fr</p>
+                <p>Ecole: ECE</p>
+                <p>Statut: Admin</p>-->
             </div>
         </div>
         <div class="col-sm-2 sidenav">
@@ -68,12 +85,12 @@ session_start();
                     <?php
                 } else if ($_SESSION['type'] === 'administrateur') {
                     ?>
-                    <p class="etat" ><a> Administrateur &#128104;&#8205;&#128187;</a></p>
-                    <br><br ><br >
-                    <p><a href = "matieres_admin.php" > Matières/Classes</a ></p ><br >
-                    <p><a href = "etudiants_admin.php" > Etudiants</a ></p ><br >
-                    <p><a href = "professeurs_admin.php" > Professeurs</a ></p ><br >
-                    <p><a href = "supprimer_utilisateurs.php" > Supprimer</a ></p ><br >
+                    <p class="etat"><a> Administrateur &#128104;&#8205;&#128187;</a></p>
+                    <br><br><br>
+                    <p><a href="matieres_admin.php"> Matières/Classes</a></p><br>
+                    <p><a href="etudiants_admin.php"> Etudiants</a></p><br>
+                    <p><a href="professeurs_admin.php"> Professeurs</a></p><br>
+                    <p><a href="supprimer_utilisateurs.php"> Supprimer</a></p><br>
                     <?php
                 } else {
                     ?>

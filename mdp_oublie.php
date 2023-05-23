@@ -53,7 +53,7 @@ if (isset($_POST['email'])) {
             $mail->addAddress($email);
 
             $mail->isHTML(true);
-            $mail->Subject = 'Réinitialiser votre mot de passe';
+            $mail->Subject = 'Reinitialisation de votre mot de passe';
             $mail->Body = 'Votre token pour réinitialiser votre mot de passe est : <strong>' . $token . '</strong>';
 
             $mail->send();

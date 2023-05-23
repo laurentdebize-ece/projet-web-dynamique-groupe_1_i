@@ -39,13 +39,9 @@ session_start();
                     <h3><?php echo "Prénom : " . $_SESSION['prenom']; ?></h3>
                     <p><?php echo "Email : " . $_SESSION['email']; ?></p>
                     <p><?php echo "Ecole : " . $_SESSION['ecole']; ?></p>
-                    <p><?php echo "Statut : " . $_SESSION['statut']; ?></p>
+                    <p><?php echo "Statut : " . $_SESSION['type']; ?></p>
                     <?php
                 } ?>
-                <h3>Nom: Admin Admin</h3>
-                <p>Email: admin@ece.fr</p>
-                <p>Ecole: ECE</p>
-                <p>Statut: Admin</p>
             </div>
         </div>
         <div class="col-sm-2 sidenav">

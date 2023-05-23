@@ -38,6 +38,7 @@ if (isset($_POST['submit'])) {
     $orderBy = "C.id ASC"; // Tri par défaut : ordre croissant d'ID
 }
 
+
 $sql = "SELECT C.* FROM Competences C 
         JOIN Autoevaluations A ON C.id = A.id_competence 
         WHERE C.type = 'specifique' 

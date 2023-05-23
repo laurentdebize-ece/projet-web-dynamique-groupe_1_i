@@ -38,7 +38,6 @@ session_start();
                     <h3><?php echo "Prénom : " . $_SESSION['prenom']; ?></h3>
                     <p><?php echo "Email : " . $_SESSION['email']; ?></p>
                     <p><?php echo "Ecole : " . $_SESSION['ecole']; ?></p>
-                    <p><?php echo "Statut : " . $_SESSION['statut']; ?></p>
                     <?php
                     if ($_SESSION['type'] === 'etudiant') {
                         ?>

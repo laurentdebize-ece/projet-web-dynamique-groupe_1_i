@@ -65,7 +65,11 @@ if (isset($_POST['email'])) {
 
 <head>
     <meta charset="UTF-8">
-    <title>Changement de mot de passe</title>
+    <title>Changer de mot de passe</title>
+    <link rel="stylesheet" href="style1.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -125,12 +129,21 @@ if (isset($_POST['email'])) {
 </head>
 
 <body>
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="accueil.php">OMNES</a>
+            <a class="navbar-brand center" href="pageCompte.php">Compte</a>
+        </div>
+    </div>
+</nav>
+<h2 class="centered-title">Changement de mot de passe</h2>
 <div class="container">
-    <h2>Changement de mot de passe</h2>
     <?php if (!isset($token)) : ?>
         <?php if (isset($erreur)) : ?>
             <p class="error-message"><?php echo $erreur; ?></p>
         <?php endif; ?>
+    <div id="divSupp">
         <form action="mdp_oublie.php" method="post">
             <div class="form-group">
                 <label for="email">Adresse e-mail :</label>
@@ -140,11 +153,13 @@ if (isset($_POST['email'])) {
                 <button type="submit">Changer le mot de passe</button>
             </div>
         </form>
+    </div>
     <?php endif; ?>
     <?php if (isset($token)) : ?>
         <?php if (isset($erreur)) : ?>
             <p class="error-message"><?php echo $erreur; ?></p>
         <?php endif; ?>
+    <div id="divSupp">
         <form action="reset_password.php" method="post">
             <div class="form-group">
                 <label for="email">Adresse e-mail :</label>
@@ -159,9 +174,13 @@ if (isset($_POST['email'])) {
             </div>
 
         </form>
+    </div>
     <?php endif; ?>
 </div>
 </body>
+<footer class="footer">
+    <p>Footer Text</p>
+</footer>
 
 </html>
 

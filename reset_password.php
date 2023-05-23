@@ -58,11 +58,15 @@ if (isset($_POST['password'], $_POST['confirm_password'])) {
 <html lang="fr">
 <head>
     <title>Réinitialisation du mot de passe</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="style1.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <style>
         body {
             font-family: Arial, sans-serif;
             background-color: #f5f5f5;
-            padding: 10%;
         }
 
         form {
@@ -107,6 +111,14 @@ if (isset($_POST['password'], $_POST['confirm_password'])) {
     </style>
 </head>
 <body>
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="accueil.php">OMNES</a>
+            <a class="navbar-brand center" href="pageCompte.php">Compte</a>
+        </div>
+    </div>
+</nav>
 <form action="reset_password.php" method="post">
     <?php if (isset($erreur)) : ?>
         <p class="error-message"><?php echo $erreur; ?></p>
@@ -125,5 +137,8 @@ if (isset($_POST['password'], $_POST['confirm_password'])) {
         <input type="submit" value="Valider">
     </div>
 </form>
+<footer class="footer">
+    <p>Footer Text</p>
+</footer>
 </body>
 </html>

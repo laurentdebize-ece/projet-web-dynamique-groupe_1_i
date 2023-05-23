@@ -113,7 +113,6 @@ $conn->close();
                     </select>
                     <input type="submit" name="submit" value="Trier">
                 </form>
-
                 <?php
                 if (!empty($competences)) {
                     echo "<form method='post' action='tableauEvalutationSpecifique.php'>";

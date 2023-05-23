@@ -123,7 +123,8 @@ VALUES ('Admin', 'Laurent', 'admin@ece.fr', '$2y$10$55.Ebfl/vSXK2IVwPl7kw.djRxFS
 -- Pour les tests :
 INSERT INTO Utilisateurs (nom, prenom, email, mot_de_passe, ecole, statut_id, first_login)
 VALUES ('Etu', 'Laurent', 'etu@ece.fr', '$2y$10$FL5zoBNMgE0M6J1t1E7bHujsQGnyP.h5nxVTQhoxziezL4WUmVFJO', 'ECE', '1', '1'),
-       ('Prof', 'Laurent', 'prof@ece.fr', '$2y$10$QjqyQmpPgHbnEVAZrSjcGuv7./e/hQtlFxlQtWVWoNByQ.nTQG3TC', 'ECE', '2', '1');
+       ('Prof', 'Laurent', 'prof@ece.fr', '$2y$10$QjqyQmpPgHbnEVAZrSjcGuv7./e/hQtlFxlQtWVWoNByQ.nTQG3TC', 'ECE', '2', '1'),
+       ('crash', 'test', 'crash@ece.fr', '12', 'SuP', '1', '0');
 
 
 
@@ -146,8 +147,32 @@ VALUES ('Competence1', 'Algèbre linéaire : Maîtriser les opérations sur les 
        ('Competence16', 'Électronique numérique : Comprendre les principes de base des circuits logiques et des systèmes numériques, tels que les portes logiques, les mémoires, les compteurs, les multiplexeurs, etc.', 'specifique');
 
 
+INSERT INTO matieres (nom_matiere, volume_horaire)
+VALUES
+    ('maths', 30),
+    ('electronique', 40),
+    ('physique', 30),
+    ('ang', 10),
+    ('informatique', 30);
 
+INSERT INTO matieres_competences (id_competence, id_matiere)
+VALUES
+    (1, 1),
+    (2, 1),
+    (3, 1),
+    (4, 1),
+    (5, 3),
+    (6, 3),
+    (7, 3),
+    (8, 3),
+    (9, 5),
+    (10, 5),
+    (11, 5),
+    (12, 5),
+    (13, 2),
+    (14, 2),
+    (15, 2);
 
-
-
-
+INSERT INTO Autoevaluations (id_etudiant, id_competence, statut, date)
+VALUES
+    (4, 1, 'non_acquis', '2000-12-12');

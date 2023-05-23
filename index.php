@@ -11,10 +11,13 @@ if (isset($_POST['email']) && isset($_POST['mot_de_passe'])) {
         $requete->execute();
         $utilisateur = $requete->fetch();
 
-        if ($utilisateur['first_login']) {
-            // Redirigez vers la page de changement de mot de passe
-            header('Location: change_password.php');
-            exit;
+        if ($utilisateur && is_array($utilisateur)) {
+            if ($utilisateur['first_login'] == 1) {
+                header('Location: change_password.php');
+                exit;
+            }
+        } else {
+            $erreur = "Email non trouvé.";
         }
 
         if ($utilisateur && password_verify($mot_de_passe, $utilisateur['mot_de_passe'])) {
@@ -39,7 +42,8 @@ if (isset($_POST['email']) && isset($_POST['mot_de_passe'])) {
         } else {
             $erreur = "Email ou mot de passe incorrect.";
         }
-    } catch (PDOException $e) {
+    } catch
+    (PDOException $e) {
         $erreur = "Erreur : " . $e->getMessage();
     }
     $nom_utilisateur = $email;

@@ -111,7 +111,7 @@ session_start();
                 echo '<p><a href="index.php">Connectez-vous ici</a></p><br><br>';
             }
             ?> <?php
-            if ($_SESSION['type'] != 'administrateur') {
+            if (!isset($_SESSION['type']) || $_SESSION['type'] != 'administrateur') {
                 ?>
                 <p><a href="matieres.php">Matières</a></p><br>
                 <p><a href="competences.php">Compétences</a></p><br>

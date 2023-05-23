@@ -117,7 +117,7 @@ VALUES ('etudiant'),
 
 
 INSERT INTO Utilisateurs (nom, prenom, email, mot_de_passe, ecole, statut_id, first_login)
-VALUES ('Admin', 'Laurent', 'admin@ece.fr', '$2y$10$55.Ebfl/vSXK2IVwPl7kw.djRxFSno5A9wm9D4RqklnIxoPLjNJ8K', 'ECE', '3', '0');
+VALUES ('Debize', 'Laurent', 'admin@ece.fr', '$2y$10$55.Ebfl/vSXK2IVwPl7kw.djRxFSno5A9wm9D4RqklnIxoPLjNJ8K', 'ECE', '3', '1');
 
 
 -- Pour les tests :

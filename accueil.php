@@ -57,7 +57,7 @@ session_start();
 
         <div class="col-sm-6 text-left">
             <h1>Omnes Skills</h1>
-            <p>Omnes skills est une plateforme qui vous permetera de suivre vos competences<br>
+            <p>Omnes skills est une plateforme qui vous permetra de suivre vos competences<br>
                 acquises durant vos années d'études</p>
             <br><br><br><br>
             <div>
